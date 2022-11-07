@@ -1,0 +1,125 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "Damager",
+"language": "GDScript",
+"path": "res://Addons/HealthSystem/Damager.gd"
+}, {
+"base": "Camera",
+"class": "FPSCamera",
+"language": "GDScript",
+"path": "res://Scripts/FPSCamera.gd"
+}, {
+"base": "RayCast",
+"class": "FPSRaycast",
+"language": "GDScript",
+"path": "res://Scripts/FPSRaycast.gd"
+}, {
+"base": "Node",
+"class": "Healer",
+"language": "GDScript",
+"path": "res://Addons/HealthSystem/Healer.gd"
+}, {
+"base": "Node",
+"class": "HealthSystem",
+"language": "GDScript",
+"path": "res://Addons/HealthSystem/HealthSystem.gd"
+}, {
+"base": "Spatial",
+"class": "Movement",
+"language": "GDScript",
+"path": "res://Addons/KinematicMovement2D/Movement2D.gd"
+}, {
+"base": "Spatial",
+"class": "TopDownMovement",
+"language": "GDScript",
+"path": "res://Addons/KinematicMovement2D/TopDownMovement2D.gd"
+}, {
+"base": "KinematicBody",
+"class": "movement",
+"language": "GDScript",
+"path": "res://Scripts/Movement.gd"
+} ]
+_global_script_class_icons={
+"Damager": "res://Addons/HealthSystem/health-decrease.png",
+"FPSCamera": "",
+"FPSRaycast": "",
+"Healer": "res://Addons/HealthSystem/health-increase.png",
+"HealthSystem": "res://Addons/HealthSystem/health.png",
+"Movement": "res://Addons/KinematicMovement2D/move.png",
+"TopDownMovement": "res://Addons/KinematicMovement2D/topDown.png",
+"movement": ""
+}
+
+[application]
+
+config/name="GameOff2022"
+run/main_scene="res://Scenes/Levels/TestLevel.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_render/layer_1="World"
+3d_render/layer_2="PlayerPerspective"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
