@@ -1,23 +1,65 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/Shaders/FullShader.tres" type="Shader" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.160784, 0.517647, 0, 1 )
 
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 1, 0.190522, 1 )
+
 [sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.45098, 0.243137, 0, 1 )
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 3 )
+shader_param/albedo = Color( 0.368627, 0.25098, 0.054902, 1 )
+shader_param/specular = 0.5
+shader_param/specular_amount = 0.5
+shader_param/specular_smoothness = 0.05
+shader_param/rim = 1.0
+shader_param/rim_amount = 0.2
+shader_param/rim_smoothness = 0.05
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/normal_scale = 1.0
+shader_param/depth_scale = 0.0
+shader_param/depth_min_layers = 8
+shader_param/depth_max_layers = 32
+shader_param/flip_tangent = false
+shader_param/flip_binormal = false
+shader_param/ao_light_affect = 0.0
+shader_param/anisotropy_ratio = 0.0
+shader_param/anisotropy_direction = Vector3( 0, -1, 0 )
+shader_param/aniso_map_dir_ratio = 0.0
+shader_param/subsurface_scattering = 0.0
+shader_param/transmission = Color( 0, 0, 0, 1 )
+shader_param/refraction = 0.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/diffuse_curve = SubResource( 13 )
 
 [sub_resource type="BoxShape" id=8]
 
 [sub_resource type="CubeMesh" id=5]
 
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.45098, 0.243137, 0, 1 )
+
 [sub_resource type="SpatialMaterial" id=6]
+params_diffuse_mode = 4
 albedo_color = Color( 0.0196078, 0.658824, 0, 1 )
+roughness = 0.0
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends Camera
@@ -41,13 +83,18 @@ transform = Transform( 29.1526, 0, 0, 0, 1, 0, 0, 0, 29.1526, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 9 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.999415, 0 )
 
 [node name="Tree" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 2, 0, 0, 0, 0.2, -4.49749, 1.90885, 8.47778 )
 mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+material/0 = SubResource( 14 )
 
 [node name="RigidBody" type="StaticBody" parent="Tree"]
 
@@ -57,7 +104,6 @@ shape = SubResource( 8 )
 [node name="MeshInstance" type="MeshInstance" parent="Tree"]
 transform = Transform( 6.2, 0, 0, 0, 0.695621, 0, 0, 0, 5.99974, 0, 1.39856, 0 )
 mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
 
 [node name="Tree2" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 2, 0, 0, 0, 0.2, 3.55706, 1.90885, -5.45014 )
@@ -92,3 +138,8 @@ material/0 = SubResource( 6 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.0143112, 0.999898, 0, -0.999898, -0.0143112, 0, 6.21891, 0 )
 script = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.930763, -0.0191684, -0.36512, 0.103842, -0.943642, 0.314255, -0.350566, -0.330412, -0.876317, 10.2899, 15.5767, 15.5835 )
+light_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+shadow_enabled = true
