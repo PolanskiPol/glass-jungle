@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Art/Audio/Spawn.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/EnemySetup.gd" type="Script" id=3]
+
+[node name="EnemySetup" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.2, 0 )
+
+[node name="EndPosition" type="Position3D" parent="."]
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 1 )
+unit_db = 4.0
+unit_size = 4.0
+max_db = 6.0

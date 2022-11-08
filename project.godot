@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Addons/HealthSystem/Damager.gd"
 }, {
+"base": "Spatial",
+"class": "EnemySetup",
+"language": "GDScript",
+"path": "res://Scripts/EnemySetup.gd"
+}, {
 "base": "Camera",
 "class": "FPSCamera",
 "language": "GDScript",
@@ -51,6 +56,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Damager": "res://Addons/HealthSystem/health-decrease.png",
+"EnemySetup": "",
 "FPSCamera": "",
 "FPSRaycast": "",
 "Healer": "res://Addons/HealthSystem/health-increase.png",
@@ -63,13 +69,19 @@ _global_script_class_icons={
 [application]
 
 config/name="GameOff2022"
-run/main_scene="res://Scenes/Levels/TestLevel.tscn"
+run/main_scene="res://Scenes/Menus/Intro.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[global]
+
+envi=false
 
 [gui]
 
@@ -125,6 +137,11 @@ ui_aim={
 
 3d_render/layer_1="World"
 3d_render/layer_2="PlayerPerspective"
+3d_physics/layer_1="Wall"
+3d_physics/layer_2="EnemyArea"
+3d_physics/layer_3="Spawn"
+3d_physics/layer_4="Player"
+3d_physics/layer_5="EnemyBody"
 
 [physics]
 
@@ -132,5 +149,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Resources/Environments/Default.tres"
