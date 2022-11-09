@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Resources/Fonts/Fonts/Monserrat-144.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/Fonts/Fonts/Lemonmilk-200.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Art/2D/Circle.png" type="Texture" id=2]
 [ext_resource path="res://Art/2D/Controller.png" type="Texture" id=3]
 [ext_resource path="res://Art/2D/Arm.png" type="Texture" id=4]
 [ext_resource path="res://Art/Audio/misc_menu_4.wav" type="AudioStream" id=5]
 [ext_resource path="res://Art/Audio/DownHigh.wav" type="AudioStream" id=6]
 [ext_resource path="res://Art/Audio/HighDown.wav" type="AudioStream" id=7]
+[ext_resource path="res://Resources/Fonts/Fonts/Playball-144.tres" type="DynamicFont" id=8]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Control
@@ -236,6 +237,78 @@ tracks/18/keys = {
 "update": 0,
 "values": [ Vector2( 4800.01, 2700 ) ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("LabelsEffect:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 4.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/20/type = "bezier"
+tracks/20/path = NodePath("LabelsEffect:rect_scale:x")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.2, 4.3, 5.7 )
+}
+tracks/21/type = "bezier"
+tracks/21/path = NodePath("LabelsEffect:rect_scale:y")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.2, 4.3, 5.7 )
+}
+tracks/22/type = "bezier"
+tracks/22/path = NodePath("LabelsEffect:modulate:r")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.3, 5.7 )
+}
+tracks/23/type = "bezier"
+tracks/23/path = NodePath("LabelsEffect:modulate:g")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.3, 5.7 )
+}
+tracks/24/type = "bezier"
+tracks/24/path = NodePath("LabelsEffect:modulate:b")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.3, 5.7 )
+}
+tracks/25/type = "bezier"
+tracks/25/path = NodePath("LabelsEffect:modulate:a")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.3, 5.7 )
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -441,6 +514,78 @@ tracks/18/keys = {
 "update": 0,
 "values": [ Vector2( 4800.01, 2700 ) ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("LabelsEffect:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/20/type = "bezier"
+tracks/20/path = NodePath("LabelsEffect:rect_scale:x")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/21/type = "bezier"
+tracks/21/path = NodePath("LabelsEffect:rect_scale:y")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/22/type = "bezier"
+tracks/22/path = NodePath("LabelsEffect:modulate:r")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/23/type = "bezier"
+tracks/23/path = NodePath("LabelsEffect:modulate:g")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/24/type = "bezier"
+tracks/24/path = NodePath("LabelsEffect:modulate:b")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/25/type = "bezier"
+tracks/25/path = NodePath("LabelsEffect:modulate:a")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [node name="Intro" type="Control"]
 anchor_right = 1.0
@@ -451,24 +596,6 @@ script = SubResource( 5 )
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="Arm" type="TextureRect" parent="."]
-margin_left = 1756.0
-margin_top = 910.0
-margin_right = 2956.01
-margin_bottom = 2110.0
-rect_pivot_offset = Vector2( 600, 600 )
-texture = ExtResource( 4 )
-
-[node name="Circle" type="TextureRect" parent="."]
-margin_left = 1118.0
-margin_top = 639.0
-margin_right = 1118.0
-margin_bottom = 639.0
-rect_rotation = -50.0
-rect_pivot_offset = Vector2( 2500, 2500 )
-texture = ExtResource( 2 )
-expand = true
 
 [node name="ControllerPivot" type="Control" parent="."]
 margin_left = -480.0
@@ -489,6 +616,24 @@ rect_pivot_offset = Vector2( 300, 300 )
 texture = ExtResource( 3 )
 expand = true
 
+[node name="Arm" type="TextureRect" parent="."]
+margin_left = 1756.0
+margin_top = 910.0
+margin_right = 2956.01
+margin_bottom = 2110.0
+rect_pivot_offset = Vector2( 600, 600 )
+texture = ExtResource( 4 )
+
+[node name="Circle" type="TextureRect" parent="."]
+margin_left = 1118.0
+margin_top = 639.0
+margin_right = 1118.0
+margin_bottom = 639.0
+rect_rotation = -50.0
+rect_pivot_offset = Vector2( 2500, 2500 )
+texture = ExtResource( 2 )
+expand = true
+
 [node name="PanelBlack2" type="Panel" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
@@ -504,8 +649,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 1 )
 text = "Morphine
-Games"
+"
 align = 1
+valign = 1
+
+[node name="Games" type="Label" parent="Labels"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -578.0
+custom_fonts/font = ExtResource( 8 )
+text = "
+Games"
+align = 2
+valign = 1
+
+[node name="LabelsEffect" type="Control" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 960, 540 )
+
+[node name="Morphine" type="Label" parent="LabelsEffect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+text = "Morphine
+"
+align = 1
+valign = 1
+
+[node name="Games" type="Label" parent="LabelsEffect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -578.0
+custom_fonts/font = ExtResource( 8 )
+text = "
+Games"
+align = 2
 valign = 1
 
 [node name="PanelColor" type="Panel" parent="."]
@@ -514,8 +695,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5034.0
 margin_top = -3327.0
-margin_right = -233.99
-margin_bottom = -627.0
+margin_right = -2153.99
+margin_bottom = -1707.0
 rect_rotation = 24.5968
 custom_styles/panel = SubResource( 3 )
 
@@ -583,50 +764,50 @@ custom_styles/panel = SubResource( 3 )
 self_modulate = Color( 1, 0.470588, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1372.34
-margin_top = 12.3263
-margin_right = -1372.34
-margin_bottom = 12.3262
+margin_left = 29.0
+margin_top = 12.0
+margin_right = -1372.01
+margin_bottom = 11.999
 custom_styles/panel = SubResource( 4 )
 
 [node name="PanelColor3" type="Panel" parent="PanelColor/PanelColor7"]
 self_modulate = Color( 1, 0.819608, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -2754.75
-margin_top = -9.22864
-margin_right = -2754.75
-margin_bottom = -9.22852
-custom_styles/panel = SubResource( 4 )
-
-[node name="PanelColor4" type="Panel" parent="PanelColor/PanelColor7"]
-self_modulate = Color( 0.290196, 0.803922, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -4216.04
-margin_top = -1.27661
-margin_right = -4216.04
-margin_bottom = -1.27661
+margin_left = 203.0
+margin_top = -9.0
+margin_right = -2755.01
+margin_bottom = -9.00098
 custom_styles/panel = SubResource( 4 )
 
 [node name="PanelColor5" type="Panel" parent="PanelColor/PanelColor7"]
 self_modulate = Color( 0, 0.670588, 0.803922, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -5792.93
-margin_top = 11.2056
-margin_right = -5792.93
-margin_bottom = 11.2056
+margin_left = -2101.0
+margin_top = 11.0
+margin_right = -4359.01
+margin_bottom = 10.999
+custom_styles/panel = SubResource( 4 )
+
+[node name="PanelColor4" type="Panel" parent="PanelColor/PanelColor7"]
+self_modulate = Color( 0.290196, 0.803922, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -808.0
+margin_top = -1.0
+margin_right = -4217.01
+margin_bottom = -1.00098
 custom_styles/panel = SubResource( 4 )
 
 [node name="PanelColor6" type="Panel" parent="PanelColor/PanelColor7"]
 self_modulate = Color( 0.501961, 0.133333, 0.996078, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -7489.57
-margin_top = 16.9114
-margin_right = -7489.57
-margin_bottom = 16.9114
+margin_left = -3451.0
+margin_top = 17.0
+margin_right = -6840.01
+margin_bottom = 16.999
 custom_styles/panel = SubResource( 4 )
 
 [node name="PanelColor8" type="Panel" parent="PanelColor"]
@@ -688,16 +869,6 @@ margin_left = -7489.57
 margin_top = 16.9114
 margin_right = -7489.57
 margin_bottom = 16.9114
-custom_styles/panel = SubResource( 4 )
-
-[node name="PanelColor9" type="Panel" parent="PanelColor"]
-self_modulate = Color( 0, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -17507.5
-margin_top = -196.71
-margin_right = -18347.5
-margin_bottom = 443.291
 custom_styles/panel = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
