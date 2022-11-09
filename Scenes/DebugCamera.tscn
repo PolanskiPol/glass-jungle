@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Camera
+
+export var enabled : bool = false
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if(enabled):
+		current = true
+"
+
+[node name="Camera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, -0.0143112, 0.999898, 0, -0.999898, -0.0143112, 0, 6.21891, 0 )
+script = SubResource( 7 )
