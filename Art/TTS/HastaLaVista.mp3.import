@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HastaLaVista.mp3-70ac085e26e6a600a987e5092e76c76b.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/HastaLaVista.mp3"
+dest_files=[ "res://.import/HastaLaVista.mp3-70ac085e26e6a600a987e5092e76c76b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

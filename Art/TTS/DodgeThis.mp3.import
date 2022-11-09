@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DodgeThis.mp3-4a8b7fefda8b9fe490202ea7e5b42c34.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/DodgeThis.mp3"
+dest_files=[ "res://.import/DodgeThis.mp3-4a8b7fefda8b9fe490202ea7e5b42c34.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

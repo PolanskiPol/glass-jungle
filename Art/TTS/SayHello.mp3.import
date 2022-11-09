@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SayHello.mp3-395064c921ab7791c8091c0011a0bf3c.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/SayHello.mp3"
+dest_files=[ "res://.import/SayHello.mp3-395064c921ab7791c8091c0011a0bf3c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

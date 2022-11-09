@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HeyTerrorist.mp3-49f6662a49292c79ac78a5f6684fd11e.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/HeyTerrorist.mp3"
+dest_files=[ "res://.import/HeyTerrorist.mp3-49f6662a49292c79ac78a5f6684fd11e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/YoureADisease.mp3-f94ef3656299e6eb093d441f4319e624.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/YoureADisease.mp3"
+dest_files=[ "res://.import/YoureADisease.mp3-f94ef3656299e6eb093d441f4319e624.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

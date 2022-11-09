@@ -514,8 +514,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5034.0
 margin_top = -3327.0
-margin_right = -2153.99
-margin_bottom = -1707.0
+margin_right = -233.99
+margin_bottom = -627.0
 rect_rotation = 24.5968
 custom_styles/panel = SubResource( 3 )
 
@@ -706,11 +706,14 @@ anims/RESET = SubResource( 2 )
 
 [node name="Bum" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = 2.5
 
 [node name="HighDown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = 5.0
 
 [node name="DownHigh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = 5.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
