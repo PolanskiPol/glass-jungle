@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/12 Cold Killa Sting.mp3-68ac0a6f0952859aa659156e746c1881.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/Intros/12 Cold Killa Sting.mp3"
+dest_files=[ "res://.import/12 Cold Killa Sting.mp3-68ac0a6f0952859aa659156e746c1881.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
