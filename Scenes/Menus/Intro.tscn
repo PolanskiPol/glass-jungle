@@ -741,8 +741,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5034.0
 margin_top = -3327.0
-margin_right = -2153.99
-margin_bottom = -1707.0
+margin_right = -233.99
+margin_bottom = -627.0
 rect_rotation = 24.5968
 custom_styles/panel = SubResource( 3 )
 

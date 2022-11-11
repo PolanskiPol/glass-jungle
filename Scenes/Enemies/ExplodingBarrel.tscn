@@ -1,0 +1,184 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Resources/Materials/Explosion.tres" type="Material" id=1]
+[ext_resource path="res://Art/3D/ExplosiveBarrel.fbx" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends StaticBody
+
+func _ready():
+	pass
+	
+func explode() -> void:
+	$AnimationPlayer.play(\"Explode\")
+	
+func _on_Body_hit():
+	explode()
+
+func _on_ExplosionArea_body_entered(body : Node) -> void:
+	if(\"Enemy\" in body.name and not \"Setup\" in body.name):
+		body.get_node(\"HealthSystem\").fatally_damage()
+	elif(\"Exploding\" in body.name):
+		body.explode()
+		
+func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
+	if(anim_name == \"Explosion\"):
+		queue_free()
+"
+
+[sub_resource type="CylinderShape" id=2]
+height = 0.760582
+radius = 0.281883
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Area
+
+signal hit
+"
+
+[sub_resource type="CylinderShape" id=3]
+height = 0.904682
+radius = 0.430723
+
+[sub_resource type="SphereMesh" id=15]
+material = ExtResource( 1 )
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.113636 ), 0.0, 0.0, 0, 0, Vector2( 0.685039, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.25 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 1, 0.861328, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "Explode"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplosiveBarrel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplosionArea/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplosiveBarrel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplosionArea/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CylinderShape" id=16]
+height = 0.667797
+radius = 3.80726
+
+[node name="ExplodingBarrel" type="StaticBody"]
+collision_layer = 16
+collision_mask = 8
+script = SubResource( 4 )
+
+[node name="ExplosiveBarrel" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.451432, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0730889, 0 )
+shape = SubResource( 2 )
+
+[node name="Body" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293658, 0 )
+script = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.286098, 0 )
+shape = SubResource( 3 )
+
+[node name="Particles" type="CPUParticles" parent="."]
+emitting = false
+amount = 500
+lifetime = 0.6
+one_shot = true
+local_coords = false
+mesh = SubResource( 15 )
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3( 0, 0, 0 )
+radial_accel = 15.0
+scale_amount = 0.2
+scale_amount_curve = SubResource( 13 )
+color_ramp = SubResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Explode = SubResource( 11 )
+anims/RESET = SubResource( 12 )
+
+[node name="ExplosionArea" type="Area" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="ExplosionArea"]
+shape = SubResource( 16 )
+disabled = true
+
+[connection signal="hit" from="Body" to="." method="_on_Body_hit"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_ExplosionArea_body_entered"]
