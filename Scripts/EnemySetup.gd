@@ -22,5 +22,8 @@ func trigger_spawn(body : Node) -> void:
 		$Enemy.setup(body)
 
 func setup_enemy() -> void:
-	$Enemy.global_transform.origin = lerp($Enemy.global_transform.origin, $EndPosition.global_transform.origin, 0.23)
-	$Enemy.scale = lerp($Enemy.scale, Vector3(1, 1, 1), 0.23)
+	if(get_node_or_null("Enemy") != null):
+		$Enemy.global_transform.origin = lerp($Enemy.global_transform.origin, $EndPosition.global_transform.origin, 0.23)
+		$Enemy.scale = lerp($Enemy.scale, Vector3(1, 1, 1), 0.23)
+	else:
+		queue_free()

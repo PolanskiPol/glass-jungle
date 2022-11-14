@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Resources/Fonts/Data/Boyfrend.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Art/2D/Circle.png" type="Texture" id=2]
@@ -9,22 +9,24 @@
 [ext_resource path="res://Art/Audio/HighDown.wav" type="AudioStream" id=7]
 [ext_resource path="res://Resources/Fonts/Fonts/Playball-144.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Art/Audio/Intros/12 Cold Killa Sting.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=10]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Control
 
+onready var skipped : bool = false
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.play(\"Idle\")
 
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed(\"ui_accept\") and !skipped):
+		skipped = true
+		get_tree().change_scene(\"res://Scenes/Menus/MainMenu.tscn\")
+
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
+	skipped = true
+	get_tree().change_scene(\"res://Scenes/Menus/MainMenu.tscn\")
 "
 
 [sub_resource type="DynamicFont" id=6]
@@ -935,5 +937,15 @@ volume_db = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[node name="IntroSkip" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1495.0
+margin_bottom = -972.0
+custom_fonts/font = ExtResource( 10 )
+text = "\"Intro\" to skip"
+align = 1
+valign = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

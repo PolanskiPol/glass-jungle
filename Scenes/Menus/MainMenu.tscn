@@ -1,0 +1,717 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Art/2D/Circle2.png" type="Texture" id=1]
+[ext_resource path="res://Art/3D/LowPolyCharacter2.fbx" type="PackedScene" id=2]
+[ext_resource path="res://Art/3D/Office/Office/OfficeChairs.fbx" type="PackedScene" id=3]
+[ext_resource path="res://Art/3D/ExplosiveBarrel.fbx" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Art/3D/DeagleV2.fbx" type="PackedScene" id=6]
+[ext_resource path="res://Art/3D/Office/MeetingZone/Blackboard.fbx" type="PackedScene" id=7]
+[ext_resource path="res://Art/3D/LowPolyCharacter3.fbx" type="PackedScene" id=8]
+[ext_resource path="res://Art/2D/Logo.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-36.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Art/2D/Skycrapper.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Art/TTS/DirectorScene1.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Art/OST/MainMenu.mp3" type="AudioStream" id=14]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Spatial
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$Enter.play(\"Enter\")
+	$CamRot.play(\"Idle\")
+	$Music.play(0.0)
+	set_process(false)
+	
+func _process(delta: float) -> void:
+	$CamPivot/Camera.global_transform.origin = lerp($CamPivot/Camera.global_transform.origin, $FinalCamPos.global_transform.origin, 0.02)
+	$CamPivot/Camera.rotation.x = lerp_angle($CamPivot/Camera.rotation.x, $FinalCamPos.rotation.x, 0.02)
+	$CamPivot/Camera.rotation.y = lerp_angle($CamPivot/Camera.rotation.y, $FinalCamPos.rotation.y - $CamPivot.rotation.y, 0.02)
+	$CamPivot/Camera.rotation.z = lerp_angle($CamPivot/Camera.rotation.z, $FinalCamPos.rotation.z, 0.02)
+
+func _on_Campaign_pressed() -> void:
+	$UI/UI/Menu.visible = false
+	$UI/UI/Campaign.visible = true
+
+func _on_Mission1Button_pressed() -> void:
+	set_process(true)
+	$CamRot.stop(false)
+	$DirectorCue1.play(0.0)
+	$UI/UI/Subtitles/Scene1.visible = true
+	$UI/UI/Menu.visible = false
+	$UI/UI/Campaign.visible = false
+	
+func _on_DirectorCue1_finished() -> void:
+	$UI/UI/Subtitles/Scene1.visible = false
+	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
+"
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Idle"
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CamPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CamPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0.607843, 0.556863, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=18]
+albedo_color = Color( 0.254902, 0.0901961, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=19]
+albedo_color = Color( 0, 0.0313726, 0.290196, 1 )
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 0.12549, 0.0705882, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=21]
+albedo_color = Color( 0.164706, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.380392, 0.380392, 0.380392, 1 )
+
+[sub_resource type="CylinderMesh" id=14]
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 2, 2, 2, 1 )
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+glow_enabled = true
+
+[sub_resource type="Animation" id=22]
+resource_name = "Take 001"
+length = 5.0
+
+[sub_resource type="CylinderMesh" id=23]
+
+[sub_resource type="SpatialMaterial" id=24]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.294118, 0.141176, 0.054902, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=26]
+resource_name = "Enter"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("UI/UI/Begin:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("UI/UI/Begin:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("UI/UI/Begin:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0, 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("UI/UI/Begin:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("UI/UI/Begin:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("UI/UI/Begin:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("UI/UI/Begin:rect_size:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("UI/UI/Begin:rect_size:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[node name="MainMenu" type="Spatial"]
+script = SubResource( 5 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Subtitles" type="Control" parent="UI/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Scene1" type="Label" parent="UI/UI/Subtitles"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 210.0
+margin_top = 720.0
+margin_right = -210.0
+margin_bottom = -110.0
+custom_fonts/font = ExtResource( 10 )
+text = "Director: In this scene, you will infiltrate in the skycrapper where the big baddie is located, but at the end things will go wrong and you will have to jump from a window. Get ready to start!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Scene2" type="Label" parent="UI/UI/Subtitles"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 210.0
+margin_top = 720.0
+margin_right = -210.0
+margin_bottom = -110.0
+custom_fonts/font = ExtResource( 10 )
+text = "Director:"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Scene3" type="Label" parent="UI/UI/Subtitles"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 210.0
+margin_top = 720.0
+margin_right = -210.0
+margin_bottom = -110.0
+custom_fonts/font = ExtResource( 10 )
+text = "Director:"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Menu" type="Control" parent="UI/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="TextureRect" parent="UI/UI/Menu"]
+margin_right = 386.0
+margin_bottom = 343.0
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Options" type="VBoxContainer" parent="UI/UI/Menu"]
+anchor_left = 0.078
+anchor_top = 0.306
+anchor_right = 0.443
+anchor_bottom = 1.0
+margin_left = 0.23999
+margin_top = -0.480011
+margin_right = 182.64
+margin_bottom = 214.76
+custom_constants/separation = 15
+
+[node name="Campaign" type="Button" parent="UI/UI/Menu/Options"]
+margin_right = 883.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 12 )
+text = "Campaign"
+flat = true
+align = 0
+
+[node name="Config" type="Button" parent="UI/UI/Menu/Options"]
+margin_top = 117.0
+margin_right = 883.0
+margin_bottom = 219.0
+custom_fonts/font = ExtResource( 12 )
+text = "Settings"
+flat = true
+align = 0
+
+[node name="Exit" type="Button" parent="UI/UI/Menu/Options"]
+margin_top = 234.0
+margin_right = 883.0
+margin_bottom = 336.0
+custom_fonts/font = ExtResource( 12 )
+text = "Exit"
+flat = true
+align = 0
+
+[node name="Campaign" type="Control" parent="UI/UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Selector" type="HBoxContainer" parent="UI/UI/Campaign"]
+anchor_left = -0.015
+anchor_top = 0.315
+anchor_right = 1.0
+anchor_bottom = 0.685
+margin_left = 28.8
+margin_top = -0.200043
+margin_bottom = 0.199951
+custom_constants/separation = 100
+alignment = 1
+
+[node name="Mission1" type="VBoxContainer" parent="UI/UI/Campaign/Selector"]
+margin_left = 410.0
+margin_right = 710.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 300, 300 )
+
+[node name="Mission1Button" type="TextureButton" parent="UI/UI/Campaign/Selector/Mission1"]
+margin_right = 300.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/UI/Campaign/Selector/Mission1"]
+margin_top = 304.0
+margin_right = 300.0
+margin_bottom = 403.0
+custom_fonts/font = ExtResource( 10 )
+text = "Scene 1:
+Skycrapper"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Mission2" type="VBoxContainer" parent="UI/UI/Campaign/Selector"]
+margin_left = 810.0
+margin_right = 1110.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 300, 300 )
+
+[node name="Mission2Button" type="TextureButton" parent="UI/UI/Campaign/Selector/Mission2"]
+margin_right = 300.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/UI/Campaign/Selector/Mission2"]
+margin_top = 304.0
+margin_right = 300.0
+margin_bottom = 403.0
+custom_fonts/font = ExtResource( 10 )
+text = "Scene 2: 
+???"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Mission3" type="VBoxContainer" parent="UI/UI/Campaign/Selector"]
+margin_left = 1210.0
+margin_right = 1510.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 300, 300 )
+
+[node name="Mission3Button" type="TextureButton" parent="UI/UI/Campaign/Selector/Mission3"]
+margin_right = 300.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/UI/Campaign/Selector/Mission3"]
+margin_top = 304.0
+margin_right = 300.0
+margin_bottom = 403.0
+custom_fonts/font = ExtResource( 10 )
+text = "Scene 3: 
+???"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="SelectMission" type="Label" parent="UI/UI/Campaign"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 208.0
+margin_top = 162.0
+margin_right = -1407.0
+margin_bottom = -853.0
+custom_fonts/font = ExtResource( 12 )
+text = "Select a scene"
+
+[node name="Begin" type="Panel" parent="UI/UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 25 )
+
+[node name="CamPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.79315, 0 )
+
+[node name="Camera" type="Camera" parent="CamPivot"]
+transform = Transform( 1, 0, 0, 0, 0.805184, 0.593026, 0, -0.593026, 0.805184, -2.38419e-07, 0, 6.20044 )
+
+[node name="CamRot" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+
+[node name="Deco" type="Spatial" parent="."]
+
+[node name="LowPolyCharacter4" parent="Deco" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0613108, 0, -1.70193 )
+
+[node name="lowPolyCharacterFace4" parent="Deco/LowPolyCharacter4/RootNode" index="0"]
+material/2 = SubResource( 17 )
+material/3 = SubResource( 18 )
+material/4 = SubResource( 19 )
+material/6 = SubResource( 20 )
+material/7 = SubResource( 21 )
+material/8 = SubResource( 21 )
+
+[node name="GreenScreen" type="MeshInstance" parent="Deco"]
+transform = Transform( 1.80592, 0, 0, 0, 1.23583, 0, 0, 0, 0.0291277, 0.0679343, 0.983193, -2.67274 )
+mesh = SubResource( 11 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 12 )
+
+[node name="Blackboard" parent="Deco" instance=ExtResource( 7 )]
+transform = Transform( -0.282836, 0, 0.100019, 0, 0.3, 0, -0.100019, 0, -0.282836, 0, 0, 0 )
+
+[node name="RootNode" parent="Deco/Blackboard" index="0"]
+transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0 )
+
+[node name="Pizarra" parent="Deco/Blackboard/RootNode" index="0"]
+transform = Transform( 53.1627, -82.9177, 17.2736, -30.9017, 0, 95.1056, -78.8594, -55.8986, -25.623, -5.23017, 2.23068, -7.36041 )
+material/0 = SubResource( 13 )
+
+[node name="ExplosiveBarrel" parent="Deco" instance=ExtResource( 4 )]
+transform = Transform( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -1.17083, 0, -1.94225 )
+
+[node name="ExplosiveBarrel2" parent="Deco" instance=ExtResource( 4 )]
+transform = Transform( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 2.52006, 0, -0.200363 )
+
+[node name="ExplosiveBarrel3" parent="Deco" instance=ExtResource( 4 )]
+transform = Transform( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 2.76477, 0, 0.679238 )
+
+[node name="DeagleV2" parent="Deco" instance=ExtResource( 6 )]
+transform = Transform( 0.2, 0, 0, 0, 0.0836654, -0.181659, 0, 0.181659, 0.0836654, -0.542617, 0.69143, -1.75708 )
+
+[node name="Cargador" parent="Deco/DeagleV2/RootNode" index="4"]
+visible = false
+
+[node name="Enemy" parent="Deco" instance=ExtResource( 5 )]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 1.85689, 0, -1.74665 )
+script = null
+
+[node name="US_Soldiers" parent="Deco/Enemy" index="0"]
+transform = Transform( 0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 0, 0, 0 )
+
+[node name="Focus" type="Spatial" parent="Deco"]
+transform = Transform( 0.913219, -0.349661, -0.20921, 0, -0.513436, 0.858128, -0.40747, -0.783658, -0.46888, 2.52641, 4.59259, 4.20473 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/Focus"]
+transform = Transform( 0.5, 0, 0, 0, 0.2, 0, 0, 0, 0.5, 0, 1.24621, 0 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/Focus"]
+transform = Transform( 0.45, 0, 0, 0, 0.1, 0, 0, 0, 0.45, 0, 1.37717, 0 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 16 )
+
+[node name="SpotLight" type="SpotLight" parent="Deco/Focus"]
+transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
+light_energy = 7.0
+spot_range = 7.1254
+spot_angle = 30.0
+
+[node name="OmniLight" type="OmniLight" parent="Deco/Focus"]
+transform = Transform( 1, -2.98023e-08, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 1.97711, -2.38419e-07 )
+omni_range = 0.879134
+
+[node name="Focus2" type="Spatial" parent="Deco"]
+transform = Transform( 0.981982, 0.162165, 0.0970269, 0, -0.513436, 0.858128, 0.188976, -0.842666, -0.504185, -2.39925, 4.59259, 4.20473 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/Focus2"]
+transform = Transform( 0.5, 0, 0, 0, 0.2, 0, 0, 0, 0.5, 0, 1.24621, 0 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/Focus2"]
+transform = Transform( 0.45, 0, 0, 0, 0.1, 0, 0, 0, 0.45, 0, 1.37717, 0 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 16 )
+
+[node name="SpotLight" type="SpotLight" parent="Deco/Focus2"]
+transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
+light_energy = 7.0
+spot_range = 7.1254
+spot_angle = 30.0
+
+[node name="OmniLight" type="OmniLight" parent="Deco/Focus2"]
+transform = Transform( 1, 2.98023e-08, 5.21541e-08, 0, 1, -5.96046e-08, -3.72529e-08, 2.98023e-08, 1, 2.38419e-07, 2.06207, 1.07288e-06 )
+omni_range = 0.924504
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Deco"]
+environment = SubResource( 1 )
+
+[node name="LowPolyCharacter3" parent="Deco" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0734776, 0, 1.46977 )
+
+[node name="AnimationPlayer" parent="Deco/LowPolyCharacter3/RootNode" index="1"]
+"anims/Take 001" = SubResource( 22 )
+
+[node name="OmniLight" type="OmniLight" parent="Deco/LowPolyCharacter3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45058e-09, 1.66715, 0.402351 )
+omni_range = 2.74303
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/LowPolyCharacter3"]
+transform = Transform( 0.005, 0, 0, 0, -4.37114e-10, -0.005, 0, 0.01, -2.18557e-10, -0.027286, 1.72516, 0.0731652 )
+mesh = SubResource( 23 )
+material/0 = SubResource( 24 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/LowPolyCharacter3"]
+transform = Transform( 0.005, 0, 0, 0, -4.37114e-10, -0.005, 0, 0.01, -2.18557e-10, 0.0262856, 1.72516, 0.0731652 )
+mesh = SubResource( 23 )
+material/0 = SubResource( 24 )
+
+[node name="SpotLight" type="SpotLight" parent="Deco"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.6112, 0 )
+light_energy = 1.118
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_contact = 0.662
+spot_range = 105.149
+spot_angle = 25.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Deco"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+texture = ExtResource( 1 )
+
+[node name="Camera" type="Spatial" parent="Deco"]
+transform = Transform( 0.961415, 0, 0.2751, 0, 1, 0, -0.2751, 0, 0.961415, 1.13567, 0, 0.834148 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( 0.16, 0, 0, 0, 0.051012, 0, 0, 0, 0.16, 0, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( 0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.32, 0, 1.11404, -0.0770397 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( 0.048, 0, 0, 0, 1.0024, 0, 0, 0, 0.048, 0, 0, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( 0.0576, 0, 0, 0, -5.25793e-08, -0.0576, 0, 0.300719, -6.29444e-10, 0, 1.11881, -0.347981 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( 0.06336, 0, 0, 0, -5.78372e-08, -0.06336, 0, 0.038963, -8.15547e-11, 0, 1.11881, -0.674776 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( -2.76955e-09, 0.038963, -8.15547e-11, 0, -2.25565e-07, -0.247104, -0.234432, -6.30157e-09, 1.319e-17, 0.151381, 1.28736, -0.284535 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Deco/Camera"]
+transform = Transform( -2.76955e-09, 0.038963, -8.15547e-11, 0, -2.25565e-07, -0.247104, -0.234432, -6.30157e-09, 1.319e-17, 0.151381, 1.28736, 0.121632 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="Camera2" type="Spatial" parent="Deco"]
+transform = Transform( 0.866514, 0, -0.499153, 0, 1, 0, 0.499153, 0, 0.866514, -1.85687, -7.15256e-07, 0.382366 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( 0.16, 0, 0, 0, 0.051012, 0, 0, 0, 0.16, 0, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( 0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.32, 0, 1.11404, -0.0770397 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( 0.048, 0, 0, 0, 1.0024, 0, 0, 0, 0.048, 0, 0, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( 0.0576, 0, 0, 0, -5.25793e-08, -0.0576, 0, 0.300719, -6.29444e-10, 0, 1.11881, -0.347981 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( 0.06336, 0, 0, 0, -5.78372e-08, -0.06336, 0, 0.038963, -8.15547e-11, 0, 1.11881, -0.674776 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( -2.76955e-09, 0.038963, -8.15547e-11, 0, -2.25565e-07, -0.247104, -0.234432, -6.30157e-09, 1.319e-17, 0.151381, 1.28736, -0.284535 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Deco/Camera2"]
+transform = Transform( -2.76955e-09, 0.038963, -8.15547e-11, 0, -2.25565e-07, -0.247104, -0.234432, -6.30157e-09, 1.319e-17, 0.151381, 1.28736, 0.121632 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="OfficeChairs" parent="Deco" instance=ExtResource( 3 )]
+transform = Transform( -0.0965926, 0, -0.0258819, 0, 0.1, 0, 0.0258819, 0, -0.0965926, -0.811627, 0, 2.29346 )
+
+[node name="Silla de Oficina" parent="Deco/OfficeChairs/RootNode" index="0"]
+transform = Transform( 89.1663, 45.2699, 1.61898e-05, 0, -3.57628e-05, 100, 45.2699, -89.1663, -3.18884e-05, 0, 0, 0 )
+material/0 = SubResource( 6 )
+
+[node name="DirectorThing" type="Spatial" parent="Deco"]
+transform = Transform( -0.387693, 0.291114, -0.874612, 0, 0.948821, 0.315815, 0.921789, 0.122439, -0.367851, -1.39251, -0.147954, 2.01016 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Deco/DirectorThing"]
+transform = Transform( 0.267313, 0, 0, 0, 0.151087, 0, 0, 0, 0.0216902, 0, 0.328398, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 8 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Deco/DirectorThing"]
+transform = Transform( 0.261383, -0.00972741, 0, 0.0559928, 0.0454091, 0, 0, 0, 0.0216902, -0.0161081, 0.562359, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 8 )
+
+[node name="FinalCamPos" type="Camera" parent="."]
+transform = Transform( -0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, 0.183013, -0.683013, -0.857014, 1.89806, 0.41904 )
+
+[node name="DirectorCue1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+bus = "Effects"
+
+[node name="Enter" type="AnimationPlayer" parent="."]
+anims/Enter = SubResource( 26 )
+anims/RESET = SubResource( 27 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -5.0
+
+[connection signal="pressed" from="UI/UI/Menu/Options/Campaign" to="." method="_on_Campaign_pressed"]
+[connection signal="pressed" from="UI/UI/Campaign/Selector/Mission1/Mission1Button" to="." method="_on_Mission1Button_pressed"]
+[connection signal="finished" from="DirectorCue1" to="." method="_on_DirectorCue1_finished"]
+
+[editable path="Deco/LowPolyCharacter4"]
+[editable path="Deco/Blackboard"]
+[editable path="Deco/DeagleV2"]
+[editable path="Deco/Enemy"]
+[editable path="Deco/LowPolyCharacter3"]
+[editable path="Deco/OfficeChairs"]
