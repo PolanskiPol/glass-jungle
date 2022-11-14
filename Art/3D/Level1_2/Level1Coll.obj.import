@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Level1Coll.obj-731a3a06bb7f2884dc6cf4f27f27d613.mesh"
+
+[deps]
+
+files=[ "res://.import/Level1Coll.obj-731a3a06bb7f2884dc6cf4f27f27d613.mesh" ]
+
+source_file="res://Art/3D/Level1_2/Level1Coll.obj"
+dest_files=[ "res://.import/Level1Coll.obj-731a3a06bb7f2884dc6cf4f27f27d613.mesh", "res://.import/Level1Coll.obj-731a3a06bb7f2884dc6cf4f27f27d613.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

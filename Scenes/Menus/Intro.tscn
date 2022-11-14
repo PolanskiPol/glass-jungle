@@ -18,6 +18,11 @@ onready var skipped : bool = false
 
 func _ready() -> void:
 	$AnimationPlayer.play(\"Idle\")
+	var save_file : SaveFile = GameSaver.load_game()
+	OS.window_fullscreen = save_file.fullscreen
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), save_file.master_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), save_file.music_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), save_file.effects_volume)
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed(\"ui_accept\") and !skipped):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Art/2D/Circle2.png" type="Texture" id=1]
 [ext_resource path="res://Art/3D/LowPolyCharacter2.fbx" type="PackedScene" id=2]
@@ -14,10 +14,18 @@
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Art/TTS/DirectorScene1.mp3" type="AudioStream" id=13]
 [ext_resource path="res://Art/OST/MainMenu.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Art/2D/Sliderhandle.png" type="Texture" id=15]
+[ext_resource path="res://Art/2D/CheckedCheck.png" type="Texture" id=16]
+[ext_resource path="res://Art/2D/Check.png" type="Texture" id=17]
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-32.tres" type="DynamicFont" id=18]
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-48.tres" type="DynamicFont" id=19]
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-72.tres" type="DynamicFont" id=20]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Spatial
 
+onready var scene : bool = false
+onready var settings : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Enter.play(\"Enter\")
@@ -26,16 +34,39 @@ func _ready() -> void:
 	set_process(false)
 	
 func _process(delta: float) -> void:
-	$CamPivot/Camera.global_transform.origin = lerp($CamPivot/Camera.global_transform.origin, $FinalCamPos.global_transform.origin, 0.02)
-	$CamPivot/Camera.rotation.x = lerp_angle($CamPivot/Camera.rotation.x, $FinalCamPos.rotation.x, 0.02)
-	$CamPivot/Camera.rotation.y = lerp_angle($CamPivot/Camera.rotation.y, $FinalCamPos.rotation.y - $CamPivot.rotation.y, 0.02)
-	$CamPivot/Camera.rotation.z = lerp_angle($CamPivot/Camera.rotation.z, $FinalCamPos.rotation.z, 0.02)
+	if(scene):
+		lerp_main_camera($FinalCamPos)
+	elif(settings):
+		lerp_main_camera($CamPosSettings)
+	else:
+		lerp_main_camera($CamPivot/CamPosRotate)
+	
+func lerp_main_camera(to : Spatial) -> void:
+	$CamPivot/Camera.global_transform.origin = lerp($CamPivot/Camera.global_transform.origin, to.global_transform.origin, 0.02)
+	$CamPivot/Camera.rotation.x = lerp_angle($CamPivot/Camera.rotation.x, to.rotation.x, 0.02)
+	if(to.name == \"CamPosRotate\"):
+		$CamPivot/Camera.rotation.y = lerp_angle($CamPivot/Camera.rotation.y, to.rotation.y, 0.02)
+	else:
+		$CamPivot/Camera.rotation.y = lerp_angle($CamPivot/Camera.rotation.y, to.rotation.y - $CamPivot.rotation.y, 0.02)
+	$CamPivot/Camera.rotation.z = lerp_angle($CamPivot/Camera.rotation.z, to.rotation.z, 0.02)
+	
+	if($CamPivot.rotation == to.rotation):
+		set_process(false)
+
+func _on_Config_pressed():
+	settings = true
+	set_process(true)
+	$CamRot.stop(false)
+	$UI/UI/Menu.visible = false
+	$UI/UI/Campaign.visible = false
+	$UI/UI/Settings.visible = true
 
 func _on_Campaign_pressed() -> void:
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = true
 
 func _on_Mission1Button_pressed() -> void:
+	scene = true
 	set_process(true)
 	$CamRot.stop(false)
 	$DirectorCue1.play(0.0)
@@ -46,7 +77,84 @@ func _on_Mission1Button_pressed() -> void:
 func _on_DirectorCue1_finished() -> void:
 	$UI/UI/Subtitles/Scene1.visible = false
 	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
+
+
+func _on_Exit_pressed():
+	get_tree().quit()
+
+
+func _on_Return_pressed() -> void:
+	scene = false
+	settings = false
+	set_process(true)
+	$CamRot.play(\"Idle\")
+	$UI/UI/Menu.visible = true
+	$UI/UI/Settings.visible = false
 "
+
+[sub_resource type="GDScript" id=32]
+script/source = "extends Control
+
+export var is_on_main_menu : bool = false
+
+var save_file : SaveFile
+
+func _ready():
+	save_file = load_settings()
+	if(is_on_main_menu):
+		$Panel/Options/Buttons/Main.visible = false
+
+func load_settings() -> SaveFile:
+	var save_file : SaveFile = GameSaver.load_game()
+	$Panel/Options/MasterVol/SliderMaster.value = save_file.master_volume
+	$Panel/Options/EffectVol/SliderEffect.value = save_file.effects_volume
+	$Panel/Options/EnemyVol/SliderEnemy.value = save_file.music_volume
+	$Panel/Options/Fullscreen.pressed = save_file.fullscreen
+	return save_file
+
+func _on_Fullscreen_toggled(button_pressed : bool) -> void:
+	if(save_file != null):
+		save_file.fullscreen = button_pressed
+		OS.window_fullscreen = button_pressed
+		GameSaver.save_game(save_file)
+
+func _on_SliderMaster_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.master_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), value)
+		GameSaver.save_game(save_file)
+
+func _on_SliderEffect_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.effects_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), value)
+		GameSaver.save_game(save_file)
+	
+# Music
+func _on_SliderEnemy_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.music_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), value)
+		GameSaver.save_game(save_file)
+
+func _on_Return_pressed() -> void:
+	visible = false
+"
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0, 0.101961, 1, 1 )
+
+[sub_resource type="StyleBoxLine" id=31]
+color = Color( 0, 0.439216, 1, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id=29]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id=30]
+color = Color( 0.501961, 0.501961, 0.501961, 1 )
+thickness = 2
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0, 0, 0, 1 )
@@ -428,16 +536,174 @@ margin_bottom = -853.0
 custom_fonts/font = ExtResource( 12 )
 text = "Select a scene"
 
+[node name="Settings" type="Control" parent="UI/UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 32 )
+is_on_main_menu = true
+
+[node name="Panel" type="Panel" parent="UI/UI/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1220.0
+margin_top = 190.0
+margin_right = -250.0
+margin_bottom = -190.0
+custom_styles/panel = SubResource( 28 )
+
+[node name="Options" type="VBoxContainer" parent="UI/UI/Settings/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_right = -35.0
+custom_constants/separation = 35
+alignment = 1
+
+[node name="Settings" type="Label" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 48.0
+margin_right = 392.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 20 )
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 147.0
+margin_right = 392.0
+margin_bottom = 151.0
+custom_styles/separator = SubResource( 31 )
+
+[node name="Fullscreen" type="CheckBox" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 186.0
+margin_right = 392.0
+margin_bottom = 237.0
+custom_fonts/font = ExtResource( 19 )
+custom_icons/checked = ExtResource( 16 )
+custom_icons/unchecked = ExtResource( 17 )
+text = "Fullscreen"
+align = 1
+icon_align = 1
+
+[node name="MasterVol" type="VBoxContainer" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 272.0
+margin_right = 392.0
+margin_bottom = 339.0
+
+[node name="Label" type="Label" parent="UI/UI/Settings/Panel/Options/MasterVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 19 )
+text = "Master Volume"
+align = 1
+valign = 1
+
+[node name="SliderMaster" type="HSlider" parent="UI/UI/Settings/Panel/Options/MasterVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber = ExtResource( 15 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = -12.0
+step = 0.01
+value = -25.8
+
+[node name="EnemyVol" type="VBoxContainer" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 476.0
+margin_right = 392.0
+margin_bottom = 543.0
+
+[node name="Label" type="Label" parent="UI/UI/Settings/Panel/Options/EnemyVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 19 )
+text = "Music Volume"
+align = 1
+valign = 1
+
+[node name="SliderEnemy" type="HSlider" parent="UI/UI/Settings/Panel/Options/EnemyVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber = ExtResource( 15 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = 0.0
+step = 0.01
+
+[node name="EffectVol" type="VBoxContainer" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 374.0
+margin_right = 392.0
+margin_bottom = 441.0
+
+[node name="Label" type="Label" parent="UI/UI/Settings/Panel/Options/EffectVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 19 )
+text = "Effects Volume"
+align = 1
+valign = 1
+
+[node name="SliderEffect" type="HSlider" parent="UI/UI/Settings/Panel/Options/EffectVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber = ExtResource( 15 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = 0.0
+step = 0.01
+
+[node name="HSeparator2" type="HSeparator" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 578.0
+margin_right = 392.0
+margin_bottom = 582.0
+custom_styles/separator = SubResource( 31 )
+
+[node name="Buttons" type="HBoxContainer" parent="UI/UI/Settings/Panel/Options"]
+margin_top = 617.0
+margin_right = 392.0
+margin_bottom = 652.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Return" type="Button" parent="UI/UI/Settings/Panel/Options/Buttons"]
+margin_left = 16.0
+margin_right = 142.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 18 )
+text = "Return"
+flat = true
+align = 0
+
+[node name="Main" type="Button" parent="UI/UI/Settings/Panel/Options/Buttons"]
+margin_left = 192.0
+margin_right = 375.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 18 )
+text = "Main Menu"
+flat = true
+align = 0
+
 [node name="Begin" type="Panel" parent="UI/UI"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="CamPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.79315, 0 )
 
 [node name="Camera" type="Camera" parent="CamPivot"]
+transform = Transform( 1, 0, 0, 0, 0.805184, 0.593026, 0, -0.593026, 0.805184, -2.38419e-07, 0, 6.20044 )
+current = true
+
+[node name="CamPosRotate" type="Camera" parent="CamPivot"]
 transform = Transform( 1, 0, 0, 0, 0.805184, 0.593026, 0, -0.593026, 0.805184, -2.38419e-07, 0, 6.20044 )
 
 [node name="CamRot" type="AnimationPlayer" parent="."]
@@ -693,6 +959,9 @@ material/0 = SubResource( 8 )
 [node name="FinalCamPos" type="Camera" parent="."]
 transform = Transform( -0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, 0.183013, -0.683013, -0.857014, 1.89806, 0.41904 )
 
+[node name="CamPosSettings" type="Camera" parent="."]
+transform = Transform( -0.5, -0.224144, 0.836516, 0, 0.965926, 0.258819, -0.866025, 0.12941, -0.482963, -0.823595, 1.54066, -0.441957 )
+
 [node name="DirectorCue1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
 bus = "Effects"
@@ -706,7 +975,15 @@ stream = ExtResource( 14 )
 volume_db = -5.0
 
 [connection signal="pressed" from="UI/UI/Menu/Options/Campaign" to="." method="_on_Campaign_pressed"]
+[connection signal="pressed" from="UI/UI/Menu/Options/Config" to="." method="_on_Config_pressed"]
+[connection signal="pressed" from="UI/UI/Menu/Options/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="UI/UI/Campaign/Selector/Mission1/Mission1Button" to="." method="_on_Mission1Button_pressed"]
+[connection signal="toggled" from="UI/UI/Settings/Panel/Options/Fullscreen" to="UI/UI/Settings" method="_on_Fullscreen_toggled"]
+[connection signal="value_changed" from="UI/UI/Settings/Panel/Options/MasterVol/SliderMaster" to="UI/UI/Settings" method="_on_SliderMaster_value_changed"]
+[connection signal="value_changed" from="UI/UI/Settings/Panel/Options/EnemyVol/SliderEnemy" to="UI/UI/Settings" method="_on_SliderEnemy_value_changed"]
+[connection signal="value_changed" from="UI/UI/Settings/Panel/Options/EffectVol/SliderEffect" to="UI/UI/Settings" method="_on_SliderEffect_value_changed"]
+[connection signal="pressed" from="UI/UI/Settings/Panel/Options/Buttons/Return" to="." method="_on_Return_pressed"]
+[connection signal="pressed" from="UI/UI/Settings/Panel/Options/Buttons/Return" to="UI/UI/Settings" method="_on_Return_pressed"]
 [connection signal="finished" from="DirectorCue1" to="." method="_on_DirectorCue1_finished"]
 
 [editable path="Deco/LowPolyCharacter4"]
