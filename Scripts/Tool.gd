@@ -8,12 +8,8 @@ func set_enabled(new_enabled : bool) -> void:
 	functionality()
 	
 func functionality() -> void:
-	if(enabled and Engine.editor_hint):
-		var material_count : int = $US_Soldiers.get_surface_material_count() -1
-		var percentaje : float = material_count / 100.0
-		
-		for i in range(0, material_count):
-			print(i * percentaje, "%")
-			$US_Soldiers.get_surface_material(material_count).next_pass = load("res://Resources/Materials/Outline.tres")
-		
-		print("Complete!")
+	if(enabled):
+		print("Well, hello there!")
+		for child in get_children():
+			if(child is MeshInstance):
+				child.create_convex_collision()

@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Addons/HealthSystem/Damager.gd"
 }, {
+"base": "Node",
+"class": "DialogEasy",
+"language": "GDScript",
+"path": "res://Scripts/DialogEasy.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "DialogStreamPlayer",
+"language": "GDScript",
+"path": "res://Scripts/DialogStreamPlayer.gd"
+}, {
 "base": "Spatial",
 "class": "EnemySetup",
 "language": "GDScript",
@@ -61,6 +71,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Damager": "res://Addons/HealthSystem/health-decrease.png",
+"DialogEasy": "",
+"DialogStreamPlayer": "",
 "EnemySetup": "",
 "FPSCamera": "",
 "FPSRaycast": "",
@@ -87,9 +99,7 @@ GameSaver="*res://Scripts/GameSaver.gd"
 window/size/width=1920
 window/size/height=1080
 window/size/resizable=false
-window/size/test_width=640
-window/size/test_height=360
-window/stretch/mode="viewport"
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [global]

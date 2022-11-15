@@ -1,0 +1,256 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-48.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Resources/Fonts/Fonts/VCR-72.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Art/2D/Sliderhandle.png" type="Texture" id=4]
+[ext_resource path="res://Art/2D/CheckedCheck.png" type="Texture" id=5]
+[ext_resource path="res://Art/2D/Check.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/CoolButton.gd" type="Script" id=7]
+[ext_resource path="res://Art/Audio/Card.wav" type="AudioStream" id=8]
+[ext_resource path="res://Art/Audio/Dice.wav" type="AudioStream" id=9]
+[ext_resource path="res://Art/2D/SliderhandleTaken.png" type="Texture" id=10]
+
+[sub_resource type="GDScript" id=32]
+script/source = "extends Control
+
+signal back_pressed
+signal main_menu_pressed
+
+export var is_on_main_menu : bool = false
+
+var save_file : SaveFile
+
+func _ready():
+	save_file = load_settings()
+	if(is_on_main_menu):
+		$Panel/Options/Buttons/Main.visible = false
+
+func load_settings() -> SaveFile:
+	var save_file : SaveFile = GameSaver.load_game()
+	$Panel/Options/MasterVol/SliderMaster.value = save_file.master_volume
+	$Panel/Options/EffectVol/SliderEffect.value = save_file.effects_volume
+	$Panel/Options/EnemyVol/SliderEnemy.value = save_file.music_volume
+	$Panel/Options/Fullscreen.pressed = save_file.fullscreen
+	return save_file
+
+func _on_Fullscreen_toggled(button_pressed : bool) -> void:
+	if(save_file != null):
+		save_file.fullscreen = button_pressed
+		OS.window_fullscreen = button_pressed
+		GameSaver.save_game(save_file)
+
+func _on_SliderMaster_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.master_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), value)
+		GameSaver.save_game(save_file)
+
+func _on_SliderEffect_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.effects_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), value)
+		GameSaver.save_game(save_file)
+	
+# Music
+func _on_SliderEnemy_value_changed(value: float) -> void:
+	if(save_file != null):
+		save_file.music_volume = value
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), value)
+		GameSaver.save_game(save_file)
+
+func _on_Return_pressed() -> void:
+	visible = false
+	emit_signal(\"back_pressed\")
+
+func _on_Main_pressed() -> void:
+	emit_signal(\"main_menu_pressed\")
+"
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0, 0.101961, 1, 1 )
+
+[sub_resource type="StyleBoxLine" id=31]
+color = Color( 0, 0.439216, 1, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id=29]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id=30]
+color = Color( 0.501961, 0.501961, 0.501961, 1 )
+thickness = 2
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 32 )
+is_on_main_menu = true
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1220.0
+margin_top = 190.0
+margin_right = -250.0
+margin_bottom = -190.0
+custom_styles/panel = SubResource( 28 )
+
+[node name="Options" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_right = -35.0
+custom_constants/separation = 35
+alignment = 1
+
+[node name="Settings" type="Label" parent="Panel/Options"]
+margin_top = 48.0
+margin_right = 392.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Options"]
+margin_top = 147.0
+margin_right = 392.0
+margin_bottom = 151.0
+custom_styles/separator = SubResource( 31 )
+
+[node name="Fullscreen" type="CheckBox" parent="Panel/Options"]
+margin_top = 186.0
+margin_right = 392.0
+margin_bottom = 237.0
+custom_fonts/font = ExtResource( 2 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 6 )
+text = "Fullscreen"
+align = 1
+icon_align = 1
+script = ExtResource( 7 )
+click_audio = ExtResource( 9 )
+enter_audio = ExtResource( 8 )
+max_scale = 1.05
+
+[node name="MasterVol" type="VBoxContainer" parent="Panel/Options"]
+margin_top = 272.0
+margin_right = 392.0
+margin_bottom = 339.0
+
+[node name="Label" type="Label" parent="Panel/Options/MasterVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 2 )
+text = "Master Volume"
+align = 1
+valign = 1
+
+[node name="SliderMaster" type="HSlider" parent="Panel/Options/MasterVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = -12.0
+step = 0.01
+value = -25.8
+
+[node name="EnemyVol" type="VBoxContainer" parent="Panel/Options"]
+margin_top = 374.0
+margin_right = 392.0
+margin_bottom = 441.0
+
+[node name="Label" type="Label" parent="Panel/Options/EnemyVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 2 )
+text = "Music Volume"
+align = 1
+valign = 1
+
+[node name="SliderEnemy" type="HSlider" parent="Panel/Options/EnemyVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = 0.0
+step = 0.01
+
+[node name="EffectVol" type="VBoxContainer" parent="Panel/Options"]
+margin_top = 476.0
+margin_right = 392.0
+margin_bottom = 543.0
+
+[node name="Label" type="Label" parent="Panel/Options/EffectVol"]
+margin_right = 392.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 2 )
+text = "Effects Volume"
+align = 1
+valign = 1
+
+[node name="SliderEffect" type="HSlider" parent="Panel/Options/EffectVol"]
+margin_top = 47.0
+margin_right = 392.0
+margin_bottom = 67.0
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+min_value = -80.0
+max_value = 0.0
+step = 0.01
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/Options"]
+margin_top = 578.0
+margin_right = 392.0
+margin_bottom = 582.0
+custom_styles/separator = SubResource( 31 )
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/Options"]
+margin_top = 617.0
+margin_right = 392.0
+margin_bottom = 652.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Return" type="Button" parent="Panel/Options/Buttons"]
+margin_left = 16.0
+margin_right = 142.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 1 )
+text = "Return"
+flat = true
+align = 0
+script = ExtResource( 7 )
+click_audio = ExtResource( 9 )
+enter_audio = ExtResource( 8 )
+max_scale = 1.05
+
+[node name="Main" type="Button" parent="Panel/Options/Buttons"]
+margin_left = 192.0
+margin_right = 375.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 1 )
+text = "Main Menu"
+flat = true
+align = 0
+script = ExtResource( 7 )
+click_audio = ExtResource( 9 )
+enter_audio = ExtResource( 8 )
+max_scale = 1.05
+
+[connection signal="toggled" from="Panel/Options/Fullscreen" to="." method="_on_Fullscreen_toggled"]
+[connection signal="value_changed" from="Panel/Options/MasterVol/SliderMaster" to="." method="_on_SliderMaster_value_changed"]
+[connection signal="value_changed" from="Panel/Options/EnemyVol/SliderEnemy" to="." method="_on_SliderEnemy_value_changed"]
+[connection signal="value_changed" from="Panel/Options/EffectVol/SliderEffect" to="." method="_on_SliderEffect_value_changed"]
+[connection signal="pressed" from="Panel/Options/Buttons/Return" to="." method="_on_Return_pressed"]
+[connection signal="pressed" from="Panel/Options/Buttons/Main" to="." method="_on_Main_pressed"]

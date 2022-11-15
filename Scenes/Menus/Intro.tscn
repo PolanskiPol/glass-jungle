@@ -23,6 +23,10 @@ func _ready() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), save_file.master_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), save_file.music_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), save_file.effects_volume)
+	
+	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Master\")))
+	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Music\")))
+	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Effects\")))
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed(\"ui_accept\") and !skipped):

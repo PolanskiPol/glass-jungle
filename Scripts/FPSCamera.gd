@@ -10,7 +10,7 @@ func _ready() -> void:
 	target = get_node(target_path)
 
 func _input(event: InputEvent) -> void:
-	if(event is InputEventMouseMotion):
+	if(event is InputEventMouseMotion and target.active):
 		target.rotation_degrees.y -= event.relative.x * 0.2
 		rotation_degrees.x -= event.relative.y * 0.2
 		

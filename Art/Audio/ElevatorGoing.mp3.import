@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ElevatorGoing.mp3-20b20189f05727d927c894770cf07e85.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/ElevatorGoing.mp3"
+dest_files=[ "res://.import/ElevatorGoing.mp3-20b20189f05727d927c894770cf07e85.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
