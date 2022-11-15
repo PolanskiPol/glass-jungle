@@ -36,6 +36,8 @@ func _ready() -> void:
 	unlock_level(save_file.unlocked_levels[0], $UI/UI/Campaign/Selector/Mission1/Mission1/Mission1Button, load(\"res://Art/2D/Skycrapper.png\"))
 	unlock_level(save_file.unlocked_levels[1], $UI/UI/Campaign/Selector/Mission2/Mission1/Mission2Button, load(\"res://Art/2D/SecretBase.png\"))
 	unlock_level(save_file.unlocked_levels[2], $UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button, load(\"res://Art/2D/BadGuy.png\"))
+	if(save_file.fast_graphics):
+		get_tree().call_group(\"Lights\", \"set_shadow\", false)
 	
 func _process(delta: float) -> void:
 	if(scene):
@@ -111,6 +113,9 @@ func _on_Settings_back_pressed() -> void:
 	$CamRot.play(\"Idle\")
 	$UI/UI/Menu.visible = true
 	$UI/UI/Settings.visible = false
+
+func _on_Settings_graphics_changed(fast_graphics) -> void:
+	get_tree().call_group(\"Lights\", \"set_shadow\", !fast_graphics)
 "
 
 [sub_resource type="StyleBoxFlat" id=28]
@@ -652,14 +657,20 @@ transform = Transform( 0.45, 0, 0, 0, 0.1, 0, 0, 0, 0.45, 0, 1.37717, 0 )
 mesh = SubResource( 14 )
 material/0 = SubResource( 16 )
 
-[node name="SpotLight" type="SpotLight" parent="Deco/Focus"]
+[node name="SpotLight" type="SpotLight" parent="Deco/Focus" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
 light_energy = 7.0
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 3.292
 spot_range = 7.1254
 spot_angle = 30.0
 
-[node name="OmniLight" type="OmniLight" parent="Deco/Focus"]
+[node name="OmniLight" type="OmniLight" parent="Deco/Focus" groups=["Lights"]]
 transform = Transform( 1, -2.98023e-08, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 1.97711, -2.38419e-07 )
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 3.292
 omni_range = 0.879134
 
 [node name="Focus2" type="Spatial" parent="Deco"]
@@ -675,14 +686,20 @@ transform = Transform( 0.45, 0, 0, 0, 0.1, 0, 0, 0, 0.45, 0, 1.37717, 0 )
 mesh = SubResource( 14 )
 material/0 = SubResource( 16 )
 
-[node name="SpotLight" type="SpotLight" parent="Deco/Focus2"]
+[node name="SpotLight" type="SpotLight" parent="Deco/Focus2" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
 light_energy = 7.0
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 3.292
 spot_range = 7.1254
 spot_angle = 30.0
 
-[node name="OmniLight" type="OmniLight" parent="Deco/Focus2"]
+[node name="OmniLight" type="OmniLight" parent="Deco/Focus2" groups=["Lights"]]
 transform = Transform( 1, 2.98023e-08, 5.21541e-08, 0, 1, -5.96046e-08, -3.72529e-08, 2.98023e-08, 1, 2.38419e-07, 2.06207, 1.07288e-06 )
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 3.292
 omni_range = 0.924504
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Deco"]
@@ -694,8 +711,11 @@ transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0734
 [node name="AnimationPlayer" parent="Deco/LowPolyCharacter3/RootNode" index="1"]
 "anims/Take 001" = SubResource( 22 )
 
-[node name="OmniLight" type="OmniLight" parent="Deco/LowPolyCharacter3"]
+[node name="OmniLight" type="OmniLight" parent="Deco/LowPolyCharacter3" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45058e-09, 1.66715, 0.402351 )
+light_specular = 1.0
+shadow_enabled = true
+shadow_bias = 3.292
 omni_range = 2.74303
 
 [node name="MeshInstance" type="MeshInstance" parent="Deco/LowPolyCharacter3"]
@@ -708,13 +728,12 @@ transform = Transform( 0.005, 0, 0, 0, -4.37114e-10, -0.005, 0, 0.01, -2.18557e-
 mesh = SubResource( 23 )
 material/0 = SubResource( 24 )
 
-[node name="SpotLight" type="SpotLight" parent="Deco"]
+[node name="SpotLight" type="SpotLight" parent="Deco" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.6112, 0 )
 light_energy = 1.118
 light_specular = 1.0
 shadow_enabled = true
-shadow_bias = 0.2
-shadow_contact = 0.662
+shadow_bias = 3.292
 spot_range = 105.149
 spot_angle = 25.0
 
@@ -862,6 +881,7 @@ bus = "Music"
 [connection signal="pressed" from="UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button" to="." method="_on_Mission3Button_pressed"]
 [connection signal="pressed" from="UI/UI/Campaign/GoBack" to="." method="_on_GoBack_pressed"]
 [connection signal="back_pressed" from="UI/UI/Settings" to="." method="_on_Settings_back_pressed"]
+[connection signal="graphics_changed" from="UI/UI/Settings" to="." method="_on_Settings_graphics_changed"]
 [connection signal="finished" from="DirectorCue1" to="." method="_on_DirectorCue1_finished"]
 
 [editable path="Deco/LowPolyCharacter4"]
