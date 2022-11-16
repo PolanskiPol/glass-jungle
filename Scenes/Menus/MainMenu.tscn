@@ -27,10 +27,12 @@ script/source = "extends Spatial
 
 onready var scene : bool = false
 onready var settings : bool = false
+onready var playing_cue : bool = false
 
 var save_file : SaveFile
 
 func _ready() -> void:
+	randomize()
 	$Enter.play(\"Enter\")
 	$CamRot.play(\"Idle\")
 	$Music.play(0.0)
@@ -49,6 +51,14 @@ func _process(delta: float) -> void:
 		lerp_main_camera($CamPosSettings)
 	else:
 		lerp_main_camera($CamPivot/CamPosRotate)
+		
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed(\"ui_accept\") and playing_cue):
+		$UI/UI/IntroSkip.visible = false
+		cue_ended()
+		$DirectorCue1.stop()
+		$DirectorCue2.stop()
+		$DirectorCue3.stop()
 		
 func unlock_level(unlocked : bool, texture_button : TextureButton, texture : Resource) -> void:
 	if(!unlocked):
@@ -69,6 +79,13 @@ func lerp_main_camera(to : Spatial) -> void:
 	
 	if($CamPivot.rotation == to.rotation):
 		set_process(false)
+		
+func cue_ended() -> void:
+	$UI/UI/Subtitles/Scene1.visible = false
+	$UI/UI/Transition/AnimationPlayer.play(\"Transition\")
+	$UI/UI/Transition/LoadIcon.play(\"Loading\")
+	yield($UI/UI/Transition/AnimationPlayer, \"animation_finished\")
+	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
 
 func _on_Config_pressed():
 	settings = true
@@ -76,24 +93,21 @@ func _on_Config_pressed():
 	$CamRot.stop(false)
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = false
-	$UI/UI/Settings.visible = true
+	$UI/UI/Settings.activate()
 
 func _on_Campaign_pressed() -> void:
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = true
 	
 func _on_DirectorCue1_finished() -> void:
-	$UI/UI/Subtitles/Scene1.visible = false
-	$UI/UI/Transition/AnimationPlayer.play(\"Transition\")
-	$UI/UI/Transition/LoadIcon.play(\"Loading\")
-	yield($UI/UI/Transition/AnimationPlayer, \"animation_finished\")
-	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
-
-
+	cue_ended()
+	
 func _on_Exit_pressed():
 	get_tree().quit()
 
 func _on_Mission1Button_pressed() -> void:
+	$UI/UI/IntroSkip.visible = true
+	playing_cue = true
 	scene = true
 	set_process(true)
 	$CamRot.stop(false)
@@ -104,10 +118,12 @@ func _on_Mission1Button_pressed() -> void:
 	$UI/UI/Transition/Scene.text = str(\"Scene 1 | Take \", int(rand_range(1, 1000)))
 
 func _on_Mission2Button_pressed() -> void:
+	playing_cue = true
 #	TODO: Add logic
 	$UI/UI/Transition/Scene.text = str(\"Scene 2 | Take \", int(rand_range(1, 1000)))
 	
 func _on_Mission3Button_pressed() -> void:
+	playing_cue = true
 #	TODO: Add logic
 	$UI/UI/Transition/Scene.text = str(\"Scene 3 | Take \", int(rand_range(1, 1000)))
 
@@ -868,23 +884,19 @@ visible = false
 [node name="Begin" type="Panel" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="Transition" type="Control" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1080.0
-margin_right = 1920.0
+margin_bottom = -1080.0
 
 [node name="Panel" type="Panel" parent="UI/UI/Transition"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 230.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 
 [node name="Clap" type="TextureRect" parent="UI/UI/Transition"]
 margin_right = 1920.0
@@ -908,7 +920,7 @@ margin_top = 457.0
 margin_right = 1059.0
 margin_bottom = 648.0
 custom_fonts/font = ExtResource( 24 )
-text = "Directed by: James Smith"
+text = "Directed by: Morphine Games"
 valign = 1
 
 [node name="Scene" type="Label" parent="UI/UI/Transition"]
@@ -941,6 +953,21 @@ bus = "Effects"
 [node name="LoadIcon" type="AnimationPlayer" parent="UI/UI/Transition"]
 anims/Loading = SubResource( 31 )
 anims/RESET = SubResource( 32 )
+
+[node name="IntroSkip" type="Label" parent="UI/UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 4.0
+margin_right = -1494.0
+margin_bottom = -968.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 212, 54 )
+custom_fonts/font = ExtResource( 12 )
+text = "\"Space\" to skip"
+align = 1
+valign = 1
 
 [node name="CamPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.79315, 0 )
@@ -1003,9 +1030,6 @@ visible = false
 [node name="Enemy" parent="Deco" instance=ExtResource( 5 )]
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 1.85689, 0, -1.74665 )
 script = null
-
-[node name="US_Soldiers" parent="Deco/Enemy" index="0"]
-transform = Transform( 0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 0, 0, 0 )
 
 [node name="Focus" type="Spatial" parent="Deco"]
 transform = Transform( 0.913219, -0.349661, -0.20921, 0, -0.513436, 0.858128, -0.40747, -0.783658, -0.46888, 2.52641, 4.59259, 4.20473 )
@@ -1227,6 +1251,16 @@ stream = ExtResource( 13 )
 volume_db = 18.0
 bus = "Effects"
 
+[node name="DirectorCue2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = 18.0
+bus = "Effects"
+
+[node name="DirectorCue3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = 18.0
+bus = "Effects"
+
 [node name="Enter" type="AnimationPlayer" parent="."]
 anims/Enter = SubResource( 26 )
 anims/RESET = SubResource( 27 )
@@ -1246,6 +1280,8 @@ bus = "Music"
 [connection signal="back_pressed" from="UI/UI/Settings" to="." method="_on_Settings_back_pressed"]
 [connection signal="graphics_changed" from="UI/UI/Settings" to="." method="_on_Settings_graphics_changed"]
 [connection signal="finished" from="DirectorCue1" to="." method="_on_DirectorCue1_finished"]
+[connection signal="finished" from="DirectorCue2" to="." method="_on_DirectorCue1_finished"]
+[connection signal="finished" from="DirectorCue3" to="." method="_on_DirectorCue1_finished"]
 
 [editable path="Deco/LowPolyCharacter4"]
 [editable path="Deco/Blackboard"]

@@ -831,8 +831,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5034.0
 margin_top = -3327.0
-margin_right = -2153.99
-margin_bottom = -1707.0
+margin_right = -233.99
+margin_bottom = -627.0
 rect_rotation = 24.5968
 custom_styles/panel = SubResource( 3 )
 
@@ -1034,7 +1034,7 @@ margin_bottom = -972.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 212, 54 )
 custom_fonts/font = ExtResource( 10 )
-text = "\"Intro\" to skip"
+text = "\"Space\" to skip"
 align = 1
 valign = 1
 
@@ -1043,6 +1043,6 @@ self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1080.0
-margin_bottom = -1080.0
+margin_right = 1920.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

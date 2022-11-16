@@ -21,11 +21,30 @@ signal graphics_changed(fast_graphics)
 export var is_on_main_menu : bool = false
 
 var save_file : SaveFile
+var new_values : Dictionary
 
 func _ready():
 	save_file = load_settings()
 	if(is_on_main_menu):
 		$Panel/Options/Buttons/Main.visible = false
+		
+	setup_new_values()
+		
+func activate() -> void:
+	visible = true
+	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
+	load_settings()
+	setup_new_values()
+	
+func setup_new_values() -> void:
+	new_values = {
+		\"master_volume\" : save_file.master_volume
+		,\"music_volume\" : save_file.music_volume
+		,\"effects_volume\" : save_file.effects_volume
+		,\"fast_graphics\" : save_file.fast_graphics
+		,\"fullscreen\" : save_file.fullscreen
+		,\"resolution\" : save_file.resolution
+	}
 
 func load_settings() -> SaveFile:
 	var save_file : SaveFile = GameSaver.load_game()
@@ -34,62 +53,84 @@ func load_settings() -> SaveFile:
 	$Panel/Options/EnemyVol/SliderEnemy.value = save_file.music_volume
 	$Panel/Options/Fullscreen.pressed = save_file.fullscreen
 	$Panel/Options/Graphics.pressed = save_file.fast_graphics
+	
+	$Panel/Options/Resolution/Label.text = \"Resolution (\" + str(save_file.resolution.x) + \"x\" + str(save_file.resolution.y) + \")\"
+	if(save_file.resolution == Vector2(1920, 1080)):
+		$Panel/Options/Resolution/SliderRes.value = 2
+	elif(save_file.resolution == Vector2(1366, 768)):
+		$Panel/Options/Resolution/SliderRes.value = 1
+	elif(save_file.resolution == Vector2(1280, 720)):
+		$Panel/Options/Resolution/SliderRes.value = 0
+	
 	return save_file
 	
 func _on_Graphics_toggled(button_pressed : bool) -> void:
 	if(save_file != null):
-		save_file.fast_graphics = button_pressed
-		GameSaver.save_game(save_file)
-		emit_signal(\"graphics_changed\", button_pressed)
+		new_values.fast_graphics = button_pressed
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_Fullscreen_toggled(button_pressed : bool) -> void:
 	if(save_file != null):
-		save_file.fullscreen = button_pressed
-		OS.window_fullscreen = button_pressed
-		GameSaver.save_game(save_file)
+		new_values.fullscreen = button_pressed
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_SliderMaster_value_changed(value: float) -> void:
 	if(save_file != null):
-		save_file.master_volume = value
+		new_values.master_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), value)
-		GameSaver.save_game(save_file)
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_SliderEffect_value_changed(value: float) -> void:
 	if(save_file != null):
-		save_file.effects_volume = value
+		new_values.effects_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), value)
-		GameSaver.save_game(save_file)
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 	
-# Music
 func _on_SliderEnemy_value_changed(value: float) -> void:
 	if(save_file != null):
-		save_file.music_volume = value
+		new_values.music_volume = value
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), value)
-		GameSaver.save_game(save_file)
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_SliderRes_value_changed(value: float) -> void:
 	if(save_file != null):
 		if(value == 2):
-			save_file.resolution = Vector2(1920, 1080)
+			new_values.resolution = Vector2(1920, 1080)
 			$Panel/Options/Resolution/Label.text = \"Resolution (1920x1080)\"
 		elif(value == 1):
-			save_file.resolution = Vector2(1366, 768)
+			new_values.resolution = Vector2(1366, 768)
 			$Panel/Options/Resolution/Label.text = \"Resolution (1366x786)\"
 		elif(value == 0):
-			save_file.resolution = Vector2(1280, 720)
+			new_values.resolution = Vector2(1280, 720)
 			$Panel/Options/Resolution/Label.text = \"Resolution (1280x720)\"
-			
-		get_viewport().size = save_file.resolution
-		OS.window_size = save_file.resolution
-		GameSaver.save_game(save_file)
+		
+		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 			
 func _on_Return_pressed() -> void:
+	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
 	visible = false
 	emit_signal(\"back_pressed\")
 
 func _on_Main_pressed() -> void:
+	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
 	emit_signal(\"main_menu_pressed\")
 
+func _on_Apply_pressed() -> void:
+	save_file.master_volume = new_values.master_volume
+	save_file.music_volume = new_values.music_volume
+	save_file.effects_volume = new_values.effects_volume
+	save_file.fast_graphics = new_values.fast_graphics
+	save_file.fullscreen = new_values.fullscreen
+	save_file.resolution = new_values.resolution
+	GameSaver.save_game(save_file)
+	
+	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
+	emit_signal(\"graphics_changed\", save_file.fast_graphics)
+	OS.window_fullscreen = save_file.fullscreen
+	get_viewport().size = save_file.resolution
+	OS.window_size = save_file.resolution
+	OS.center_window()
+	setup_new_values()
 "
 
 [sub_resource type="StyleBoxFlat" id=28]
@@ -104,7 +145,7 @@ color = Color( 1, 1, 1, 1 )
 thickness = 5
 
 [sub_resource type="StyleBoxLine" id=30]
-color = Color( 0.501961, 0.501961, 0.501961, 1 )
+color = Color( 0, 1, 0, 1 )
 thickness = 2
 
 [node name="Settings" type="Control"]
@@ -286,9 +327,22 @@ margin_bottom = 868.0
 custom_constants/separation = 50
 alignment = 1
 
+[node name="Apply" type="Button" parent="Panel/Options/Buttons"]
+margin_left = 57.0
+margin_right = 164.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apply"
+flat = true
+align = 0
+script = ExtResource( 7 )
+click_audio = ExtResource( 9 )
+enter_audio = ExtResource( 8 )
+max_scale = 1.05
+
 [node name="Return" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 135.0
-margin_right = 261.0
+margin_left = 214.0
+margin_right = 340.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
@@ -300,8 +354,8 @@ enter_audio = ExtResource( 8 )
 max_scale = 1.05
 
 [node name="Main" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 311.0
-margin_right = 494.0
+margin_left = 390.0
+margin_right = 573.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 1 )
 text = "Main Menu"
@@ -318,5 +372,6 @@ max_scale = 1.05
 [connection signal="value_changed" from="Panel/Options/MasterVol/SliderMaster" to="." method="_on_SliderMaster_value_changed"]
 [connection signal="value_changed" from="Panel/Options/EnemyVol/SliderEnemy" to="." method="_on_SliderEnemy_value_changed"]
 [connection signal="value_changed" from="Panel/Options/EffectVol/SliderEffect" to="." method="_on_SliderEffect_value_changed"]
+[connection signal="pressed" from="Panel/Options/Buttons/Apply" to="." method="_on_Apply_pressed"]
 [connection signal="pressed" from="Panel/Options/Buttons/Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="Panel/Options/Buttons/Main" to="." method="_on_Main_pressed"]

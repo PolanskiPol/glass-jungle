@@ -52,6 +52,7 @@ func _on_DialogEasy_dialog_over() -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if(anim_name == \"Open\"):
 		$UI/UI/Level/Player.set_active(true)
+		$UI/UI/Level/Player.set_objective(\" - Find the key\")
 "
 
 [sub_resource type="ShaderMaterial" id=15]
