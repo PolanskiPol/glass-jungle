@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BehindYou.mp3-8cdded6d0f17f2160499cc2b6891390c.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/BehindYou.mp3"
+dest_files=[ "res://.import/BehindYou.mp3-8cdded6d0f17f2160499cc2b6891390c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

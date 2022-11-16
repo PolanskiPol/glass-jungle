@@ -13,5 +13,6 @@ export var effects_volume : float = 0
 
 export var fast_graphics : bool = false
 export var fullscreen : bool = false
+export var resolution : Vector2 = Vector2(1920, 1080)
 
 export var language : String = "en"

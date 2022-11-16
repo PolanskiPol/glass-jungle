@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Clapperboard.mp3-1e07dded8caaba89004ec6bb7450f01f.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/Clapperboard.mp3"
+dest_files=[ "res://.import/Clapperboard.mp3-1e07dded8caaba89004ec6bb7450f01f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

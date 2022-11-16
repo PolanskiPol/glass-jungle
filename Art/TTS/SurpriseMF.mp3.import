@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SurpriseMF.mp3-9cbe93be3d9e6410974d23f621ab876c.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/SurpriseMF.mp3"
+dest_files=[ "res://.import/SurpriseMF.mp3-9cbe93be3d9e6410974d23f621ab876c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

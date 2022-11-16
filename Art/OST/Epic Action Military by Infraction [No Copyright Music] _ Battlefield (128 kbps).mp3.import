@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Epic Action Military by Infraction [No Copyright Music] _ Battlefield (128 kbps).mp3-b2ae50c4232010b066196c929e3e2c4d.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Epic Action Military by Infraction [No Copyright Music] _ Battlefield (128 kbps).mp3"
+dest_files=[ "res://.import/Epic Action Military by Infraction [No Copyright Music] _ Battlefield (128 kbps).mp3-b2ae50c4232010b066196c929e3e2c4d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

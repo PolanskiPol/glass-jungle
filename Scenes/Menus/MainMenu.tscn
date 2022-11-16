@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Art/2D/Circle2.png" type="Texture" id=1]
 [ext_resource path="res://Art/3D/LowPolyCharacter2.fbx" type="PackedScene" id=2]
@@ -10,10 +10,13 @@
 [ext_resource path="res://Art/3D/LowPolyCharacter3.fbx" type="PackedScene" id=8]
 [ext_resource path="res://Art/2D/Logo.png" type="Texture" id=9]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-36.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Art/2D/ClapperboardUI.png" type="Texture" id=11]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Art/TTS/DirectorScene1.mp3" type="AudioStream" id=13]
 [ext_resource path="res://Art/OST/MainMenu.mp3" type="AudioStream" id=14]
 [ext_resource path="res://Scenes/Menus/Settings.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-144.tres" type="DynamicFont" id=16]
+[ext_resource path="res://Art/Audio/Clapperboard.mp3" type="AudioStream" id=17]
 [ext_resource path="res://Scripts/CoolButton.gd" type="Script" id=21]
 [ext_resource path="res://Art/Audio/Card.wav" type="AudioStream" id=22]
 [ext_resource path="res://Art/Audio/Dice.wav" type="AudioStream" id=23]
@@ -81,6 +84,9 @@ func _on_Campaign_pressed() -> void:
 	
 func _on_DirectorCue1_finished() -> void:
 	$UI/UI/Subtitles/Scene1.visible = false
+	$UI/UI/Transition/AnimationPlayer.play(\"Transition\")
+	$UI/UI/Transition/LoadIcon.play(\"Loading\")
+	yield($UI/UI/Transition/AnimationPlayer, \"animation_finished\")
 	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
 
 
@@ -95,12 +101,15 @@ func _on_Mission1Button_pressed() -> void:
 	$UI/UI/Subtitles/Scene1.visible = true
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = false
+	$UI/UI/Transition/Scene.text = str(\"Scene 1 | Take \", int(rand_range(1, 1000)))
 
 func _on_Mission2Button_pressed() -> void:
-	pass # Replace with function body.
-
+#	TODO: Add logic
+	$UI/UI/Transition/Scene.text = str(\"Scene 2 | Take \", int(rand_range(1, 1000)))
+	
 func _on_Mission3Button_pressed() -> void:
-	pass # Replace with function body.
+#	TODO: Add logic
+	$UI/UI/Transition/Scene.text = str(\"Scene 3 | Take \", int(rand_range(1, 1000)))
 
 func _on_GoBack_pressed() -> void:
 	$UI/UI/Campaign.visible = false
@@ -134,6 +143,185 @@ shadow_offset = Vector2( 10, 10 )
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Clap:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ClapSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Transition"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1080, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Clap:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ClapSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "Loading"
+length = 1.4
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Loading:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Loading:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.345098, -0.25, 0, 0.25, 0, 0.345098, -0.25, 0, 0.25, 0, 0.345098, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Loading:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.345098, -0.25, 0, 0.25, 0, 0.345098, -0.25, 0, 0.25, 0, 0.345098, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Loading:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.4 )
+}
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Loading:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Loading:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.345098, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Loading:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.345098, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Loading:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "Idle"
@@ -268,6 +456,58 @@ tracks/3/keys = {
 "points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("UI/UI/Begin:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("UI/UI/Transition/Panel:rect_size:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("UI/UI/Transition/Panel:rect_size:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 850, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("UI/UI/Transition:rect_size:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("UI/UI/Transition:rect_size:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=27]
 length = 0.001
@@ -308,6 +548,58 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("UI/UI/Begin:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("UI/UI/Transition/Panel:rect_size:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("UI/UI/Transition/Panel:rect_size:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 850, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("UI/UI/Transition:rect_size:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("UI/UI/Transition:rect_size:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
 "points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
@@ -574,10 +866,81 @@ enter_audio = ExtResource( 22 )
 visible = false
 
 [node name="Begin" type="Panel" parent="UI/UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
+
+[node name="Transition" type="Control" parent="UI/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1080.0
+margin_right = 1920.0
+
+[node name="Panel" type="Panel" parent="UI/UI/Transition"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 230.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Clap" type="TextureRect" parent="UI/UI/Transition"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_pivot_offset = Vector2( 1915, 229 )
+texture = ExtResource( 11 )
+
+[node name="MovieTitle" type="Label" parent="UI/UI/Transition"]
+self_modulate = Color( 1, 0.941176, 0.670588, 1 )
+margin_left = 76.0
+margin_top = 287.0
+margin_right = 1059.0
+margin_bottom = 478.0
+custom_fonts/font = ExtResource( 16 )
+text = "GLASS JUNGLE"
+valign = 1
+
+[node name="Director" type="Label" parent="UI/UI/Transition"]
+margin_left = 76.0
+margin_top = 457.0
+margin_right = 1059.0
+margin_bottom = 648.0
+custom_fonts/font = ExtResource( 24 )
+text = "Directed by: James Smith"
+valign = 1
+
+[node name="Scene" type="Label" parent="UI/UI/Transition"]
+margin_left = 76.0
+margin_top = 607.0
+margin_right = 1059.0
+margin_bottom = 798.0
+custom_fonts/font = ExtResource( 24 )
+text = "Scene 1"
+valign = 1
+
+[node name="Loading" type="Label" parent="UI/UI/Transition"]
+modulate = Color( 1, 0.345098, 0.345098, 1 )
+margin_left = 76.0
+margin_top = 757.0
+margin_right = 1059.0
+margin_bottom = 948.0
+custom_fonts/font = ExtResource( 24 )
+text = "Preparing attrezzo..."
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/UI/Transition"]
+anims/RESET = SubResource( 29 )
+anims/Transition = SubResource( 30 )
+
+[node name="ClapSound" type="AudioStreamPlayer" parent="UI/UI/Transition"]
+stream = ExtResource( 17 )
+bus = "Effects"
+
+[node name="LoadIcon" type="AnimationPlayer" parent="UI/UI/Transition"]
+anims/Loading = SubResource( 31 )
+anims/RESET = SubResource( 32 )
 
 [node name="CamPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.79315, 0 )

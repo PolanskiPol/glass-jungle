@@ -67,12 +67,29 @@ func _on_SliderEnemy_value_changed(value: float) -> void:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), value)
 		GameSaver.save_game(save_file)
 
+func _on_SliderRes_value_changed(value: float) -> void:
+	if(save_file != null):
+		if(value == 2):
+			save_file.resolution = Vector2(1920, 1080)
+			$Panel/Options/Resolution/Label.text = \"Resolution (1920x1080)\"
+		elif(value == 1):
+			save_file.resolution = Vector2(1366, 768)
+			$Panel/Options/Resolution/Label.text = \"Resolution (1366x786)\"
+		elif(value == 0):
+			save_file.resolution = Vector2(1280, 720)
+			$Panel/Options/Resolution/Label.text = \"Resolution (1280x720)\"
+			
+		get_viewport().size = save_file.resolution
+		OS.window_size = save_file.resolution
+		GameSaver.save_game(save_file)
+			
 func _on_Return_pressed() -> void:
 	visible = false
 	emit_signal(\"back_pressed\")
 
 func _on_Main_pressed() -> void:
 	emit_signal(\"main_menu_pressed\")
+
 "
 
 [sub_resource type="StyleBoxFlat" id=28]
@@ -99,10 +116,10 @@ is_on_main_menu = true
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1220.0
-margin_top = 140.0
-margin_right = -175.0
-margin_bottom = -140.0
+margin_left = 1125.0
+margin_top = 90.0
+margin_right = -95.0
+margin_bottom = -90.0
 custom_styles/panel = SubResource( 28 )
 
 [node name="Options" type="VBoxContainer" parent="Panel"]
@@ -114,22 +131,22 @@ custom_constants/separation = 40
 alignment = 1
 
 [node name="Settings" type="Label" parent="Panel/Options"]
-margin_top = 35.0
-margin_right = 455.0
-margin_bottom = 99.0
+margin_top = 31.0
+margin_right = 630.0
+margin_bottom = 95.0
 custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/Options"]
-margin_top = 139.0
-margin_right = 455.0
-margin_bottom = 143.0
+margin_top = 135.0
+margin_right = 630.0
+margin_bottom = 139.0
 custom_styles/separator = SubResource( 31 )
 
 [node name="Fullscreen" type="CheckBox" parent="Panel/Options"]
-margin_top = 183.0
-margin_right = 455.0
-margin_bottom = 234.0
+margin_top = 179.0
+margin_right = 630.0
+margin_bottom = 230.0
 custom_fonts/font = ExtResource( 2 )
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 6 )
@@ -142,9 +159,9 @@ enter_audio = ExtResource( 8 )
 max_scale = 1.05
 
 [node name="Graphics" type="CheckBox" parent="Panel/Options"]
-margin_top = 274.0
-margin_right = 455.0
-margin_bottom = 325.0
+margin_top = 270.0
+margin_right = 630.0
+margin_bottom = 321.0
 custom_fonts/font = ExtResource( 2 )
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 6 )
@@ -156,13 +173,37 @@ click_audio = ExtResource( 9 )
 enter_audio = ExtResource( 8 )
 max_scale = 1.05
 
+[node name="Resolution" type="VBoxContainer" parent="Panel/Options"]
+margin_top = 361.0
+margin_right = 630.0
+margin_bottom = 428.0
+
+[node name="Label" type="Label" parent="Panel/Options/Resolution"]
+margin_right = 630.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 2 )
+text = "Resolution (1920x1080)"
+align = 1
+valign = 1
+
+[node name="SliderRes" type="HSlider" parent="Panel/Options/Resolution"]
+margin_top = 47.0
+margin_right = 630.0
+margin_bottom = 67.0
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 29 )
+custom_styles/grabber_area = SubResource( 30 )
+max_value = 2.0
+value = 2.0
+
 [node name="MasterVol" type="VBoxContainer" parent="Panel/Options"]
-margin_top = 365.0
-margin_right = 455.0
-margin_bottom = 432.0
+margin_top = 468.0
+margin_right = 630.0
+margin_bottom = 535.0
 
 [node name="Label" type="Label" parent="Panel/Options/MasterVol"]
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 43.0
 custom_fonts/font = ExtResource( 2 )
 text = "Master Volume"
@@ -171,7 +212,7 @@ valign = 1
 
 [node name="SliderMaster" type="HSlider" parent="Panel/Options/MasterVol"]
 margin_top = 47.0
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 67.0
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
@@ -183,12 +224,12 @@ step = 0.01
 value = -25.8
 
 [node name="EnemyVol" type="VBoxContainer" parent="Panel/Options"]
-margin_top = 472.0
-margin_right = 455.0
-margin_bottom = 539.0
+margin_top = 575.0
+margin_right = 630.0
+margin_bottom = 642.0
 
 [node name="Label" type="Label" parent="Panel/Options/EnemyVol"]
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 43.0
 custom_fonts/font = ExtResource( 2 )
 text = "Music Volume"
@@ -197,7 +238,7 @@ valign = 1
 
 [node name="SliderEnemy" type="HSlider" parent="Panel/Options/EnemyVol"]
 margin_top = 47.0
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 67.0
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
@@ -208,12 +249,12 @@ max_value = 0.0
 step = 0.01
 
 [node name="EffectVol" type="VBoxContainer" parent="Panel/Options"]
-margin_top = 579.0
-margin_right = 455.0
-margin_bottom = 646.0
+margin_top = 682.0
+margin_right = 630.0
+margin_bottom = 749.0
 
 [node name="Label" type="Label" parent="Panel/Options/EffectVol"]
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 43.0
 custom_fonts/font = ExtResource( 2 )
 text = "Effects Volume"
@@ -222,7 +263,7 @@ valign = 1
 
 [node name="SliderEffect" type="HSlider" parent="Panel/Options/EffectVol"]
 margin_top = 47.0
-margin_right = 455.0
+margin_right = 630.0
 margin_bottom = 67.0
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
@@ -233,21 +274,21 @@ max_value = 0.0
 step = 0.01
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/Options"]
-margin_top = 686.0
-margin_right = 455.0
-margin_bottom = 690.0
+margin_top = 789.0
+margin_right = 630.0
+margin_bottom = 793.0
 custom_styles/separator = SubResource( 31 )
 
 [node name="Buttons" type="HBoxContainer" parent="Panel/Options"]
-margin_top = 730.0
-margin_right = 455.0
-margin_bottom = 765.0
+margin_top = 833.0
+margin_right = 630.0
+margin_bottom = 868.0
 custom_constants/separation = 50
 alignment = 1
 
 [node name="Return" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 48.0
-margin_right = 174.0
+margin_left = 135.0
+margin_right = 261.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
@@ -259,8 +300,8 @@ enter_audio = ExtResource( 8 )
 max_scale = 1.05
 
 [node name="Main" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 224.0
-margin_right = 407.0
+margin_left = 311.0
+margin_right = 494.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 1 )
 text = "Main Menu"
@@ -273,6 +314,7 @@ max_scale = 1.05
 
 [connection signal="toggled" from="Panel/Options/Fullscreen" to="." method="_on_Fullscreen_toggled"]
 [connection signal="toggled" from="Panel/Options/Graphics" to="." method="_on_Graphics_toggled"]
+[connection signal="value_changed" from="Panel/Options/Resolution/SliderRes" to="." method="_on_SliderRes_value_changed"]
 [connection signal="value_changed" from="Panel/Options/MasterVol/SliderMaster" to="." method="_on_SliderMaster_value_changed"]
 [connection signal="value_changed" from="Panel/Options/EnemyVol/SliderEnemy" to="." method="_on_SliderEnemy_value_changed"]
 [connection signal="value_changed" from="Panel/Options/EffectVol/SliderEffect" to="." method="_on_SliderEffect_value_changed"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Intermission.mp3-fe43f1320365e597805a1eeee22b3232.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Intermission.mp3"
+dest_files=[ "res://.import/Intermission.mp3-fe43f1320365e597805a1eeee22b3232.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

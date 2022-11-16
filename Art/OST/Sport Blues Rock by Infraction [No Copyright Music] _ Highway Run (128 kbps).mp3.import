@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sport Blues Rock by Infraction [No Copyright Music] _ Highway Run (128 kbps).mp3-29f8215449b55578dd109e8b4d78c2b9.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Sport Blues Rock by Infraction [No Copyright Music] _ Highway Run (128 kbps).mp3"
+dest_files=[ "res://.import/Sport Blues Rock by Infraction [No Copyright Music] _ Highway Run (128 kbps).mp3-29f8215449b55578dd109e8b4d78c2b9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

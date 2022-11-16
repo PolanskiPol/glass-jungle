@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cinematic Workout Hip-Hop by Infraction [No Copyright Music] _ Sport Beat (128 kbps).mp3-72960ffd4b1fefc4947dadb620f46266.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Cinematic Workout Hip-Hop by Infraction [No Copyright Music] _ Sport Beat (128 kbps).mp3"
+dest_files=[ "res://.import/Cinematic Workout Hip-Hop by Infraction [No Copyright Music] _ Sport Beat (128 kbps).mp3-72960ffd4b1fefc4947dadb620f46266.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

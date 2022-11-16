@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/IveGotYOu.mp3-98e83659c5488b2ee50c6fc48fa8ad8b.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/IveGotYOu.mp3"
+dest_files=[ "res://.import/IveGotYOu.mp3-98e83659c5488b2ee50c6fc48fa8ad8b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

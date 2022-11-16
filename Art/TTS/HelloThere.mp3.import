@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HelloThere.mp3-66339c48b59e7135141a346d754c8c8b.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/HelloThere.mp3"
+dest_files=[ "res://.import/HelloThere.mp3-66339c48b59e7135141a346d754c8c8b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -3,6 +3,7 @@ extends Spatial
 
 export var trigger : NodePath = ""
 export var delay : float = 0.0
+export var behind_player : bool = false
 
 onready var enemy_spawned : bool = false
 
@@ -20,6 +21,10 @@ func trigger_spawn(body : Node) -> void:
 		set_process(true)
 		$SpawnSound.play(0.0)
 		$Enemy.setup(body)
+		if(!behind_player):
+			$Enemy.random_spawn_sound_normal()
+		else:
+			$Enemy.random_spawn_sound_back()
 
 func setup_enemy() -> void:
 	if(get_node_or_null("Enemy") != null):

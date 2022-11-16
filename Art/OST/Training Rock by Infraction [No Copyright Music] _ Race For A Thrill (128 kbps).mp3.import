@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Training Rock by Infraction [No Copyright Music] _ Race For A Thrill (128 kbps).mp3-b1f35a01066342817c7e88544eb8cab2.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Training Rock by Infraction [No Copyright Music] _ Race For A Thrill (128 kbps).mp3"
+dest_files=[ "res://.import/Training Rock by Infraction [No Copyright Music] _ Race For A Thrill (128 kbps).mp3-b1f35a01066342817c7e88544eb8cab2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

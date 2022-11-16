@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cinematic Racing Hip-Hop by Infraction [Copyright Free Music] _ Endgame (128 kbps).mp3-1b4adad9560ee163be45b4326009e3c5.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Cinematic Racing Hip-Hop by Infraction [Copyright Free Music] _ Endgame (128 kbps).mp3"
+dest_files=[ "res://.import/Cinematic Racing Hip-Hop by Infraction [Copyright Free Music] _ Endgame (128 kbps).mp3-1b4adad9560ee163be45b4326009e3c5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

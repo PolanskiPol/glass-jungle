@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Freeze.mp3-4776bd12b6cf38c20faa27e1062c4d77.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/Freeze.mp3"
+dest_files=[ "res://.import/Freeze.mp3-4776bd12b6cf38c20faa27e1062c4d77.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

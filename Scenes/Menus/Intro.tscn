@@ -20,13 +20,12 @@ func _ready() -> void:
 	$AnimationPlayer.play(\"Idle\")
 	var save_file : SaveFile = GameSaver.load_game()
 	OS.window_fullscreen = save_file.fullscreen
+	OS.window_size = save_file.resolution
+	get_viewport().size = save_file.resolution
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), save_file.master_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), save_file.music_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), save_file.effects_volume)
 	
-	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Master\")))
-	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Music\")))
-	print(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(\"Effects\")))
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed(\"ui_accept\") and !skipped):
@@ -53,7 +52,7 @@ bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
-length = 9.0
+length = 10.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("ControllerPivot:rect_rotation")
 tracks/0/interp = 1
@@ -203,7 +202,7 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 0, 4.90053, 9.20053 ),
+"times": PoolRealArray( 0, 4.90053, 10 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -339,6 +338,46 @@ tracks/26/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/27/type = "bezier"
+tracks/27/path = NodePath("End:rect_position:x")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9, 10 )
+}
+tracks/28/type = "bezier"
+tracks/28/path = NodePath("End:rect_position:y")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"points": PoolRealArray( -1080, -0.25, 0, 0.25, 0, -1080, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9, 10 )
+}
+tracks/29/type = "bezier"
+tracks/29/path = NodePath("End:rect_size:x")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/30/type = "bezier"
+tracks/30/path = NodePath("End:rect_size:y")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -629,6 +668,46 @@ tracks/26/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/27/type = "bezier"
+tracks/27/path = NodePath("End:rect_position:x")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/28/type = "bezier"
+tracks/28/path = NodePath("End:rect_position:y")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"points": PoolRealArray( -1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/29/type = "bezier"
+tracks/29/path = NodePath("End:rect_size:x")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"points": PoolRealArray( 1920, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/30/type = "bezier"
+tracks/30/path = NodePath("End:rect_size:y")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [node name="Intro" type="Control"]
 anchor_right = 1.0
@@ -752,8 +831,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5034.0
 margin_top = -3327.0
-margin_right = -233.99
-margin_bottom = -627.0
+margin_right = -2153.99
+margin_bottom = -1707.0
 rect_rotation = 24.5968
 custom_styles/panel = SubResource( 3 )
 
@@ -952,9 +1031,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1495.0
 margin_bottom = -972.0
+rect_scale = Vector2( 0.75, 0.75 )
+rect_pivot_offset = Vector2( 212, 54 )
 custom_fonts/font = ExtResource( 10 )
 text = "\"Intro\" to skip"
 align = 1
 valign = 1
+
+[node name="End" type="Panel" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1080.0
+margin_bottom = -1080.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
