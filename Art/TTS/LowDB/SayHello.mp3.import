@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SayHello.mp3-f0f3d09ace43cfbaeb2739a13f2de665.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/SayHello.mp3"
+dest_files=[ "res://.import/SayHello.mp3-f0f3d09ace43cfbaeb2739a13f2de665.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

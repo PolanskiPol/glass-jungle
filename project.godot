@@ -183,6 +183,8 @@ ui_crouch={
 3d_physics/layer_3="Spawn"
 3d_physics/layer_4="Player"
 3d_physics/layer_5="EnemyBody"
+3d_physics/layer_6="PlayerBulletTrigger"
+3d_physics/layer_7="PlayerCharTrigger"
 
 [physics]
 

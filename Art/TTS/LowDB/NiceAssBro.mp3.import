@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/NiceAssBro.mp3-aa0f0f5eafacfb1678e46fa9e00b2d81.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/NiceAssBro.mp3"
+dest_files=[ "res://.import/NiceAssBro.mp3-aa0f0f5eafacfb1678e46fa9e00b2d81.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

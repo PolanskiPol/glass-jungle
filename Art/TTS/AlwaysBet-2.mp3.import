@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AlwaysBet-2.mp3-79d61a593d1e925a8ec7239179311795.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/AlwaysBet-2.mp3"
+dest_files=[ "res://.import/AlwaysBet-2.mp3-79d61a593d1e925a8ec7239179311795.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -12,4 +12,4 @@ func functionality() -> void:
 		print("Well, hello there!")
 		for child in get_children():
 			if(child is MeshInstance):
-				child.create_convex_collision()
+				child.create_trimesh_collision()

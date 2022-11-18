@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/YoureADisease.mp3-2a01e3a62bd5768f1b11d6c0b3fd3979.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/YoureADisease.mp3"
+dest_files=[ "res://.import/YoureADisease.mp3-2a01e3a62bd5768f1b11d6c0b3fd3979.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

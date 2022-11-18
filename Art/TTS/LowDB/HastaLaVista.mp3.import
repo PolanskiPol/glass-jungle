@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HastaLaVista.mp3-bb960219979fb76841fa85da4bc10aea.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/HastaLaVista.mp3"
+dest_files=[ "res://.import/HastaLaVista.mp3-bb960219979fb76841fa85da4bc10aea.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

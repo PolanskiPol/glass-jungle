@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DontMove.mp3-698d2b9cb0d61b65fbc14f9c1869a150.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/DontMove.mp3"
+dest_files=[ "res://.import/DontMove.mp3-698d2b9cb0d61b65fbc14f9c1869a150.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -47,7 +47,7 @@ radius = 0.430723
 material = ExtResource( 1 )
 
 [sub_resource type="Curve" id=13]
-_data = [ Vector2( 0, 0.113636 ), 0.0, 0.0, 0, 0, Vector2( 0.685039, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.25 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.486364 ), 0.0, 0.0, 0, 0, Vector2( 0.777344, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.395455 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=14]
 colors = PoolColorArray( 1, 0.861328, 0, 1, 1, 0, 0, 1 )
@@ -86,7 +86,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
+"times": PoolRealArray( 0, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -181,15 +181,15 @@ shape = SubResource( 3 )
 
 [node name="Particles" type="CPUParticles" parent="."]
 emitting = false
-amount = 500
-lifetime = 0.6
+amount = 300
+lifetime = 0.41
 one_shot = true
 local_coords = false
 mesh = SubResource( 15 )
 emission_shape = 1
 emission_sphere_radius = 0.5
 gravity = Vector3( 0, 0, 0 )
-radial_accel = 15.0
+radial_accel = 45.0
 scale_amount = 0.2
 scale_amount_curve = SubResource( 13 )
 color_ramp = SubResource( 14 )

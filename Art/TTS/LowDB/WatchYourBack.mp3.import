@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WatchYourBack.mp3-ec33809f5c9bbd6ba0dd1423c042d80b.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/WatchYourBack.mp3"
+dest_files=[ "res://.import/WatchYourBack.mp3-ec33809f5c9bbd6ba0dd1423c042d80b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/NoTimeToBleed.mp3-5f7b688643378c820563876171395e9e.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/NoTimeToBleed.mp3"
+dest_files=[ "res://.import/NoTimeToBleed.mp3-5f7b688643378c820563876171395e9e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

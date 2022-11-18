@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ImTheLaw.mp3-300f5dd8f1a7e8dee3b97574af852ff8.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/ImTheLaw.mp3"
+dest_files=[ "res://.import/ImTheLaw.mp3-300f5dd8f1a7e8dee3b97574af852ff8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

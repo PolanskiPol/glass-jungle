@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DirectorScene1.mp3-d8110b738348fa36deb469579c208b7f.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/DirectorScene1.mp3"
+dest_files=[ "res://.import/DirectorScene1.mp3-d8110b738348fa36deb469579c208b7f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

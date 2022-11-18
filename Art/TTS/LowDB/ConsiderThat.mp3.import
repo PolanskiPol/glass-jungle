@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ConsiderThat.mp3-5743c95ddb6e0a6e927a6e8aec9981c2.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/ConsiderThat.mp3"
+dest_files=[ "res://.import/ConsiderThat.mp3-5743c95ddb6e0a6e927a6e8aec9981c2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

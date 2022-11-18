@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GetOff.mp3-4b104ab715be854509c6b8f12bcc5f0f.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/GetOff.mp3"
+dest_files=[ "res://.import/GetOff.mp3-4b104ab715be854509c6b8f12bcc5f0f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

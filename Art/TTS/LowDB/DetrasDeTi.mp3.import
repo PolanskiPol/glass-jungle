@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DetrasDeTi.mp3-77bd142bd2c3d0876bee9b4a3b862ec9.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/DetrasDeTi.mp3"
+dest_files=[ "res://.import/DetrasDeTi.mp3-77bd142bd2c3d0876bee9b4a3b862ec9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

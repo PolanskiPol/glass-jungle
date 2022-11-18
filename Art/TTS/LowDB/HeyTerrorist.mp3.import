@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HeyTerrorist.mp3-fa8a13a78e8979fbf902563d4160066b.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/LowDB/HeyTerrorist.mp3"
+dest_files=[ "res://.import/HeyTerrorist.mp3-fa8a13a78e8979fbf902563d4160066b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
