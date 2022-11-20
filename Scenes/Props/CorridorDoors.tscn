@@ -6,21 +6,25 @@
 [sub_resource type="GDScript" id=82]
 script/source = "extends Spatial
 
+export var active : bool = true
+
 func _on_Area_body_entered(body: Node) -> void:
-	$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(-1, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$TweenD1.start()
-	
-	$TweenD2.interpolate_property($D2, \"translation\", $D2.transform.origin, Vector3(2.147, 1.676, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$TweenD2.start()
-	
+	if(active):
+		$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(-1, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$TweenD1.start()
+		
+		$TweenD2.interpolate_property($D2, \"translation\", $D2.transform.origin, Vector3(2.147, 1.676, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$TweenD2.start()
+		
 	
 
 func _on_Area_body_exited(body: Node) -> void:
-	$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(0, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$TweenD1.start()
-	
-	$TweenD2.interpolate_property($D2, \"translation\", $D2.transform.origin, Vector3(1.147, 1.676, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$TweenD2.start()
+	if(active):
+		$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(0, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$TweenD1.start()
+		
+		$TweenD2.interpolate_property($D2, \"translation\", $D2.transform.origin, Vector3(1.147, 1.676, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$TweenD2.start()
 "
 
 [sub_resource type="ArrayMesh" id=78]

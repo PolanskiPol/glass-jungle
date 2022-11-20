@@ -94,6 +94,10 @@ config/icon="res://icon.png"
 
 GameSaver="*res://Scripts/GameSaver.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1920

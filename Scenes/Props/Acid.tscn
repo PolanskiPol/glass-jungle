@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="PlaneMesh" id=28]
+size = Vector2( 8, 4 )
+subdivide_width = 40
+subdivide_depth = 20
+
+[sub_resource type="Shader" id=29]
+code = "shader_type spatial;
+
+uniform vec2 amplitude = vec2(0.2, 0.1);
+uniform vec2 frequency = vec2(3.0, 2.5);
+uniform vec2 time_factor = vec2(2.0, 3.0);
+
+void fragment(){
+	ALBEDO = vec3(0.0, 1.0, 0.0);
+	EMISSION = vec3(0.0, 1.0, 0.0);
+}
+
+float height(vec2 pos, float time) {
+	return (amplitude.x * sin(pos.x * frequency.x + time * time_factor.x)) + (amplitude.y * sin(pos.y * frequency.y + time * time_factor.y));
+}
+
+void vertex() {
+	VERTEX.y += height(VERTEX.xz, TIME); // sample the height at the location of our vertex
+	TANGENT = normalize(vec3(0.0, height(VERTEX.xz + vec2(0.0, 0.2), TIME) - height(VERTEX.xz + vec2(0.0, -0.2), TIME), 0.4));
+	BINORMAL = normalize(vec3(0.4, height(VERTEX.xz + vec2(0.2, 0.0), TIME) - height(VERTEX.xz + vec2(-0.2, 0.0), TIME ), 0.0));
+	NORMAL = cross(TANGENT, BINORMAL);
+}"
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 29 )
+shader_param/amplitude = Vector2( 0.056, 0.014 )
+shader_param/frequency = Vector2( 3, 2.5 )
+shader_param/time_factor = Vector2( 2, 3 )
+
+[node name="Acid" type="MeshInstance"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 28 )
+material/0 = SubResource( 30 )
