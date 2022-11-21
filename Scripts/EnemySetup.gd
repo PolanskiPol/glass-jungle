@@ -40,6 +40,7 @@ func setup_enemy() -> void:
 		$Enemy.scale = lerp($Enemy.scale, Vector3(1, 1, 1), 0.23)
 		if(weak_enemy):
 			$Enemy/HealthSystem.max_health = 1
+			$Enemy/HealthSystem.health = 1
 	else:
 		queue_free()
 		

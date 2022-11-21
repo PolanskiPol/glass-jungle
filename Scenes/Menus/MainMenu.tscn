@@ -32,6 +32,8 @@ var save_file : SaveFile
 
 func _ready() -> void:
 	randomize()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.set_custom_mouse_cursor(load(\"res://Art/2D/CursorMouse.png\"), Input.CURSOR_ARROW)
 	$Enter.play(\"Enter\")
 	$CamRot.play(\"Idle\")
 	$Music.play(0.0)

@@ -22,3 +22,4 @@ func _process(delta: float) -> void:
 	if(get_collider() != null):
 		emit_signal("hit", get_collider(), get_collision_point())
 		queue_free()
+

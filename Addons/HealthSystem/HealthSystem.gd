@@ -9,6 +9,7 @@ signal health_changed
 
 export(int, 1, 500000, 1) var max_health : int = 100
 onready var health : int = max_health
+onready var invulnerable : bool = false
 
 func heal(health : int) -> void:
 	self.health += health
@@ -25,15 +26,17 @@ func fully_heal() -> void:
 	emit_signal("fully_healed")
 	
 func damage(damage : int) -> void:
-	health -= damage
-	emit_signal("damaged")
-	emit_signal("health_changed")
-	if(health <= 0):
-		health = 0
-		emit_signal("fatally_damaged")
+	if(!invulnerable):
+		health -= damage
+		emit_signal("damaged")
+		emit_signal("health_changed")
+		if(health <= 0):
+			health = 0
+			emit_signal("fatally_damaged")
 		
 func fatally_damage() -> void:
-	health = 0
-	emit_signal("health_changed")
-	emit_signal("damaged")
-	emit_signal("fatally_damaged")
+	if(!invulnerable):
+		health = 0
+		emit_signal("health_changed")
+		emit_signal("damaged")
+		emit_signal("fatally_damaged")

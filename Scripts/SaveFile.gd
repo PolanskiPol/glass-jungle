@@ -15,4 +15,6 @@ export var fast_graphics : bool = false
 export var fullscreen : bool = false
 export var resolution : Vector2 = Vector2(1920, 1080)
 
+export var sensitivity : float = 1.0
+
 export var language : String = "en"

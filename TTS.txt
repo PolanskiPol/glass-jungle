@@ -3,12 +3,25 @@ Protagonist:		Matthew (US)
 Protag's hacker friend:	Geraint (Welsh)
 
 
-S1D
-Hf: Hello there McCliché, this is Chester, your hacker friend, can you hear me?
-Mc: Loud and clear
-Hf: I've hacked the security system of the building, your guy is in the last floor
-Mc: That asshole will pay for kidnapping my girl
-Hf: His office is protected by a metal door
-Mc: Can I open that god damned door with bullets?
-Hf: No, you must find a key to open it
-Mc: I don't know where you are, but I will find you, and I will take you
+S1D1
+Chester: Hello there McCliché, this is Chester, your hacker friend, can you hear me?
+McCliché: Loud and clear
+Chester: I've hacked the security system of the building, your guy is in the last floor
+McCliché: That asshole will pay for kidnapping my girl
+Chester: His office is protected by a lock
+McCliché: Can I open that god damned door with bullets?
+Chester: No, you must find a key to open it
+McCliché: I don't know where you are, but I will find you, and I will take you
+
+S1D2
+McCliché: This must be the key
+Chester: Well done McCliché, now go to the office and finish that guy
+McCliché: My next bullet has your name on it, bastard
+
+S1D3
+Director: Cut! That was a very good take, good job everyone!
+
+S1DMBO
+McCliché: This must be the bad guy's office
+Chester: Affirmative McCliché, the key must be near
+McCliché: When you go to hell, tell them I sent you
