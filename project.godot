@@ -86,9 +86,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GameOff2022"
+config/name="Glass Jungle"
 run/main_scene="res://Scenes/Menus/Intro.tscn"
-config/icon="res://icon.png"
+config/icon="res://Art/2D/Icon.png"
+config/windows_native_icon="res://Art/2D/Icon.ico"
 
 [autoload]
 

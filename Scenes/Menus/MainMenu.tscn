@@ -1039,6 +1039,9 @@ visible = false
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 1.85689, 0, -1.74665 )
 script = null
 
+[node name="US_Soldiers" parent="Deco/Enemy" index="0"]
+transform = Transform( 0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 0, 0, 0 )
+
 [node name="Focus" type="Spatial" parent="Deco"]
 transform = Transform( 0.913219, -0.349661, -0.20921, 0, -0.513436, 0.858128, -0.40747, -0.783658, -0.46888, 2.52641, 4.59259, 4.20473 )
 

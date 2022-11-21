@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SGO.mp3-672b3a4d5b38f8956d9afc66da609ef6.mp3str"
+
+[deps]
+
+source_file="res://Art/Dialogs/SGO.mp3"
+dest_files=[ "res://.import/SGO.mp3-672b3a4d5b38f8956d9afc66da609ef6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
