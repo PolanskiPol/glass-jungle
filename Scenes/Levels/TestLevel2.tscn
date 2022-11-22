@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/CreateCollisions.gd" type="Script" id=2]
-[ext_resource path="res://Art/3D/Levels/Level2_test/Level2_Test.glb" type="PackedScene" id=3]
+[ext_resource path="res://Art/3D/Levels/Level2_test2/Level2_test.glb" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Shaders/CRTShader.shader" type="Shader" id=4]
 [ext_resource path="res://Art/2D/CRTFrame.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Props/Acid.tscn" type="PackedScene" id=6]
@@ -65,13 +65,6 @@ shader_param/scan_size = 5.0
 shader_param/scanline_alpha = 0.987
 shader_param/lines_velocity = 10.0
 
-[sub_resource type="CubeMesh" id=18]
-
-[sub_resource type="SpatialMaterial" id=19]
-albedo_color = Color( 0.47451, 0.298039, 0.109804, 1 )
-
-[sub_resource type="BoxShape" id=20]
-
 [node name="TestLevel" type="Spatial"]
 script = SubResource( 27 )
 
@@ -115,22 +108,14 @@ light_energy = 2.0
 shadow_enabled = true
 shadow_bias = 0.383
 
-[node name="Level2_Test" parent="UI/UI/Level" instance=ExtResource( 3 )]
-script = ExtResource( 2 )
-
 [node name="Acid" parent="UI/UI/Level" instance=ExtResource( 6 )]
 transform = Transform( -6.71533e-08, 0, -1.53629, 0, 1.08468, 0, 1.84703, 0, -8.07362e-08, 0.0677161, -14.0228, 20.0101 )
 
+[node name="Mesh" parent="UI/UI/Level" instance=ExtResource( 3 )]
+script = ExtResource( 2 )
+
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 0.883365, 0, -0.143258, 0, 0.571164, 0, 0.468685, 0, 0.27001, 5.26242, 0.306291, -3.82031 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 18 )
-skeleton = NodePath("../..")
-material/0 = SubResource( 19 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 20 )
 
 [node name="DialogEasy" type="Node" parent="."]
 script = ExtResource( 9 )
