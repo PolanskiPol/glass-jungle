@@ -129,6 +129,7 @@ func _on_Return_pressed() -> void:
 
 func _on_Main_pressed() -> void:
 	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
+	get_tree().change_scene(\"res://Scenes/Menus/MainMenu.tscn\")
 	emit_signal(\"main_menu_pressed\")
 
 func _on_Apply_pressed() -> void:

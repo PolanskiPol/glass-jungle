@@ -31,6 +31,7 @@ onready var playing_cue : bool = false
 var save_file : SaveFile
 
 func _ready() -> void:
+	get_tree().paused = false
 	randomize()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Input.set_custom_mouse_cursor(load(\"res://Art/2D/CursorMouse.png\"), Input.CURSOR_ARROW)
@@ -44,6 +45,7 @@ func _ready() -> void:
 	unlock_level(save_file.unlocked_levels[2], $UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button, load(\"res://Art/2D/BadGuy.png\"))
 	if(save_file.fast_graphics):
 		get_tree().call_group(\"Lights\", \"set_shadow\", false)
+	print(\"OK LOAD\")
 	
 func _process(delta: float) -> void:
 	if(scene):
@@ -888,23 +890,19 @@ visible = false
 [node name="Begin" type="Panel" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="Transition" type="Control" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1080.0
-margin_right = 1920.0
+margin_bottom = -1080.0
 
 [node name="Panel" type="Panel" parent="UI/UI/Transition"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 230.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 
 [node name="Clap" type="TextureRect" parent="UI/UI/Transition"]
 margin_right = 1920.0
@@ -1038,9 +1036,6 @@ visible = false
 [node name="Enemy" parent="Deco" instance=ExtResource( 5 )]
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 1.85689, 0, -1.74665 )
 script = null
-
-[node name="US_Soldiers" parent="Deco/Enemy" index="0"]
-transform = Transform( 0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 0, 0, 0 )
 
 [node name="Focus" type="Spatial" parent="Deco"]
 transform = Transform( 0.913219, -0.349661, -0.20921, 0, -0.513436, 0.858128, -0.40747, -0.783658, -0.46888, 2.52641, 4.59259, 4.20473 )

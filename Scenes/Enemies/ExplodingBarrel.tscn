@@ -13,6 +13,9 @@ onready var exploded : bool = false
 	
 func explode() -> void:
 	if(!exploded):
+		$CollisionShape.disabled = true
+		$Body/CollisionShape2.disabled = true
+		$ExplosionArea/CollisionShape.disabled = true
 		emit_signal(\"explosion_emitted\")
 		$ExplosionSound.play(0.0)
 		exploded = true
@@ -203,6 +206,7 @@ anims/Explode = SubResource( 11 )
 anims/RESET = SubResource( 12 )
 
 [node name="ExplosionArea" type="Area" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 16
 

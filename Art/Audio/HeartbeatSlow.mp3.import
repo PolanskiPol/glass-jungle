@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HeartbeatSlow.mp3-8adbd23a26a02163bec8b1d298a941fc.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/HeartbeatSlow.mp3"
+dest_files=[ "res://.import/HeartbeatSlow.mp3-8adbd23a26a02163bec8b1d298a941fc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
