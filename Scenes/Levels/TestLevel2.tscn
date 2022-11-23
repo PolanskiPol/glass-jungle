@@ -100,7 +100,7 @@ autowrap = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00783157, 0.0345764, -0.0084734 )
 
 [node name="Player" parent="UI/UI/Level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059227, 2.241, 8.40439 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059227, -7.08205, 52.3255 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="UI/UI/Level" groups=["Lights"]]
 transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 31.5272, 0 )

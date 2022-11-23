@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SGO_beep.mp3-cd2c9fd5163de42b0c75e5cd00164fcb.mp3str"
+
+[deps]
+
+source_file="res://Art/Dialogs/SGO_beep.mp3"
+dest_files=[ "res://.import/SGO_beep.mp3-cd2c9fd5163de42b0c75e5cd00164fcb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

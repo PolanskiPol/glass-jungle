@@ -31,8 +31,10 @@ func trigger_spawn(body : Node) -> void:
 		else:
 			$Enemy.random_spawn_sound_back()
 			
-		if(get_node(trigger) != null):
-			get_node(trigger).queue_free()
+		if(get_node(trigger).get_child(0) is CollisionShape):
+			get_node(trigger).get_child(0).disabled = true
+#		if(get_node(trigger) != null):
+#			get_node(trigger).queue_free()
 
 func setup_enemy() -> void:
 	if(get_node_or_null("Enemy") != null):

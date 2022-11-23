@@ -1,0 +1,192 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/CreateCollisions.gd" type="Script" id=2]
+[ext_resource path="res://Art/3D/Levels/Level3_test/Level3.glb" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Shaders/CRTShader.shader" type="Shader" id=4]
+[ext_resource path="res://Art/2D/CRTFrame.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Props/Acid.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-36.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Scripts/DialogEasy.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/DialogStreamPlayer.gd" type="Script" id=10]
+[ext_resource path="res://Art/Dialogs/S1D2.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Art/Dialogs/S1D3.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Art/Dialogs/S1D4.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Art/Dialogs/S1D5.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Art/Dialogs/S1D7.mp3" type="AudioStream" id=15]
+[ext_resource path="res://Art/Dialogs/S1D1.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Art/Dialogs/S1D8.mp3" type="AudioStream" id=17]
+[ext_resource path="res://Art/Dialogs/S1D6.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Resources/Environments/Default.tres" type="Environment" id=21]
+[ext_resource path="res://Art/OST/Intermission.mp3" type="AudioStream" id=22]
+[ext_resource path="res://Art/OST/Sport Blues Rock by Infraction [No Copyright Music] _ Highway Run (128 kbps).mp3" type="AudioStream" id=23]
+
+[sub_resource type="GDScript" id=27]
+script/source = "extends Spatial
+
+var save_file : SaveFile
+
+func _ready() -> void:
+#	yield(get_tree().create_timer(1.0),\"timeout\")
+#	$DialogEasy.play_next()
+	save_file = GameSaver.load_game()
+	if(save_file.fast_graphics):
+		get_tree().call_group(\"Lights\", \"set_shadow\", false)
+		
+	$UI/UI/Level/Player.set_active(true)
+#	$Intermission.play(0.0)
+#	$Music.play(0.0)
+#	$Music.volume_db = -80
+
+func _on_DialogEasy_dialog_changed(dialog_text) -> void:
+	$UI/UI/Subtitles/Label.text = dialog_text[0]
+
+func _on_DialogEasy_dialog_over() -> void:
+	$UI/UI/Elevator/AnimationPlayer.stop(true)
+	$UI/UI/Elevator/AnimationPlayer.play(\"Open\")
+	$UI/UI/Subtitles/Label.text = \"\"
+	
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if(anim_name == \"Open\"):
+		$UI/UI/Level/Player.set_active(true)
+		$UI/UI/Level/Player.set_objective(\" - Find the key\")
+"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 4 )
+shader_param/screen_width = 1920.0
+shader_param/screen_height = 1080.0
+shader_param/BarrelPower = 1.0
+shader_param/color_bleeding = 1.5
+shader_param/bleeding_range_x = 2.0
+shader_param/bleeding_range_y = 2.0
+shader_param/lines_distance = 6.0
+shader_param/scan_size = 5.0
+shader_param/scanline_alpha = 0.987
+shader_param/lines_velocity = 10.0
+
+[node name="TestLevel" type="Spatial"]
+script = SubResource( 27 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Panel" parent="UI"]
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Frame" type="TextureRect" parent="UI/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+
+[node name="Subtitles" type="Control" parent="UI/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="UI/UI/Subtitles"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 210.0
+margin_top = 720.0
+margin_right = -210.0
+margin_bottom = -110.0
+custom_fonts/font = ExtResource( 8 )
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Level" type="Spatial" parent="UI/UI"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00783157, 0.0345764, -0.0084734 )
+
+[node name="Player" parent="UI/UI/Level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.1945, 0.800991, 6.34819 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="UI/UI/Level" groups=["Lights"]]
+transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 31.5272, 0 )
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.383
+
+[node name="Acid" parent="UI/UI/Level" instance=ExtResource( 6 )]
+transform = Transform( -6.71533e-08, 0, -1.53629, 0, 1.08468, 0, 1.84703, 0, -8.07362e-08, 0.0677161, -14.0228, 20.0101 )
+
+[node name="Mesh" parent="UI/UI/Level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 250.621 )
+script = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 0.883365, 0, -0.143258, 0, 0.571164, 0, 0.468685, 0, 0.27001, 5.26242, 0.306291, -3.82031 )
+
+[node name="DialogEasy" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="Dialog1" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 16 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "Chester: Hello there McCliché, this is Chester, your hacker friend, can you hear me?"
+
+[node name="Dialog2" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 11 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "McCliché: Loud and clear"
+
+[node name="Dialog3" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 12 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "Chester: I've hacked the security system of the building, your guy is in the last floor"
+
+[node name="Dialog4" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 13 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "McCliché: That asshole will pay for kidnapping my girl"
+
+[node name="Dialog5" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 14 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "Chester: His office is protected by a metal door"
+
+[node name="Dialog6" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 18 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "McCliché: Can I open that god damned door with bullets?"
+
+[node name="Dialog7" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 15 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "Chester: No, you must find a key to open it"
+
+[node name="Dialog8" type="AudioStreamPlayer" parent="DialogEasy"]
+stream = ExtResource( 17 )
+volume_db = 18.0
+bus = "Effects"
+script = ExtResource( 10 )
+dialog_text = "McCliché: I don't know where you are, but I will find you, and I will take you"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 21 )
+
+[node name="Intermission" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+bus = "Music"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -80.0
+
+[connection signal="dialog_changed" from="DialogEasy" to="." method="_on_DialogEasy_dialog_changed"]
+[connection signal="dialog_over" from="DialogEasy" to="." method="_on_DialogEasy_dialog_over"]

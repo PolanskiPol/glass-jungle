@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Stab.mp3-c45b0c42931fcbaf1360de0de493ea7e.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/Stab.mp3"
+dest_files=[ "res://.import/Stab.mp3-c45b0c42931fcbaf1360de0de493ea7e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

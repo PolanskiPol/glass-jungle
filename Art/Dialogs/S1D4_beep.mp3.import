@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/S1D4_beep.mp3-709d8dca7a8325032b6131c55d70f01f.mp3str"
+
+[deps]
+
+source_file="res://Art/Dialogs/S1D4_beep.mp3"
+dest_files=[ "res://.import/S1D4_beep.mp3-709d8dca7a8325032b6131c55d70f01f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

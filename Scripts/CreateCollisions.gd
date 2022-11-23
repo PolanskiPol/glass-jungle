@@ -2,7 +2,8 @@ extends Spatial
 
 func _ready() -> void:
 	for child in get_children():
-		child.create_trimesh_collision()
+		if(child is MeshInstance):
+			child.create_trimesh_collision()
 				
 	yield(get_tree().create_timer(0.1), "timeout")
 				
