@@ -28,7 +28,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 
 [node name="Body" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-collision_mask = 9
+collision_mask = 27
 
 [node name="Puerta02" type="MeshInstance" parent="Body"]
 transform = Transform( 1.86, 0, 0, 0, 1.86, 0, 0, 0, 1.86, 0, 0, 0.447127 )

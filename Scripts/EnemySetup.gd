@@ -7,6 +7,8 @@ export var trigger : NodePath = ""
 export var delay : float = 0.0
 export var behind_player : bool = false
 export var weak_enemy : bool = false
+export var ready : bool = false
+export var player_path : NodePath = ""
 
 onready var enemy_spawned : bool = false
 onready var enemy_reset_pos : Vector3 = $Enemy.global_transform.origin
@@ -14,6 +16,13 @@ onready var enemy_reset_pos : Vector3 = $Enemy.global_transform.origin
 func _ready() -> void:
 	set_process(false)
 	get_node(trigger).connect("body_entered", self, "trigger_spawn")
+	if(ready):
+		emit_signal("trigger_activated")
+		enemy_spawned = true
+		yield(get_tree().create_timer(delay), "timeout")
+		set_process(true)
+		$Enemy.setup(get_node(player_path))
+
 	
 func _process(delta: float) -> void:
 	setup_enemy()
