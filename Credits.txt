@@ -1,0 +1,85 @@
+Game Producer
+- Pablo Romero
+
+
+
+Game Designers
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Creative Directors
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Technical Producers
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Gameplay Designers
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Level Designers
+- Ricardo Monforte
+- Hristian Petkov
+
+
+
+Lead programmer
+- Pablo Romero
+
+
+
+Writters
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+UI Designer
+- Pablo Romero
+
+
+
+Testers
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Marketing team
+- Ricardo Monforte
+- Pablo Romero
+- Hristian Petkov
+
+
+
+Special Thanks
+- Mixamo.com
+- freetts.com
+- itch.io
+- OpenGameArt.org
+- godotshaders.com
+- Godot Engine
+- Blender
+- PaintNet
+- Audacity
+- Infraction No Copyright Music
+- Anik's Adobe Tutorials
+- Jaks
+- Hc
+- Peronds

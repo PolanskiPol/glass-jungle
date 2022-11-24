@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Credits.mp3-845a954ba08798c38839aed8934ce990.mp3str"
+
+[deps]
+
+source_file="res://Art/OST/Credits.mp3"
+dest_files=[ "res://.import/Credits.mp3-845a954ba08798c38839aed8934ce990.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
