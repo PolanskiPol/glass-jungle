@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DirectorCue2.mp3-e92ab63447efcb6de0b893815b4354e9.mp3str"
+
+[deps]
+
+source_file="res://Art/Dialogs/DirectorCue2.mp3"
+dest_files=[ "res://.import/DirectorCue2.mp3-e92ab63447efcb6de0b893815b4354e9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

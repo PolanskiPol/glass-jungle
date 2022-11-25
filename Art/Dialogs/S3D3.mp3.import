@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/S3D3.mp3-6d0f5db935274d70f2e5b3d34418ea03.mp3str"
+
+[deps]
+
+source_file="res://Art/Dialogs/S3D3.mp3"
+dest_files=[ "res://.import/S3D3.mp3-6d0f5db935274d70f2e5b3d34418ea03.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

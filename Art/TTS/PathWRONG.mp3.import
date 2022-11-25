@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PathWRONG.mp3-6dc47ba8e9ff983b51b9bd92b7c1b9be.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/PathWRONG.mp3"
+dest_files=[ "res://.import/PathWRONG.mp3-6dc47ba8e9ff983b51b9bd92b7c1b9be.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Yippee.mp3-fe5e2b5ebe4764091091ccabb79cfe22.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/Yippee.mp3"
+dest_files=[ "res://.import/Yippee.mp3-fe5e2b5ebe4764091091ccabb79cfe22.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

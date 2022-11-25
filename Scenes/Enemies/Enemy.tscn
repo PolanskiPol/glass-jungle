@@ -112,10 +112,11 @@ func _on_HealthSystem_fatally_damaged() -> void:
 		death_scream = preload(\"res://Art/Audio/DeathScreamYoda.wav\")
 		
 	$DeathSound.stream = death_scream
+	$DeathSound.play(0.0)
 #	$AnimationPlayer.play(\"Die\")
 	$Death/AnimationPlayer.play(\"default\")
 	$ShootAK.stop()
-	yield(get_tree().create_timer(0.03), \"timeout\")
+	yield(get_tree().create_timer(0.12), \"timeout\")
 	$DropAK.play(\"Drop\")
 	$Death.visible = true
 	$Gunplay.visible = false

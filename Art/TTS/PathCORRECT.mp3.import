@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PathCORRECT.mp3-f913086c34281425f35887a40111213e.mp3str"
+
+[deps]
+
+source_file="res://Art/TTS/PathCORRECT.mp3"
+dest_files=[ "res://.import/PathCORRECT.mp3-f913086c34281425f35887a40111213e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

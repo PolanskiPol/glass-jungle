@@ -1,10 +1,15 @@
 Director: 		Rusell (Australia)
 Protagonist:		Matthew (US)
 Protag's hacker friend:	Geraint (Welsh)
-
+Angela:			Kimberly (US)
+Bad guy:		Brian (UK)
 
 SGO
 Director: Cut! What a shit-show guys, focus on the god damned script please
+
+S1SMM
+Director: In this scene, you will infiltrate in the skycrapper where the big baddie is located, but when you finally get to his
+office, he won't be there and you will be ambushed by many enemies in slow motion. Get ready to start!
 
 S1D1
 Chester: Hello there McCliché, this is Chester, your hacker friend, can you hear me?
@@ -28,3 +33,46 @@ S1DMBO
 McCliché: This must be the bad guy's office
 Chester: Affirmative McCliché, the key must be near
 McCliché: When you go to hell, tell them I sent you
+
+
+
+S2SMM
+Director: In this scene, your hacker friend has located the bad guy's secret base in the desert. You have to enter the base
+and find the bad guy to end him for good. Everybody, get ready to record.
+
+S2D1
+01 McCliché: Chester, I've infiltrated in the bad guy's secret base.
+02 Chester: Good, my info says he's in there somewhere. Go kick his ass, McCliché!
+03 McCliché: I'll beat his ass so hard that not even his momma will recognice him!
+
+S2D2
+04 Bad guy: Look at who has finally appeared! I was waiting for you, McCliché!
+05 McCliché: Get your dirty hands outa my girl!
+06 Bad guy: Now that you are here, I will kill you and then I will conquer the world! Mwahahaha!
+07 McCliché: You wish, bitch.
+
+S2D3
+08 Bad guy: Noooooo! I'm dying! I curse you McCliché! I'm totally dead now and I won't return for a possible sequel. HUDSAHUGDAPFSJAPOUFF.
+09 McCliché: Say hello to my mother when you arrive to hell.
+10 Angela: Thank you for rescuing me McCliché!
+11 McCliché: Let's get the heck out of here Angela.
+
+
+
+S3SMM
+Director: This is the final scene. After killing the bad guy and rescuing your girlfriend, you will have to escape from the
+secret base before the self-destruction timer ends. Get ready, we're starting in one minute!
+
+S3D1
+01 Chester: McCliché, we have problems! The bad guy activated the self destruct button before dying! You have to get out of there quick!
+02 McCliché: That son of a gun can't stop giving me headaches even after death!
+03 Chester: Find a way out of there before the time goes off!
+
+S3D2
+04 Angela: We have done it, that's the exit door!
+05 McCliché: We are free now!
+06 Angela: Let's get married and have many kids!
+07 McCliché: I can't wait for McCliché Jr to be born!
+08 Angela: Muak muak muak. *kisses*
+09 McCliché: Muak muak muak. *kisses*
+
