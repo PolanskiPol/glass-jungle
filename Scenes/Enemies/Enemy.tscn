@@ -116,7 +116,7 @@ func _on_HealthSystem_fatally_damaged() -> void:
 #	$AnimationPlayer.play(\"Die\")
 	$Death/AnimationPlayer.play(\"default\")
 	$ShootAK.stop()
-	yield(get_tree().create_timer(0.12), \"timeout\")
+	yield(get_tree().create_timer(0.03), \"timeout\")
 	$DropAK.play(\"Drop\")
 	$Death.visible = true
 	$Gunplay.visible = false

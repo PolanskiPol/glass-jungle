@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Art/OST/Credits.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Art/2D/GameOff.png" type="Texture" id=2]
 [ext_resource path="res://Art/2D/GodotEngine.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-106.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Resources/Fonts/Fonts/City-200.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Resources/Fonts/Fonts/Boyfrend-200.tres" type="DynamicFont" id=6]
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends Control
@@ -29,12 +30,15 @@ func _process( delta:float ):
 		var mag:float = self.analyzer.get_magnitude_for_frequency_range( prev_hz, hz ).length( )
 		self.spectrum_shader.set_shader_param( \"hz%d\" % i, clamp( ( linear2db( mag ) + MIN_DB ) / MIN_DB, 0.0, 1.0 ) )
 		prev_hz = hz
+
+func _on_Roll_animation_finished(anim_name: String) -> void:
+	yield(get_tree().create_timer(1.0), \"timeout\")
+	get_tree().change_scene(\"res://Scenes/Menus/Intro.tscn\")
 "
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
-length = 93.0
-loop = true
+length = 100.0
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer:playing")
@@ -283,6 +287,56 @@ tracks/23/enabled = true
 tracks/23/keys = {
 "points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, -13461, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 20.9, 92 )
+}
+tracks/24/type = "bezier"
+tracks/24/path = NodePath("Label:modulate:r")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
+}
+tracks/25/type = "bezier"
+tracks/25/path = NodePath("Label:modulate:g")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
+}
+tracks/26/type = "bezier"
+tracks/26/path = NodePath("Label:modulate:b")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
+}
+tracks/27/type = "bezier"
+tracks/27/path = NodePath("Label:modulate:a")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
+}
+tracks/28/type = "bezier"
+tracks/28/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -80, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -555,6 +609,56 @@ tracks/25/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/26/type = "bezier"
+tracks/26/path = NodePath("Label:modulate:r")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/27/type = "bezier"
+tracks/27/path = NodePath("Label:modulate:g")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/28/type = "bezier"
+tracks/28/path = NodePath("Label:modulate:b")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/29/type = "bezier"
+tracks/29/path = NodePath("Label:modulate:a")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/30/type = "bezier"
+tracks/30/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Shader" id=4]
 code = "/*
@@ -688,6 +792,7 @@ script = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = -80.0
 bus = "Music"
 
 [node name="Roll" type="AnimationPlayer" parent="."]
@@ -714,6 +819,7 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="GameOff2" type="TextureRect" parent="GameOff"]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -723,6 +829,7 @@ margin_top = -278.0
 margin_right = 508.5
 margin_bottom = 278.0
 rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 1.4, 1.4 )
 rect_pivot_offset = Vector2( 508, 278 )
 texture = ExtResource( 2 )
 expand = true
@@ -741,6 +848,7 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="Godot2" type="TextureRect" parent="Godot"]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -749,11 +857,13 @@ margin_left = -669.0
 margin_top = -278.0
 margin_right = 669.0
 margin_bottom = 278.0
+rect_scale = Vector2( 1.4, 1.4 )
 rect_pivot_offset = Vector2( 669, 278 )
 texture = ExtResource( 3 )
 expand = true
 
 [node name="GlassJungle" type="Label" parent="."]
+visible = false
 self_modulate = Color( 0.866667, 0.588235, 0.188235, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -763,9 +873,10 @@ align = 1
 valign = 1
 
 [node name="GlassJungle2" type="Label" parent="GlassJungle"]
-self_modulate = Color( 0.866667, 0.588235, 0.188235, 1 )
+self_modulate = Color( 0.866667, 0.588235, 0.188235, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_scale = Vector2( 1.4, 1.4 )
 rect_pivot_offset = Vector2( 960, 540 )
 custom_fonts/font = ExtResource( 5 )
 text = "GLASS JUNGLE"
@@ -773,12 +884,13 @@ align = 1
 valign = 1
 
 [node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 500.0
-margin_top = -8781.0
-margin_right = 2228.0
-margin_bottom = 3600.0
+margin_left = 100.0
+margin_top = -13461.0
+margin_right = 1828.0
+margin_bottom = -1080.0
 custom_fonts/font = ExtResource( 4 )
 text = "Game Producer
 - Pablo Romero
@@ -840,6 +952,8 @@ Testers
 - Ricardo Monforte
 - Pablo Romero
 - Hristian Petkov
+- Ismael Hadira
+- Andrés Antezana
 
 
 
@@ -851,22 +965,37 @@ Marketing Team
 
 
 Special Thanks
-- Mixamo.com
-- freetts.com
 - itch.io
-- OpenGameArt.org
-- godotshaders.com
 - Godot Engine
 - Blender
 - PaintNet
 - Audacity
+- Open Game Jam
+- GitHub.com
+- Mixamo.com
+- freetts.com
+- OpenGameArt.org
+- godotshaders.com
 - Infraction No Copyright Music
 - Anik's Adobe Tutorials
 - Jaks
 - Hc
-- Peronds"
+- Peronds
+- Our families, friends and teachers <3"
 valign = 1
 autowrap = true
+
+[node name="Label" type="Label" parent="Label"]
+margin_left = -100.0
+margin_top = 13469.0
+margin_right = 1820.0
+margin_bottom = 14549.0
+custom_fonts/font = ExtResource( 6 )
+text = "Thank you 
+for playing
+our game"
+align = 1
+valign = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 5 )
@@ -874,3 +1003,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1015.0
 margin_bottom = 17.0
+
+[connection signal="animation_finished" from="Roll" to="." method="_on_Roll_animation_finished"]
