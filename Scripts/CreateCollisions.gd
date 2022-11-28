@@ -10,5 +10,6 @@ func _ready() -> void:
 	for child in get_children():
 		if(child is MeshInstance):
 			child.get_child(0).collision_mask = 8
+			
 		
 		

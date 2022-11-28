@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Art/3D/Levels/Level1/CB_Metal.material" type="Material" id=1]
 [ext_resource path="res://Art/3D/Levels/Level1/Cristal.material" type="Material" id=2]
+[ext_resource path="res://Art/Audio/SlideDoor.mp3" type="AudioStream" id=3]
 
 [sub_resource type="GDScript" id=82]
 script/source = "extends Spatial
@@ -10,6 +11,7 @@ export var active : bool = true
 
 func _on_Area_body_entered(body: Node) -> void:
 	if(active):
+		$AudioStreamPlayer.play(0.0)
 		$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(-1, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$TweenD1.start()
 		
@@ -20,6 +22,7 @@ func _on_Area_body_entered(body: Node) -> void:
 
 func _on_Area_body_exited(body: Node) -> void:
 	if(active):
+		$AudioStreamPlayer.play(0.0)
 		$TweenD1.interpolate_property($D1, \"translation\", $D1.transform.origin, Vector3(0, 0, 0), 0.33, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$TweenD1.start()
 		
@@ -96,6 +99,11 @@ shape = SubResource( 81 )
 [node name="TweenD1" type="Tween" parent="."]
 
 [node name="TweenD2" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 20.0
+bus = "Effects"
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

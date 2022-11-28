@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Skydome.obj-81eef106b460b84d97dff1d823b26fab.mesh"
+
+[deps]
+
+files=[ "res://.import/Skydome.obj-81eef106b460b84d97dff1d823b26fab.mesh" ]
+
+source_file="res://Art/3D/Skydome/Skydome.obj"
+dest_files=[ "res://.import/Skydome.obj-81eef106b460b84d97dff1d823b26fab.mesh", "res://.import/Skydome.obj-81eef106b460b84d97dff1d823b26fab.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

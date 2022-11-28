@@ -27,7 +27,8 @@ func _process(delta: float) -> void:
 		rotation_degrees.x = 0
 		rotation_degrees.z = 0
 		
-		if($RayCast.get_collider() == null or ($RayCast.get_collider() != null and $RayCast.get_collider().collision_layer == 8)):
+#		if($RayCast.get_collider() == null or ($RayCast.get_collider() != null and $RayCast.get_collider().collision_layer == 8)):
+		if($RayCast.get_collider() == null):
 			shoot_timer += delta
 		else:
 			shoot_timer = 0.0
@@ -78,6 +79,7 @@ func fake_shoot() -> void:
 		shoot_timer = 0.0
 		
 func shoot() -> void:
+	player.add_damage_source(global_transform.origin)
 	player.get_node(\"HealthSystem\").damage(1)
 	fake_shoot()
 		
@@ -1618,7 +1620,6 @@ anims/idle = SubResource( 23 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.883656, -0.23 )
 enabled = true
 cast_to = Vector3( 0, 0, -25 )
-collision_mask = 9
 collide_with_areas = true
 
 [node name="Body" type="Area" parent="."]
@@ -1701,6 +1702,10 @@ anims/Shoot = SubResource( 29 )
 [node name="DropAK" type="AnimationPlayer" parent="."]
 anims/Drop = SubResource( 30 )
 anims/RESET = SubResource( 31 )
+
+[node name="VisibilityEnabler" type="VisibilityEnabler" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.755069, 0.267986 )
+aabb = AABB( -2.5, -2.5, -2.5, 5, 5, 5 )
 
 [connection signal="animation_finished" from="Death/AnimationPlayer" to="." method="_on_Death_animation_finished"]
 [connection signal="hit" from="Body" to="." method="_on_Body_hit"]

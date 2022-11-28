@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Art/2D/EnemyHit.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureRect
+
+var enemy_position : Vector3 = Vector3.ZERO
+var player : KinematicBody
+var offset : int = 0
+
+onready var alpha : float = 1.0
+
+func setup(source : Vector3, instancer : KinematicBody, level_offset : int) -> void:
+	player = instancer
+	enemy_position = source
+
+func _process(delta: float) -> void:
+	var enemy_position_2d : Vector2 = Vector2(enemy_position.x, enemy_position.z)
+	var player_position_2d : Vector2 = Vector2(player.global_transform.origin.x, player.global_transform.origin.z)
+	
+	var angle = rad2deg(player_position_2d.angle_to(player_position_2d - enemy_position_2d)) + rad2deg(player.global_rotation.y) - offset
+	rect_rotation = angle
+	
+	alpha = lerp(alpha, 0.0, 0.015)
+	modulate.a = alpha
+	
+	if(modulate.a <= 0.05):
+		queue_free()
+"
+
+[node name="EnemyHit" type="TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -500.0
+margin_right = 500.0
+margin_bottom = 500.0
+rect_pivot_offset = Vector2( 500, 500 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )

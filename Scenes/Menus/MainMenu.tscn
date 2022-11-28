@@ -29,6 +29,7 @@ onready var scene : bool = false
 onready var settings : bool = false
 onready var playing_cue : bool = false
 
+var scene_to : String
 var save_file : SaveFile
 
 func _ready() -> void:
@@ -91,7 +92,7 @@ func cue_ended() -> void:
 	$UI/UI/Transition/AnimationPlayer.play(\"Transition\")
 	$UI/UI/Transition/LoadIcon.play(\"Loading\")
 	yield($UI/UI/Transition/AnimationPlayer, \"animation_finished\")
-	get_tree().change_scene(\"res://Scenes/Levels/TestLevel.tscn\")
+	get_tree().change_scene(scene_to)
 
 func _on_Config_pressed():
 	settings = true
@@ -122,16 +123,33 @@ func _on_Mission1Button_pressed() -> void:
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = false
 	$UI/UI/Transition/Scene.text = str(\"Scene 1 | Take \", int(rand_range(1, 1000)))
+	scene_to = \"res://Scenes/Levels/TestLevel.tscn\"
 
 func _on_Mission2Button_pressed() -> void:
+	$UI/UI/IntroSkip.visible = true
 	playing_cue = true
-#	TODO: Add logic
+	scene = true
+	set_process(true)
+	$CamRot.stop(false)
+	$DirectorCue2.play(0.0)
+	$UI/UI/Subtitles/Scene2.visible = true
+	$UI/UI/Menu.visible = false
+	$UI/UI/Campaign.visible = false
 	$UI/UI/Transition/Scene.text = str(\"Scene 2 | Take \", int(rand_range(1, 1000)))
+	scene_to = \"res://Scenes/Levels/TestLevel2.tscn\"
 	
 func _on_Mission3Button_pressed() -> void:
+	$UI/UI/IntroSkip.visible = true
 	playing_cue = true
-#	TODO: Add logic
+	scene = true
+	set_process(true)
+	$CamRot.stop(false)
+	$DirectorCue3.play(0.0)
+	$UI/UI/Subtitles/Scene3.visible = true
+	$UI/UI/Menu.visible = false
+	$UI/UI/Campaign.visible = false
 	$UI/UI/Transition/Scene.text = str(\"Scene 3 | Take \", int(rand_range(1, 1000)))
+	scene_to = \"res://Scenes/Levels/TestLevel3.tscn\"
 
 func _on_GoBack_pressed() -> void:
 	$UI/UI/Campaign.visible = false

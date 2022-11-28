@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Art/3D/Levels/Level1/Madera.material" type="Material" id=1]
+[ext_resource path="res://Art/3D/Levels/Level1/Cristal.material" type="Material" id=2]
 
 [sub_resource type="ArrayMesh" id=80]
 resource_name = "Level_1_Plane003"
@@ -20,6 +21,8 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=97]
 extents = Vector3( 0.0729255, 0.927207, 0.529282 )
 
+[sub_resource type="CubeMesh" id=99]
+
 [sub_resource type="BoxShape" id=98]
 extents = Vector3( 0.0150504, 1, 0.0179582 )
 
@@ -28,7 +31,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 
 [node name="Body" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-collision_mask = 27
+collision_mask = 155
 
 [node name="Puerta02" type="MeshInstance" parent="Body"]
 transform = Transform( 1.86, 0, 0, 0, 1.86, 0, 0, 0, 1.86, 0, 0, 0.447127 )
@@ -39,8 +42,15 @@ skeleton = NodePath("../../..")
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21019, -0.741173 )
 shape = SubResource( 97 )
 
+[node name="MeshInstance" type="MeshInstance" parent="Body"]
+transform = Transform( 0.0262569, 0, 0, 0, -2.87984e-08, -1, 0, 0.65883, -4.37114e-08, 0, 0.136402, -0.704595 )
+mesh = SubResource( 99 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
 [node name="Hinge" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+collision_mask = 155
 
 [node name="CollisionShape" type="CollisionShape" parent="Hinge"]
 shape = SubResource( 98 )

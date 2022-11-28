@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hydraulic.mp3-f176c19a955f48033cab36983c9ef16c.mp3str"
+
+[deps]
+
+source_file="res://Art/Audio/Hydraulic.mp3"
+dest_files=[ "res://.import/Hydraulic.mp3-f176c19a955f48033cab36983c9ef16c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

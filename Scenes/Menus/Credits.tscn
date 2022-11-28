@@ -285,7 +285,7 @@ tracks/23/loop_wrap = true
 tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = {
-"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, -13461, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, -14200, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 20.9, 92 )
 }
 tracks/24/type = "bezier"
@@ -295,8 +295,8 @@ tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/25/type = "bezier"
 tracks/25/path = NodePath("Label:modulate:g")
@@ -305,8 +305,8 @@ tracks/25/loop_wrap = true
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/26/type = "bezier"
 tracks/26/path = NodePath("Label:modulate:b")
@@ -315,8 +315,8 @@ tracks/26/loop_wrap = true
 tracks/26/imported = false
 tracks/26/enabled = true
 tracks/26/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/27/type = "bezier"
 tracks/27/path = NodePath("Label:modulate:a")
@@ -325,8 +325,8 @@ tracks/27/loop_wrap = true
 tracks/27/imported = false
 tracks/27/enabled = true
 tracks/27/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/28/type = "bezier"
 tracks/28/path = NodePath("AudioStreamPlayer:volume_db")
@@ -792,7 +792,6 @@ script = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -80.0
 bus = "Music"
 
 [node name="Roll" type="AnimationPlayer" parent="."]
@@ -884,13 +883,12 @@ align = 1
 valign = 1
 
 [node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0
-margin_top = -13461.0
+margin_top = -14200.0
 margin_right = 1828.0
-margin_bottom = -1080.0
+margin_bottom = -1315.0
 custom_fonts/font = ExtResource( 4 )
 text = "Game Producer
 - Pablo Romero
@@ -954,6 +952,10 @@ Testers
 - Hristian Petkov
 - Ismael Hadira
 - Andrés Antezana
+- Nikolay Chervanyuk
+- Ignacio Rodriguez
+- Valentin Kangaldzhiev
+- Soraya Ezquerra
 
 
 
@@ -981,15 +983,18 @@ Special Thanks
 - Jaks
 - Hc
 - Peronds
+- Keenan Crane
+- GGBot
+- Artie31
 - Our families, friends and teachers <3"
 valign = 1
 autowrap = true
 
 [node name="Label" type="Label" parent="Label"]
 margin_left = -100.0
-margin_top = 13469.0
+margin_top = 14200.0
 margin_right = 1820.0
-margin_bottom = 14549.0
+margin_bottom = 15280.0
 custom_fonts/font = ExtResource( 6 )
 text = "Thank you 
 for playing
