@@ -37,8 +37,8 @@ McCliché: When you go to hell, tell them I sent you
 
 
 S2SMM
-Director: In this scene, your hacker friend has located the bad guy's secret base in the desert. You have to enter the base
-and find the bad guy to end him for good. Everybody, get ready to record.
+Director: In this scene, your hacker friend has located the bad guy's secret base in the desert. You have to enter the base and 
+kill the bad guy to finally rescue your girlfriend. Everybody, get ready to record!
 
 S2D1
 01 McCliché: Chester, I've infiltrated in the bad guy's secret base.

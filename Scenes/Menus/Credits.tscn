@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/2D/GameOff.png" type="Texture" id=2]
 [ext_resource path="res://Art/2D/GodotEngine.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-106.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Resources/Fonts/Fonts/City-200.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Art/Promo/GlassJungle.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Fonts/Fonts/Boyfrend-200.tres" type="DynamicFont" id=6]
 
 [sub_resource type="GDScript" id=3]
@@ -89,254 +89,254 @@ tracks/3/keys = {
 "values": [ false, true, false ]
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("GlassJungle/GlassJungle2:rect_scale:x")
+tracks/4/path = NodePath("Godot/Godot2:rect_scale:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("GlassJungle/GlassJungle2:rect_scale:y")
+tracks/5/path = NodePath("Godot/Godot2:rect_scale:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("GlassJungle/GlassJungle2:self_modulate:r")
+tracks/6/path = NodePath("Godot/Godot2:self_modulate:r")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 0.866667, -0.25, 0, 0.25, 0, 0.866667, -0.25, 0, 0.25, 0, 0.866667, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/7/type = "bezier"
-tracks/7/path = NodePath("GlassJungle/GlassJungle2:self_modulate:g")
+tracks/7/path = NodePath("Godot/Godot2:self_modulate:g")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 0.588235, -0.25, 0, 0.25, 0, 0.588235, -0.25, 0, 0.25, 0, 0.588235, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/8/type = "bezier"
-tracks/8/path = NodePath("GlassJungle/GlassJungle2:self_modulate:b")
+tracks/8/path = NodePath("Godot/Godot2:self_modulate:b")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( 0.188235, -0.25, 0, 0.25, 0, 0.188235, -0.25, 0, 0.25, 0, 0.188235, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/9/type = "bezier"
-tracks/9/path = NodePath("GlassJungle/GlassJungle2:self_modulate:a")
+tracks/9/path = NodePath("Godot/Godot2:self_modulate:a")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5.35, 6.35 )
+"times": PoolRealArray( 0, 9.7, 10.7 )
 }
 tracks/10/type = "bezier"
-tracks/10/path = NodePath("Godot/Godot2:rect_scale:x")
+tracks/10/path = NodePath("GameOff/GameOff2:self_modulate:r")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/11/type = "bezier"
-tracks/11/path = NodePath("Godot/Godot2:rect_scale:y")
+tracks/11/path = NodePath("GameOff/GameOff2:self_modulate:g")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/12/type = "bezier"
-tracks/12/path = NodePath("Godot/Godot2:self_modulate:r")
+tracks/12/path = NodePath("GameOff/GameOff2:self_modulate:b")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/13/type = "bezier"
-tracks/13/path = NodePath("Godot/Godot2:self_modulate:g")
+tracks/13/path = NodePath("GameOff/GameOff2:self_modulate:a")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/14/type = "bezier"
-tracks/14/path = NodePath("Godot/Godot2:self_modulate:b")
+tracks/14/path = NodePath("GameOff/GameOff2:rect_scale:x")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/15/type = "bezier"
-tracks/15/path = NodePath("Godot/Godot2:self_modulate:a")
+tracks/15/path = NodePath("GameOff/GameOff2:rect_scale:y")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 9.7, 10.7 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 14.1, 15.1 )
 }
 tracks/16/type = "bezier"
-tracks/16/path = NodePath("GameOff/GameOff2:self_modulate:r")
+tracks/16/path = NodePath("Label:rect_position:x")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 100, -0.25, 0, 0.25, 0, 100, -0.25, 0, 0.25, 0, 100, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 20.9, 92 )
 }
 tracks/17/type = "bezier"
-tracks/17/path = NodePath("GameOff/GameOff2:self_modulate:g")
+tracks/17/path = NodePath("Label:rect_position:y")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, -14200, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 20.9, 92 )
 }
 tracks/18/type = "bezier"
-tracks/18/path = NodePath("GameOff/GameOff2:self_modulate:b")
+tracks/18/path = NodePath("Label:modulate:r")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/19/type = "bezier"
-tracks/19/path = NodePath("GameOff/GameOff2:self_modulate:a")
+tracks/19/path = NodePath("Label:modulate:g")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
 tracks/19/enabled = true
 tracks/19/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/20/type = "bezier"
-tracks/20/path = NodePath("GameOff/GameOff2:rect_scale:x")
+tracks/20/path = NodePath("Label:modulate:b")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/21/type = "bezier"
-tracks/21/path = NodePath("GameOff/GameOff2:rect_scale:y")
+tracks/21/path = NodePath("Label:modulate:a")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/imported = false
 tracks/21/enabled = true
 tracks/21/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 14.1, 15.1 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 99, 100 )
 }
 tracks/22/type = "bezier"
-tracks/22/path = NodePath("Label:rect_position:x")
+tracks/22/path = NodePath("AudioStreamPlayer:volume_db")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
 tracks/22/enabled = true
 tracks/22/keys = {
-"points": PoolRealArray( 100, -0.25, 0, 0.25, 0, 100, -0.25, 0, 0.25, 0, 100, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 20.9, 92 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -80, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 99, 100 )
 }
 tracks/23/type = "bezier"
-tracks/23/path = NodePath("Label:rect_position:y")
+tracks/23/path = NodePath("GlassJungle/GlassJungle2:rect_scale:x")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = {
-"points": PoolRealArray( 1080, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, -14200, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 20.9, 92 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 tracks/24/type = "bezier"
-tracks/24/path = NodePath("Label:modulate:r")
+tracks/24/path = NodePath("GlassJungle/GlassJungle2:rect_scale:y")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 tracks/25/type = "bezier"
-tracks/25/path = NodePath("Label:modulate:g")
+tracks/25/path = NodePath("GlassJungle/GlassJungle2:modulate:r")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 tracks/26/type = "bezier"
-tracks/26/path = NodePath("Label:modulate:b")
+tracks/26/path = NodePath("GlassJungle/GlassJungle2:modulate:g")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/imported = false
 tracks/26/enabled = true
 tracks/26/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 tracks/27/type = "bezier"
-tracks/27/path = NodePath("Label:modulate:a")
+tracks/27/path = NodePath("GlassJungle/GlassJungle2:modulate:b")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/imported = false
 tracks/27/enabled = true
 tracks/27/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 tracks/28/type = "bezier"
-tracks/28/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/28/path = NodePath("GlassJungle/GlassJungle2:modulate:a")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/imported = false
 tracks/28/enabled = true
 tracks/28/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -80, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 99, 100 )
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.35, 6.35 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -410,7 +410,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("GlassJungle/GlassJungle2:rect_scale:x")
+tracks/6/path = NodePath("Godot/Godot2:rect_scale:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -420,7 +420,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/7/type = "bezier"
-tracks/7/path = NodePath("GlassJungle/GlassJungle2:rect_scale:y")
+tracks/7/path = NodePath("Godot/Godot2:rect_scale:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -430,37 +430,37 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/8/type = "bezier"
-tracks/8/path = NodePath("GlassJungle/GlassJungle2:self_modulate:r")
+tracks/8/path = NodePath("Godot/Godot2:self_modulate:r")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( 0.866667, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/9/type = "bezier"
-tracks/9/path = NodePath("GlassJungle/GlassJungle2:self_modulate:g")
+tracks/9/path = NodePath("Godot/Godot2:self_modulate:g")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 0.588235, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/10/type = "bezier"
-tracks/10/path = NodePath("GlassJungle/GlassJungle2:self_modulate:b")
+tracks/10/path = NodePath("Godot/Godot2:self_modulate:b")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 0.188235, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/11/type = "bezier"
-tracks/11/path = NodePath("GlassJungle/GlassJungle2:self_modulate:a")
+tracks/11/path = NodePath("Godot/Godot2:self_modulate:a")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -470,7 +470,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/12/type = "bezier"
-tracks/12/path = NodePath("Godot/Godot2:rect_scale:x")
+tracks/12/path = NodePath("GameOff/GameOff2:self_modulate:r")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -480,7 +480,7 @@ tracks/12/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/13/type = "bezier"
-tracks/13/path = NodePath("Godot/Godot2:rect_scale:y")
+tracks/13/path = NodePath("GameOff/GameOff2:self_modulate:g")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -490,7 +490,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/14/type = "bezier"
-tracks/14/path = NodePath("Godot/Godot2:self_modulate:r")
+tracks/14/path = NodePath("GameOff/GameOff2:self_modulate:b")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -500,7 +500,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/15/type = "bezier"
-tracks/15/path = NodePath("Godot/Godot2:self_modulate:g")
+tracks/15/path = NodePath("GameOff/GameOff2:self_modulate:a")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -510,7 +510,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/16/type = "bezier"
-tracks/16/path = NodePath("Godot/Godot2:self_modulate:b")
+tracks/16/path = NodePath("GameOff/GameOff2:rect_min_size:x")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -520,7 +520,7 @@ tracks/16/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/17/type = "bezier"
-tracks/17/path = NodePath("Godot/Godot2:self_modulate:a")
+tracks/17/path = NodePath("GameOff/GameOff2:rect_min_size:y")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
@@ -530,7 +530,7 @@ tracks/17/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/18/type = "bezier"
-tracks/18/path = NodePath("GameOff/GameOff2:self_modulate:r")
+tracks/18/path = NodePath("GameOff/GameOff2:rect_scale:x")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
@@ -540,7 +540,7 @@ tracks/18/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/19/type = "bezier"
-tracks/19/path = NodePath("GameOff/GameOff2:self_modulate:g")
+tracks/19/path = NodePath("GameOff/GameOff2:rect_scale:y")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
@@ -550,7 +550,7 @@ tracks/19/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/20/type = "bezier"
-tracks/20/path = NodePath("GameOff/GameOff2:self_modulate:b")
+tracks/20/path = NodePath("Label:modulate:r")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
@@ -560,7 +560,7 @@ tracks/20/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/21/type = "bezier"
-tracks/21/path = NodePath("GameOff/GameOff2:self_modulate:a")
+tracks/21/path = NodePath("Label:modulate:g")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/imported = false
@@ -570,7 +570,7 @@ tracks/21/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/22/type = "bezier"
-tracks/22/path = NodePath("GameOff/GameOff2:rect_min_size:x")
+tracks/22/path = NodePath("Label:modulate:b")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
@@ -580,7 +580,7 @@ tracks/22/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/23/type = "bezier"
-tracks/23/path = NodePath("GameOff/GameOff2:rect_min_size:y")
+tracks/23/path = NodePath("Label:modulate:a")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/imported = false
@@ -590,17 +590,17 @@ tracks/23/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/24/type = "bezier"
-tracks/24/path = NodePath("GameOff/GameOff2:rect_scale:x")
+tracks/24/path = NodePath("AudioStreamPlayer:volume_db")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/25/type = "bezier"
-tracks/25/path = NodePath("GameOff/GameOff2:rect_scale:y")
+tracks/25/path = NodePath("GlassJungle/GlassJungle2:rect_scale:x")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
@@ -610,7 +610,7 @@ tracks/25/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/26/type = "bezier"
-tracks/26/path = NodePath("Label:modulate:r")
+tracks/26/path = NodePath("GlassJungle/GlassJungle2:rect_scale:y")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/imported = false
@@ -620,7 +620,7 @@ tracks/26/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/27/type = "bezier"
-tracks/27/path = NodePath("Label:modulate:g")
+tracks/27/path = NodePath("GlassJungle/GlassJungle2:modulate:r")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/imported = false
@@ -630,7 +630,7 @@ tracks/27/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/28/type = "bezier"
-tracks/28/path = NodePath("Label:modulate:b")
+tracks/28/path = NodePath("GlassJungle/GlassJungle2:modulate:g")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/imported = false
@@ -640,7 +640,7 @@ tracks/28/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/29/type = "bezier"
-tracks/29/path = NodePath("Label:modulate:a")
+tracks/29/path = NodePath("GlassJungle/GlassJungle2:modulate:b")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/imported = false
@@ -650,13 +650,13 @@ tracks/29/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/30/type = "bezier"
-tracks/30/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/30/path = NodePath("GlassJungle/GlassJungle2:modulate:a")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/imported = false
 tracks/30/enabled = true
 tracks/30/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -792,6 +792,7 @@ script = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = -80.0
 bus = "Music"
 
 [node name="Roll" type="AnimationPlayer" parent="."]
@@ -861,28 +862,37 @@ rect_pivot_offset = Vector2( 669, 278 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="GlassJungle" type="Label" parent="."]
+[node name="GlassJungle" type="TextureRect" parent="."]
 visible = false
-self_modulate = Color( 0.866667, 0.588235, 0.188235, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 5 )
-text = "GLASS JUNGLE"
-align = 1
-valign = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -888.0
+margin_top = -185.0
+margin_right = 1112.0
+margin_bottom = 177.0
+rect_pivot_offset = Vector2( 900, 181 )
+texture = ExtResource( 5 )
+expand = true
 
-[node name="GlassJungle2" type="Label" parent="GlassJungle"]
-self_modulate = Color( 0.866667, 0.588235, 0.188235, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="GlassJungle2" type="TextureRect" parent="GlassJungle"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1000.0
+margin_top = -181.0
+margin_right = 1000.0
+margin_bottom = 181.0
 rect_scale = Vector2( 1.4, 1.4 )
-rect_pivot_offset = Vector2( 960, 540 )
-custom_fonts/font = ExtResource( 5 )
-text = "GLASS JUNGLE"
-align = 1
-valign = 1
+rect_pivot_offset = Vector2( 900, 181 )
+texture = ExtResource( 5 )
+expand = true
 
 [node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0

@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Resources/Fonts/Data/Boyfrend.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Art/2D/Circle.png" type="Texture" id=2]
-[ext_resource path="res://Art/2D/Controller.png" type="Texture" id=3]
-[ext_resource path="res://Art/2D/Arm.png" type="Texture" id=4]
-[ext_resource path="res://Art/Audio/misc_menu_4.wav" type="AudioStream" id=5]
-[ext_resource path="res://Art/Audio/DownHigh.wav" type="AudioStream" id=6]
+[ext_resource path="res://Art/2D/Arm.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Fonts/Fonts/Playball-144.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Art/Audio/DownHigh.wav" type="AudioStream" id=5]
+[ext_resource path="res://Art/Audio/misc_menu_4.wav" type="AudioStream" id=6]
 [ext_resource path="res://Art/Audio/HighDown.wav" type="AudioStream" id=7]
-[ext_resource path="res://Resources/Fonts/Fonts/Playball-144.tres" type="DynamicFont" id=8]
-[ext_resource path="res://Art/Audio/Intros/12 Cold Killa Sting.mp3" type="AudioStream" id=9]
-[ext_resource path="res://Resources/Fonts/Fonts/Roboto-72.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Art/Audio/Intros/12 Cold Killa Sting.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Art/2D/Circle.png" type="Texture" id=9]
+[ext_resource path="res://Art/2D/Controller.png" type="Texture" id=10]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Control
@@ -29,9 +29,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed(\"ui_accept\") and !skipped):
+		print(\"skipp\")
 		skipped = true
 		get_tree().change_scene(\"res://Scenes/Menus/MainMenu.tscn\")
-
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	skipped = true
 	get_tree().change_scene(\"res://Scenes/Menus/MainMenu.tscn\")
@@ -735,7 +735,7 @@ margin_top = -1880.31
 margin_right = 306.557
 margin_bottom = -1280.31
 rect_pivot_offset = Vector2( 300, 300 )
-texture = ExtResource( 3 )
+texture = ExtResource( 10 )
 expand = true
 
 [node name="Arm" type="TextureRect" parent="."]
@@ -744,7 +744,7 @@ margin_top = 910.0
 margin_right = 2956.01
 margin_bottom = 2110.0
 rect_pivot_offset = Vector2( 600, 600 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
 [node name="Circle" type="TextureRect" parent="."]
 margin_left = 1118.0
@@ -753,7 +753,7 @@ margin_right = 1118.0
 margin_bottom = 639.0
 rect_rotation = -50.0
 rect_pivot_offset = Vector2( 2500, 2500 )
-texture = ExtResource( 2 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="PanelBlack2" type="Panel" parent="."]
@@ -787,7 +787,7 @@ valign = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -578.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "
 Games"
 align = 2
@@ -819,7 +819,7 @@ valign = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -578.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 3 )
 text = "
 Games"
 align = 2
@@ -1012,11 +1012,11 @@ anims/Idle = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
 [node name="Bum" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 volume_db = 2.5
 
 [node name="HighDown" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 5 )
 volume_db = 5.0
 
 [node name="DownHigh" type="AudioStreamPlayer" parent="."]
@@ -1024,7 +1024,7 @@ stream = ExtResource( 7 )
 volume_db = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 8 )
 
 [node name="IntroSkip" type="Label" parent="."]
 anchor_right = 1.0
@@ -1033,7 +1033,7 @@ margin_right = -1495.0
 margin_bottom = -972.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_pivot_offset = Vector2( 212, 54 )
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 4 )
 text = "\"Space\" to skip"
 align = 1
 valign = 1

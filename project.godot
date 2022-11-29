@@ -94,6 +94,7 @@ config/windows_native_icon="res://Art/2D/Icon.ico"
 [autoload]
 
 GameSaver="*res://Scripts/GameSaver.gd"
+CheckpointManager="*res://Scripts/CheckpointManager.gd"
 
 [debug]
 

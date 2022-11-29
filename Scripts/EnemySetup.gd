@@ -15,7 +15,8 @@ onready var enemy_reset_pos : Vector3 = $Enemy.global_transform.origin
 
 func _ready() -> void:
 	set_process(false)
-	get_node(trigger).connect("body_entered", self, "trigger_spawn")
+	if(get_node(trigger) != null):
+		get_node(trigger).connect("body_entered", self, "trigger_spawn")
 	if(ready):
 		emit_signal("trigger_activated")
 		enemy_spawned = true
@@ -44,6 +45,21 @@ func trigger_spawn(body : Node) -> void:
 			get_node(trigger).get_child(0).disabled = true
 #		if(get_node(trigger) != null):
 #			get_node(trigger).queue_free()
+
+func force_spawn(body : Node) -> void:
+	emit_signal("trigger_activated")
+	enemy_spawned = true
+	yield(get_tree().create_timer(delay), "timeout")
+	set_process(true)
+	$SpawnSound.play(0.0)
+	$Enemy.setup(body)
+	if(!behind_player):
+		$Enemy.random_spawn_sound_normal()
+	else:
+		$Enemy.random_spawn_sound_back()
+		
+	if(get_node(trigger) != null and get_node(trigger).get_child(0) is CollisionShape):
+		get_node(trigger).get_child(0).disabled = true
 
 func setup_enemy() -> void:
 	if(get_node_or_null("Enemy") != null):
