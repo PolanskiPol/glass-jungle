@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Scripts/CoolButton.gd" type="Script" id=1]
 [ext_resource path="res://Art/OST/MainMenu.mp3" type="AudioStream" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Art/3D/MainMenu/DirectorSeat.glb" type="PackedScene" id=24]
 [ext_resource path="res://Art/2D/PleaseClick.png" type="Texture" id=25]
 [ext_resource path="res://Art/3D/MainMenu/Mic.glb" type="PackedScene" id=26]
+[ext_resource path="res://Art/3D/MainMenu/Camera.glb" type="PackedScene" id=27]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Spatial
@@ -1812,23 +1813,19 @@ visible = false
 [node name="Begin" type="Panel" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="Transition" type="Control" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1080.0
-margin_right = 1920.0
+margin_bottom = -1080.0
 
 [node name="Panel" type="Panel" parent="UI/UI/Transition"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 230.0
-margin_right = 1920.0
-margin_bottom = 1080.0
 
 [node name="Clap" type="TextureRect" parent="UI/UI/Transition"]
 margin_right = 1920.0
@@ -2023,6 +2020,7 @@ texture = ExtResource( 4 )
 
 [node name="Camera" type="Spatial" parent="Deco"]
 transform = Transform( 0.961415, 0, 0.2751, 0, 1, 0, -0.2751, 0, 0.961415, 1.13567, 0, 0.834148 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Deco/Camera"]
 transform = Transform( 0.16, 0, 0, 0, 0.051012, 0, 0, 0, 0.16, 0, 0, 0 )
@@ -2068,6 +2066,7 @@ material/0 = SubResource( 3 )
 
 [node name="Camera2" type="Spatial" parent="Deco"]
 transform = Transform( 0.866514, 0, -0.499153, 0, 1, 0, 0.499153, 0, 0.866514, -1.85687, -7.15256e-07, 0.382366 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Deco/Camera2"]
 transform = Transform( 0.16, 0, 0, 0, 0.051012, 0, 0, 0, 0.16, 0, 0, 0 )
@@ -2195,7 +2194,7 @@ transform = Transform( 0.996398, 0.0832789, -0.0159963, -0.0809413, 0.99023, 0.1
 transform = Transform( -0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, 0.183013, -0.683013, -0.857014, 1.89806, 0.41904 )
 
 [node name="CamPosSettings" type="Camera" parent="."]
-transform = Transform( -0.5, -0.224144, 0.836516, 0, 0.965926, 0.258819, -0.866025, 0.12941, -0.482963, -0.823595, 1.54066, -0.441957 )
+transform = Transform( -0.125697, -0.256767, 0.958265, 0, 0.965926, 0.258819, -0.992069, 0.0325328, -0.121414, -0.480667, 1.54066, -0.168923 )
 
 [node name="CamHelp" type="Camera" parent="."]
 transform = Transform( -0.797721, 0, -0.603027, 0, 1, 0, 0.603027, 0, -0.797721, 0.359335, 0.833157, 2.11757 )
@@ -2231,6 +2230,12 @@ transform = Transform( -0.817477, 0, -0.594332, 0, 1, 0, 0.604129, 0, -0.80422, 
 transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -1.00447, 0 )
 mesh = SubResource( 46 )
 material/0 = SubResource( 47 )
+
+[node name="Camera" parent="." instance=ExtResource( 27 )]
+transform = Transform( -0.138564, 0, -0.08, 0, 0.16, 0, 0.08, 0, -0.138564, 1.02636, 0, 0.277918 )
+
+[node name="Camera2" parent="." instance=ExtResource( 27 )]
+transform = Transform( -0.0977437, 0, 0.0931191, 0, 0.135, 0, -0.0931191, 0, -0.0977437, -1.5039, 0, 0.418093 )
 
 [connection signal="pressed" from="UI/UI/Menu/Options/Campaign" to="." method="_on_Campaign_pressed"]
 [connection signal="pressed" from="UI/UI/Menu/Options/HowTo" to="." method="_on_HowTo_pressed"]

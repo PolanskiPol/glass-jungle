@@ -32,9 +32,9 @@ func _ready():
 		
 	setup_new_values()
 	
-func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed(\"ui_cancel\") and get_tree().paused):
-		emit_signal(\"unpause_key_pressed\")    
+#func _input(event: InputEvent) -> void:
+#	if(event.is_action_pressed(\"ui_cancel\") and get_tree().paused):
+#		emit_signal(\"unpause_key_pressed\")    
 		
 func activate() -> void:
 	visible = true
@@ -42,6 +42,11 @@ func activate() -> void:
 	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
 	load_settings()
 	setup_new_values()
+	
+func deactivate() -> void:
+	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
+	visible = false
+	emit_signal(\"back_pressed\")
 	
 func setup_new_values() -> void:
 	new_values = {
@@ -123,9 +128,7 @@ func _on_SliderRes_value_changed(value: float) -> void:
 		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 			
 func _on_Return_pressed() -> void:
-	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
-	visible = false
-	emit_signal(\"back_pressed\")
+	deactivate()
 
 func _on_Main_pressed() -> void:
 	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
