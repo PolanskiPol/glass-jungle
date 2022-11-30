@@ -32,10 +32,11 @@ func _ready():
 		
 	setup_new_values()
 	
-#func _input(event: InputEvent) -> void:
-#	if(event.is_action_pressed(\"ui_cancel\") and get_tree().paused):
-#		emit_signal(\"unpause_key_pressed\")    
-		
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed(\"ui_cancel\") and get_tree().paused and visible):
+		emit_signal(\"unpause_key_pressed\")  
+		print(\"unpause signal\") 
+
 func activate() -> void:
 	visible = true
 	$Panel/Options/Fullscreen.grab_focus()
