@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+onready var active : bool = false
+
+func _ready() -> void:
+	visible = false
+	set_process(false)
+
+func _input(event: InputEvent) -> void:
+	if(event is InputEventKey and event.is_action_pressed(\"ui_show_fps\")):
+		active = !active
+		set_process(active)
+		visible = active
+		
+func _process(delta: float) -> void:
+	$FPS.text = str(\"FPS: \", Engine.get_frames_per_second())
+	if(Engine.get_frames_per_second() >= 30):
+		$FPS.modulate = Color(0, 1, 0)
+	elif(Engine.get_frames_per_second() < 30 and Engine.get_frames_per_second() >= 20):
+		$FPS.modulate = Color(1, 1, 0.2)
+	if(Engine.get_frames_per_second() < 2):
+		$FPS.modulate = Color(1, 0, 0)
+"
+
+[node name="DebugFPS" type="CanvasLayer"]
+script = SubResource( 1 )
+
+[node name="FPS" type="Label" parent="."]
+margin_left = 90.0
+margin_top = 83.0
+margin_right = 130.0
+margin_bottom = 97.0
+rect_scale = Vector2( 5, 5 )
+text = "FPS: []"

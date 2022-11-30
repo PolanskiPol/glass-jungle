@@ -7,7 +7,9 @@ export var max_scale : float = 1.15
 onready var current_scale : Vector2 = Vector2(1, 1)
 
 func _ready() -> void:
+	connect("focus_entered", self, "play_mouse_entered")
 	connect("mouse_entered", self, "play_mouse_entered")
+	connect("focus_exited", self, "return_to_normal")
 	connect("mouse_exited", self, "return_to_normal")
 	connect("pressed", self, "play_mouse_pressed")
 	
@@ -18,6 +20,7 @@ func return_to_normal() -> void:
 	current_scale = Vector2(1, 1)
 	
 func play_mouse_entered() -> void:
+	grab_focus()
 	current_scale = Vector2(max_scale, max_scale)
 	var inst : AudioStreamPlayer = AudioStreamPlayer.new()
 	inst.stream = enter_audio

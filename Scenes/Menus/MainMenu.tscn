@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Scripts/CoolButton.gd" type="Script" id=1]
 [ext_resource path="res://Art/OST/MainMenu.mp3" type="AudioStream" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://Art/3D/Office/MeetingZone/Blackboard.fbx" type="PackedScene" id=9]
 [ext_resource path="res://Art/3D/Chars/Director/DirectorFBX.fbx" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Menus/Settings.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Art/3D/Office/Office/OfficeChairs.fbx" type="PackedScene" id=12]
+[ext_resource path="res://Art/3D/MainMenu/MagicTube.glb" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Menus/3DUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Art/3D/ExplosiveBarrel.fbx" type="PackedScene" id=14]
 [ext_resource path="res://Art/3D/Chars/McCliche/McCliche.fbx" type="PackedScene" id=15]
@@ -23,6 +23,9 @@
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-96.tres" type="DynamicFont" id=21]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-144.tres" type="DynamicFont" id=22]
 [ext_resource path="res://Resources/Fonts/Fonts/Roboto-48.tres" type="DynamicFont" id=23]
+[ext_resource path="res://Art/3D/MainMenu/DirectorSeat.glb" type="PackedScene" id=24]
+[ext_resource path="res://Art/2D/PleaseClick.png" type="Texture" id=25]
+[ext_resource path="res://Art/3D/MainMenu/Mic.glb" type="PackedScene" id=26]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Spatial
@@ -36,7 +39,7 @@ var scene_to : String
 var save_file : SaveFile
 
 func _ready() -> void:
-	print(\"Ready\")
+	$UI/UI/Menu/Options/Campaign.grab_focus()
 	get_tree().paused = false
 	randomize()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -54,7 +57,11 @@ func _ready() -> void:
 	unlock_level(save_file.unlocked_levels[2], $UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button, load(\"res://Art/2D/Explosion.png\"), $UI/UI/Campaign/Selector/Mission3/Label, \"Self destruction\")
 	if(save_file.fast_graphics):
 		get_tree().call_group(\"Lights\", \"set_shadow\", false)
-	print(\"scene\")
+	if(save_file.first_time_playing):
+		$UI/UI/Menu/Options/HowTo/PleaseClick.visible = true
+		save_file.first_time_playing = false
+		$UI/UI/Menu/Options/HowTo.grab_focus()
+		GameSaver.save_game(save_file)
 	
 func _process(delta: float) -> void:
 	if(scene):
@@ -110,15 +117,9 @@ func _on_Config_pressed():
 	$UI/UI/Campaign.visible = false
 	$UI/UI/Settings.activate()
 	
-func _on_3DUI_return_pressed() -> void:
-	scene = false
-	settings = false
-	how_to = false
-	set_process(true)
-	$CamRot.play(\"Idle\")
-	$UI/UI/Menu.visible = true
-	
 func _on_HowTo_pressed() -> void:
+	$UI/UI/Menu/Options/HowTo/PleaseClick.visible = false
+	$UI/UI/HowTo/HBoxContainer/Next.grab_focus()
 	how_to = true
 	set_process(true)
 	$CamRot.stop(false)
@@ -129,6 +130,7 @@ func _on_HowTo_pressed() -> void:
 func _on_Campaign_pressed() -> void:
 	$UI/UI/Menu.visible = false
 	$UI/UI/Campaign.visible = true
+	$UI/UI/Campaign/Selector/Mission1/Mission1/Mission1Button.grab_focus()
 	
 func _on_DirectorCue1_finished() -> void:
 	cue_ended()
@@ -177,10 +179,12 @@ func _on_Mission3Button_pressed() -> void:
 	scene_to = \"res://Scenes/Levels/TestLevel3.tscn\"
 
 func _on_GoBack_pressed() -> void:
+	$UI/UI/Menu/Options/Campaign.grab_focus()
 	$UI/UI/Campaign.visible = false
 	$UI/UI/Menu.visible = true
 
 func _on_Settings_back_pressed() -> void:
+	$UI/UI/Menu/Options/Campaign.grab_focus()
 	scene = false
 	settings = false
 	how_to = false
@@ -195,8 +199,10 @@ func _on_Settings_graphics_changed(fast_graphics) -> void:
 
 func _on_Prev_pressed() -> void:
 	$\"3DUI\".prev()
+	$UI/UI/HowTo/Label.text = str($\"3DUI\".help+1, \"/4\")
 
 func _on_Back_pressed() -> void:
+	$UI/UI/Menu/Options/Campaign.grab_focus()
 	scene = false
 	settings = false
 	how_to = false
@@ -207,6 +213,7 @@ func _on_Back_pressed() -> void:
 	
 func _on_Next_pressed() -> void:
 	$\"3DUI\".next()
+	$UI/UI/HowTo/Label.text = str($\"3DUI\".help+1, \"/4\")
 "
 
 [sub_resource type="StyleBoxFlat" id=28]
@@ -463,9 +470,6 @@ glow_enabled = true
 albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="CylinderMesh" id=4]
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0.294118, 0.141176, 0.054902, 1 )
 
 [sub_resource type="CubeMesh" id=7]
 
@@ -1431,6 +1435,12 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="CylinderMesh" id=46]
+
+[sub_resource type="SpatialMaterial" id=47]
+metallic = 1.0
+roughness = 0.74
+
 [node name="MainMenu" type="Spatial"]
 script = SubResource( 5 )
 
@@ -1511,6 +1521,8 @@ custom_constants/separation = 15
 [node name="Campaign" type="Button" parent="UI/UI/Menu/Options"]
 margin_right = 883.0
 margin_bottom = 102.0
+hint_tooltip = "Select one of the 3 levels to play"
+focus_next = NodePath("../HowTo")
 custom_fonts/font = ExtResource( 7 )
 text = "Campaign"
 flat = true
@@ -1520,10 +1532,12 @@ click_audio = ExtResource( 17 )
 enter_audio = ExtResource( 16 )
 
 [node name="HowTo" type="Button" parent="UI/UI/Menu/Options"]
-modulate = Color( 1, 0.537255, 0, 1 )
+self_modulate = Color( 1, 0.537255, 0, 1 )
 margin_top = 117.0
 margin_right = 883.0
 margin_bottom = 219.0
+hint_tooltip = "Learn the controls and some useful tips"
+focus_next = NodePath("../Config")
 custom_fonts/font = ExtResource( 7 )
 text = "How to play"
 flat = true
@@ -1532,10 +1546,20 @@ script = ExtResource( 1 )
 click_audio = ExtResource( 17 )
 enter_audio = ExtResource( 16 )
 
+[node name="PleaseClick" type="TextureRect" parent="UI/UI/Menu/Options/HowTo"]
+visible = false
+margin_left = -152.0
+margin_top = -446.0
+margin_right = 1768.0
+margin_bottom = 634.0
+texture = ExtResource( 25 )
+
 [node name="Config" type="Button" parent="UI/UI/Menu/Options"]
 margin_top = 234.0
 margin_right = 883.0
 margin_bottom = 336.0
+hint_tooltip = "Configure the game"
+focus_next = NodePath("../Exit")
 custom_fonts/font = ExtResource( 7 )
 text = "Settings"
 flat = true
@@ -1548,6 +1572,8 @@ enter_audio = ExtResource( 16 )
 margin_top = 351.0
 margin_right = 883.0
 margin_bottom = 453.0
+hint_tooltip = "Leave the game"
+focus_next = NodePath("../Campaign")
 custom_fonts/font = ExtResource( 7 )
 text = "Exit"
 flat = true
@@ -1600,6 +1626,7 @@ margin_right = 450.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 400, 400 )
 rect_pivot_offset = Vector2( 200, 200 )
+focus_next = NodePath("../../../Mission2/Mission1/Mission2Button")
 size_flags_horizontal = 4
 size_flags_vertical = 6
 expand = true
@@ -1638,6 +1665,7 @@ margin_right = 450.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 400, 400 )
 rect_pivot_offset = Vector2( 200, 200 )
+focus_next = NodePath("../../../Mission3/Mission1/Mission3Button")
 size_flags_horizontal = 4
 size_flags_vertical = 6
 expand = true
@@ -1676,6 +1704,7 @@ margin_right = 450.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 400, 400 )
 rect_pivot_offset = Vector2( 200, 200 )
+focus_next = NodePath("../../../../GoBack")
 size_flags_horizontal = 4
 size_flags_vertical = 6
 expand = true
@@ -1698,15 +1727,13 @@ margin_left = 47.0
 margin_top = 925.0
 margin_right = 196.0
 margin_bottom = 1027.0
+focus_next = NodePath("../Selector/Mission1/Mission1/Mission1Button")
 custom_fonts/font = ExtResource( 7 )
 text = "Back"
 flat = true
 script = ExtResource( 1 )
 click_audio = ExtResource( 17 )
 enter_audio = ExtResource( 16 )
-
-[node name="Settings" parent="UI/UI" instance=ExtResource( 11 )]
-visible = false
 
 [node name="HowTo" type="Control" parent="UI/UI"]
 visible = false
@@ -1727,6 +1754,7 @@ alignment = 1
 margin_right = 210.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 210, 0 )
+focus_next = NodePath("../Back")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 23 )
@@ -1742,6 +1770,7 @@ margin_left = 320.0
 margin_right = 530.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 210, 0 )
+focus_next = NodePath("../Next")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 23 )
@@ -1756,6 +1785,7 @@ margin_left = 640.0
 margin_right = 850.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 210, 0 )
+focus_next = NodePath("../Prev")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 23 )
@@ -1765,6 +1795,19 @@ align = 0
 script = ExtResource( 1 )
 click_audio = ExtResource( 17 )
 enter_audio = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="UI/UI/HowTo"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 359.0
+margin_top = 256.0
+margin_right = 421.0
+margin_bottom = 321.0
+custom_fonts/font = ExtResource( 23 )
+text = "1/4"
+
+[node name="Settings" parent="UI/UI" instance=ExtResource( 11 )]
+visible = false
 
 [node name="Begin" type="Panel" parent="UI/UI"]
 anchor_right = 1.0
@@ -1914,6 +1957,7 @@ material/0 = SubResource( 16 )
 
 [node name="SpotLight" type="SpotLight" parent="Deco/Focus" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
+visible = false
 light_energy = 7.0
 light_specular = 1.0
 shadow_enabled = true
@@ -1923,6 +1967,7 @@ spot_angle = 30.0
 
 [node name="OmniLight" type="OmniLight" parent="Deco/Focus" groups=["Lights"]]
 transform = Transform( 1, -2.98023e-08, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 1.97711, -2.38419e-07 )
+visible = false
 light_specular = 1.0
 shadow_enabled = true
 shadow_bias = 3.292
@@ -1943,6 +1988,7 @@ material/0 = SubResource( 16 )
 
 [node name="SpotLight" type="SpotLight" parent="Deco/Focus2" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -5.96046e-08, 0.0073123, 1.9125, 0.00693893 )
+visible = false
 light_energy = 7.0
 light_specular = 1.0
 shadow_enabled = true
@@ -1952,6 +1998,7 @@ spot_angle = 30.0
 
 [node name="OmniLight" type="OmniLight" parent="Deco/Focus2" groups=["Lights"]]
 transform = Transform( 1, 2.98023e-08, 5.21541e-08, 0, 1, -5.96046e-08, -3.72529e-08, 2.98023e-08, 1, 2.38419e-07, 2.06207, 1.07288e-06 )
+visible = false
 light_specular = 1.0
 shadow_enabled = true
 shadow_bias = 3.292
@@ -1971,6 +2018,7 @@ spot_angle = 25.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Deco"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+visible = false
 texture = ExtResource( 4 )
 
 [node name="Camera" type="Spatial" parent="Deco"]
@@ -2063,15 +2111,8 @@ mesh = SubResource( 4 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 3 )
 
-[node name="OfficeChairs" parent="Deco" instance=ExtResource( 12 )]
-transform = Transform( -0.0965926, 0, -0.0258819, 0, 0.1, 0, 0.0258819, 0, -0.0965926, -0.811627, 0, 2.29346 )
-
-[node name="Silla de Oficina" parent="Deco/OfficeChairs/RootNode" index="0"]
-transform = Transform( 89.1663, 45.2699, 1.61898e-05, 0, -3.57628e-05, 100, 45.2699, -89.1663, -3.18884e-05, 0, 0, 0 )
-material/0 = SubResource( 6 )
-
 [node name="DirectorThing" type="Spatial" parent="Deco"]
-transform = Transform( -0.387693, 0.291114, -0.874612, 0, 0.948821, 0.315815, 0.921789, 0.122439, -0.367851, -1.39251, -0.147954, 2.01016 )
+transform = Transform( -0.992139, 0.0395217, -0.118738, 0, 0.948821, 0.315815, 0.125142, 0.313332, -0.941362, -0.627107, -0.158979, 1.80637 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Deco/DirectorThing"]
 transform = Transform( 0.267313, 0, 0, 0, 0.151087, 0, 0, 0, 0.0216902, 0, 0.328398, 0 )
@@ -2112,6 +2153,44 @@ material/7 = SubResource( 44 )
 [node name="AnimationPlayer" parent="Deco/DirectorFBX/RootNode" index="3"]
 anims/mixamo.com = SubResource( 45 )
 
+[node name="DirectorSeat" parent="Deco" instance=ExtResource( 24 )]
+transform = Transform( -0.12, 0, -1.81195e-08, 0, 0.12, 0, 1.81195e-08, 0, -0.12, -0.592967, -0.283233, 2.43669 )
+
+[node name="MagicTube" parent="Deco" instance=ExtResource( 12 )]
+transform = Transform( -0.0320466, 0, 0.146537, 0, 0.15, 0, -0.146537, 0, -0.0320466, -1.21372, -0.347795, 3.31012 )
+
+[node name="OmniLight" type="OmniLight" parent="Deco" groups=["Lights"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.21819, 0 )
+shadow_enabled = true
+omni_range = 4096.0
+
+[node name="Mic" parent="Deco" instance=ExtResource( 26 )]
+transform = Transform( -0.119891, -0.352812, 0.333391, -0.46031, -0.0263707, -0.19344, 0.154079, -0.35331, -0.318483, -2.24995, 2.9882, 0.678622 )
+
+[node name="Cube" parent="Deco/Mic" index="1"]
+transform = Transform( -0.00803773, -0.00841918, -0.0801963, -0.023678, 0.178757, -0.00254519, 0.115459, 0.0360725, -0.0061049, -0.0728116, 0.717128, 2.39266 )
+
+[node name="Cylinder001" parent="Deco/Mic" index="2"]
+transform = Transform( 0.00423638, -0.0351743, -0.0915478, -0.0899475, -0.103617, -0.00290545, -0.0181511, 0.505262, -0.00696901, -0.14217, 0.714907, 2.38738 )
+
+[node name="BezierCurve" parent="Deco/Mic" index="3"]
+transform = Transform( 0.998909, -0.0461188, 0.00733624, 0.0466591, 0.979195, -0.197472, 0.00192378, 0.197599, 0.98028, 2.38955, 0.0213203, 2.42139 )
+
+[node name="Mic2" parent="Deco" instance=ExtResource( 26 )]
+transform = Transform( 0.117799, -0.432586, -0.221343, -0.46031, -0.0263707, -0.19344, 0.155685, 0.249347, -0.404461, 2.92093, 2.9882, 0.817747 )
+
+[node name="Cylinder" parent="Deco/Mic2" index="0"]
+transform = Transform( 1, 0, 0, 1.49012e-08, 0, -1, 0, 1, 0, 2.38419e-07, 0.781651, -2.50303 )
+
+[node name="Cube" parent="Deco/Mic2" index="1"]
+transform = Transform( -0.0107639, 0.015203, -0.0798532, 0.0140943, 0.180771, 0.00580555, 0.116797, -0.0204136, -0.00805983, -0.0167074, 0.844178, 2.24184 )
+
+[node name="Cylinder001" parent="Deco/Mic2" index="2"]
+transform = Transform( -0.00764991, -0.0471043, -0.0911561, -0.0909611, 0.061679, 0.0066273, 0.0102718, 0.511116, -0.00920065, -0.0857718, 0.849179, 2.23487 )
+
+[node name="BezierCurve" parent="Deco/Mic2" index="3"]
+transform = Transform( 0.996398, 0.0832789, -0.0159963, -0.0809413, 0.99023, 0.113525, 0.0252945, -0.111821, 0.993405, 2.33315, -0.112952, 2.5739 )
+
 [node name="FinalCamPos" type="Camera" parent="."]
 transform = Transform( -0.707107, 0.183013, -0.683013, 0, 0.965926, 0.258819, 0.707107, 0.183013, -0.683013, -0.857014, 1.89806, 0.41904 )
 
@@ -2148,6 +2227,11 @@ bus = "Music"
 [node name="3DUI" parent="." instance=ExtResource( 13 )]
 transform = Transform( -0.817477, 0, -0.594332, 0, 1, 0, 0.604129, 0, -0.80422, 0.698447, 0.800963, 2.5751 )
 
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -1.00447, 0 )
+mesh = SubResource( 46 )
+material/0 = SubResource( 47 )
+
 [connection signal="pressed" from="UI/UI/Menu/Options/Campaign" to="." method="_on_Campaign_pressed"]
 [connection signal="pressed" from="UI/UI/Menu/Options/HowTo" to="." method="_on_HowTo_pressed"]
 [connection signal="pressed" from="UI/UI/Menu/Options/Config" to="." method="_on_Config_pressed"]
@@ -2156,17 +2240,18 @@ transform = Transform( -0.817477, 0, -0.594332, 0, 1, 0, 0.604129, 0, -0.80422, 
 [connection signal="pressed" from="UI/UI/Campaign/Selector/Mission2/Mission1/Mission2Button" to="." method="_on_Mission2Button_pressed"]
 [connection signal="pressed" from="UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button" to="." method="_on_Mission3Button_pressed"]
 [connection signal="pressed" from="UI/UI/Campaign/GoBack" to="." method="_on_GoBack_pressed"]
-[connection signal="back_pressed" from="UI/UI/Settings" to="." method="_on_Settings_back_pressed"]
-[connection signal="graphics_changed" from="UI/UI/Settings" to="." method="_on_Settings_graphics_changed"]
 [connection signal="pressed" from="UI/UI/HowTo/HBoxContainer/Prev" to="." method="_on_Prev_pressed"]
 [connection signal="pressed" from="UI/UI/HowTo/HBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="UI/UI/HowTo/HBoxContainer/Next" to="." method="_on_Next_pressed"]
+[connection signal="back_pressed" from="UI/UI/Settings" to="." method="_on_Settings_back_pressed"]
+[connection signal="graphics_changed" from="UI/UI/Settings" to="." method="_on_Settings_graphics_changed"]
 [connection signal="finished" from="DirectorCue1" to="." method="_on_DirectorCue1_finished"]
 [connection signal="finished" from="DirectorCue2" to="." method="_on_DirectorCue1_finished"]
 [connection signal="finished" from="DirectorCue3" to="." method="_on_DirectorCue1_finished"]
 [connection signal="return_pressed" from="3DUI" to="." method="_on_3DUI_return_pressed"]
 
 [editable path="Deco/Blackboard"]
-[editable path="Deco/OfficeChairs"]
 [editable path="Deco/McCliche"]
 [editable path="Deco/DirectorFBX"]
+[editable path="Deco/Mic"]
+[editable path="Deco/Mic2"]

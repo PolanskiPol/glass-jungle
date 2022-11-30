@@ -38,6 +38,7 @@ func _input(event: InputEvent) -> void:
 		
 func activate() -> void:
 	visible = true
+	$Panel/Options/Fullscreen.grab_focus()
 	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
 	load_settings()
 	setup_new_values()
@@ -75,6 +76,8 @@ func load_settings() -> SaveFile:
 func _on_Graphics_toggled(button_pressed : bool) -> void:
 	if(save_file != null):
 		new_values.fast_graphics = button_pressed
+		print(\"BP: \", button_pressed)
+		print(\"NV_FG: \", new_values.fast_graphics)
 		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_Fullscreen_toggled(button_pressed : bool) -> void:
@@ -93,19 +96,16 @@ func _on_Sensitivity_text_changed(new_text: String) -> void:
 func _on_SliderMaster_value_changed(value: float) -> void:
 	if(save_file != null):
 		new_values.master_volume = value
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), value)
 		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_SliderEffect_value_changed(value: float) -> void:
 	if(save_file != null):
 		new_values.effects_volume = value
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), value)
 		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 	
 func _on_SliderEnemy_value_changed(value: float) -> void:
 	if(save_file != null):
 		new_values.music_volume = value
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), value)
 		$Panel/Options/Buttons/Apply.self_modulate = Color(0, 1, 0)
 
 func _on_SliderRes_value_changed(value: float) -> void:
@@ -140,7 +140,9 @@ func _on_Apply_pressed() -> void:
 	save_file.fullscreen = new_values.fullscreen
 	save_file.resolution = new_values.resolution
 	save_file.sensitivity = new_values.sensitivity
+	print(\"Before apply: \", save_file.fast_graphics)
 	GameSaver.save_game(save_file)
+	print(\"After apply: \", save_file.fast_graphics)
 	
 	$Panel/Options/Buttons/Apply.self_modulate = Color(1, 1, 1)
 	emit_signal(\"graphics_changed\", save_file.fast_graphics)
@@ -148,6 +150,9 @@ func _on_Apply_pressed() -> void:
 	get_viewport().size = save_file.resolution
 	OS.window_size = save_file.resolution
 	OS.center_window()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Master\"), new_values.master_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Music\"), new_values.music_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"Effects\"), new_values.effects_volume)
 	setup_new_values()
 "
 
@@ -212,6 +217,10 @@ custom_styles/separator = SubResource( 31 )
 margin_top = 188.0
 margin_right = 630.0
 margin_bottom = 239.0
+hint_tooltip = "Turn fullscreen on/off
+
+* To see changed, press \"Apply\""
+focus_next = NodePath("../Graphics")
 custom_fonts/font = ExtResource( 2 )
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 6 )
@@ -227,6 +236,10 @@ max_scale = 1.05
 margin_top = 279.0
 margin_right = 630.0
 margin_bottom = 330.0
+hint_tooltip = "Turn shadows on/off
+
+* To see changed, press \"Apply\""
+focus_next = NodePath("../Sensitivity/Sensitivity")
 custom_fonts/font = ExtResource( 2 )
 custom_icons/checked = ExtResource( 5 )
 custom_icons/unchecked = ExtResource( 6 )
@@ -246,6 +259,10 @@ margin_bottom = 413.0
 [node name="Label" type="Label" parent="Panel/Options/Sensitivity"]
 margin_right = 458.0
 margin_bottom = 43.0
+hint_tooltip = "Mouse speed configuration
+
+* To see changed, press \"Apply\""
+mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
@@ -256,6 +273,7 @@ valign = 1
 margin_left = 462.0
 margin_right = 630.0
 margin_bottom = 43.0
+focus_next = NodePath("../../Resolution/SliderRes")
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 11 )
 custom_styles/focus = SubResource( 33 )
@@ -273,6 +291,8 @@ margin_bottom = 520.0
 [node name="Label" type="Label" parent="Panel/Options/Resolution"]
 margin_right = 630.0
 margin_bottom = 43.0
+hint_tooltip = "Game's resolution configuration"
+mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Resolution (1920x1080)"
 align = 1
@@ -282,6 +302,7 @@ valign = 1
 margin_top = 47.0
 margin_right = 630.0
 margin_bottom = 67.0
+focus_next = NodePath("../../MasterVol/SliderMaster")
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 29 )
@@ -297,6 +318,10 @@ margin_bottom = 627.0
 [node name="Label" type="Label" parent="Panel/Options/MasterVol"]
 margin_right = 630.0
 margin_bottom = 43.0
+hint_tooltip = "Game's general volume
+
+* To see changed, press \"Apply\""
+mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Master Volume"
 align = 1
@@ -306,6 +331,7 @@ valign = 1
 margin_top = 47.0
 margin_right = 630.0
 margin_bottom = 67.0
+focus_next = NodePath("../../EnemyVol/SliderEnemy")
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 29 )
@@ -323,6 +349,10 @@ margin_bottom = 734.0
 [node name="Label" type="Label" parent="Panel/Options/EnemyVol"]
 margin_right = 630.0
 margin_bottom = 43.0
+hint_tooltip = "Game's music volume
+
+* To see changed, press \"Apply\""
+mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Music Volume"
 align = 1
@@ -332,6 +362,7 @@ valign = 1
 margin_top = 47.0
 margin_right = 630.0
 margin_bottom = 67.0
+focus_next = NodePath("../../EffectVol/SliderEffect")
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 29 )
@@ -348,6 +379,10 @@ margin_bottom = 841.0
 [node name="Label" type="Label" parent="Panel/Options/EffectVol"]
 margin_right = 630.0
 margin_bottom = 43.0
+hint_tooltip = "Game's effects volume, such as voices or shots
+
+* To see changed, press \"Apply\""
+mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Effects Volume"
 align = 1
@@ -357,6 +392,7 @@ valign = 1
 margin_top = 47.0
 margin_right = 630.0
 margin_bottom = 67.0
+focus_next = NodePath("../../Buttons/Apply")
 custom_icons/grabber_highlight = ExtResource( 10 )
 custom_icons/grabber = ExtResource( 4 )
 custom_styles/slider = SubResource( 29 )
@@ -375,13 +411,16 @@ custom_styles/separator = SubResource( 31 )
 margin_top = 925.0
 margin_right = 630.0
 margin_bottom = 960.0
-custom_constants/separation = 50
+size_flags_horizontal = 3
+custom_constants/separation = 85
 alignment = 1
 
 [node name="Apply" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 57.0
-margin_right = 164.0
+margin_left = 22.0
+margin_right = 129.0
 margin_bottom = 35.0
+hint_tooltip = "Apply all changes to configuration"
+focus_next = NodePath("../Return")
 custom_fonts/font = ExtResource( 1 )
 text = "Apply"
 flat = true
@@ -395,6 +434,8 @@ max_scale = 1.05
 margin_left = 214.0
 margin_right = 340.0
 margin_bottom = 35.0
+hint_tooltip = "Leave the configuration screen, unapplied changes will revert"
+focus_next = NodePath("../../Fullscreen")
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
 flat = true
@@ -405,11 +446,12 @@ enter_audio = ExtResource( 8 )
 max_scale = 1.05
 
 [node name="Main" type="Button" parent="Panel/Options/Buttons"]
-margin_left = 390.0
-margin_right = 573.0
+margin_left = 425.0
+margin_right = 608.0
 margin_bottom = 35.0
+hint_tooltip = "Return to the main menu"
 custom_fonts/font = ExtResource( 1 )
-text = "Main Menu"
+text = "Main menu"
 flat = true
 align = 0
 script = ExtResource( 7 )

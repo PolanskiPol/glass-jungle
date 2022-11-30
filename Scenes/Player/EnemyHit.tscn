@@ -14,6 +14,8 @@ onready var alpha : float = 1.0
 func setup(source : Vector3, instancer : KinematicBody, level_offset : int) -> void:
 	player = instancer
 	enemy_position = source
+	offset = level_offset
+	print(\"enemy_hit: \", offset)
 
 func _process(delta: float) -> void:
 	var enemy_position_2d : Vector2 = Vector2(enemy_position.x, enemy_position.z)

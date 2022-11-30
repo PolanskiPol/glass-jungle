@@ -1,10 +1,12 @@
 class_name SaveFile
 extends Resource
 
+export var first_time_playing : bool = true
+
 export var unlocked_levels : Array = [
 	true
 	,false
-	,true
+	,false
 ]
 
 export var master_volume  : float = -25.8
@@ -17,4 +19,6 @@ export var resolution : Vector2 = Vector2(1920, 1080)
 
 export var sensitivity : float = 1.0
 
+
+# unused :c
 export var language : String = "en"
