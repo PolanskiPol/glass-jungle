@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/SaveFile.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+first_time_playing = false
+unlocked_levels = [ true, false, false ]
+master_volume = -25.8
+music_volume = 0.0
+effects_volume = 0.0
+fast_graphics = false
+fullscreen = true
+resolution = Vector2( 1920, 1080 )
+sensitivity = 1.0
+language = "en"

@@ -40,6 +40,7 @@ var scene_to : String
 var save_file : SaveFile
 
 func _ready() -> void:
+	save_file = GameSaver.load_game()
 	$UI/UI/Menu/Options/Campaign.grab_focus()
 	get_tree().paused = false
 	randomize()
@@ -52,18 +53,21 @@ func _ready() -> void:
 	$Deco/DirectorFBX/RootNode/AnimationPlayer.play(\"mixamo.com\")
 	
 	set_process(false)
-	save_file = GameSaver.load_game()
 	unlock_level(save_file.unlocked_levels[0], $UI/UI/Campaign/Selector/Mission1/Mission1/Mission1Button, load(\"res://Art/2D/Skycrapper.png\"), $UI/UI/Campaign/Selector/Mission1/Label, \"Skycrapper\")
 	unlock_level(save_file.unlocked_levels[1], $UI/UI/Campaign/Selector/Mission2/Mission1/Mission2Button, load(\"res://Art/2D/SecretBase.png\"), $UI/UI/Campaign/Selector/Mission2/Label, \"Secret base\")
 	unlock_level(save_file.unlocked_levels[2], $UI/UI/Campaign/Selector/Mission3/Mission1/Mission3Button, load(\"res://Art/2D/Explosion.png\"), $UI/UI/Campaign/Selector/Mission3/Label, \"Self destruction\")
 	if(save_file.fast_graphics):
 		get_tree().call_group(\"Lights\", \"set_shadow\", false)
+	
+	yield(get_tree().create_timer(0.5), \"timeout\")
 	if(save_file.first_time_playing):
-		$UI/UI/Menu/Options/HowTo/PleaseClick.visible = true
+		$UI/UI/PleaseClick.visible = true
 		save_file.first_time_playing = false
 		$UI/UI/Menu/Options/HowTo.grab_focus()
 		GameSaver.save_game(save_file)
-	
+	else:
+		$UI/UI/PleaseClick.visible = false
+		
 func _process(delta: float) -> void:
 	if(scene):
 		lerp_main_camera($FinalCamPos)
@@ -1497,6 +1501,18 @@ align = 1
 valign = 1
 autowrap = true
 
+[node name="PleaseClick" type="TextureRect" parent="UI/UI"]
+visible = false
+anchor_left = -0.172
+anchor_top = -4.373
+anchor_right = 2.002
+anchor_bottom = 6.216
+margin_left = 328.24
+margin_top = 4723.84
+margin_right = 328.598
+margin_bottom = 4723.76
+texture = ExtResource( 25 )
+
 [node name="Menu" type="Control" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1546,14 +1562,6 @@ align = 0
 script = ExtResource( 1 )
 click_audio = ExtResource( 17 )
 enter_audio = ExtResource( 16 )
-
-[node name="PleaseClick" type="TextureRect" parent="UI/UI/Menu/Options/HowTo"]
-visible = false
-margin_left = -152.0
-margin_top = -446.0
-margin_right = 1768.0
-margin_bottom = 634.0
-texture = ExtResource( 25 )
 
 [node name="Config" type="Button" parent="UI/UI/Menu/Options"]
 margin_top = 234.0

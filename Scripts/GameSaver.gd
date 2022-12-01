@@ -3,8 +3,8 @@ extends Node
 signal game_loaded
 
 func load_game() -> SaveFile:
-	if(ResourceLoader.exists("SaveFile.res")):
-		var save_file : SaveFile = ResourceLoader.load("SaveFile.res")
+	if(ResourceLoader.exists("user://SaveFile.tres")):
+		var save_file : SaveFile = ResourceLoader.load("user://SaveFile.tres")
 		if(save_file is SaveFile):
 			emit_signal("game_loaded")
 			return save_file
@@ -12,4 +12,4 @@ func load_game() -> SaveFile:
 	return SaveFile.new()
 	
 func save_game(save_file : SaveFile) -> void:
-	ResourceSaver.save("SaveFile.res", save_file)
+	ResourceSaver.save("user://SaveFile.tres", save_file)
