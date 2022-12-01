@@ -76,7 +76,6 @@ McCliché and his hacker friend Chester have been assigned the mission to find a
 ### Important
 
 - The executable MUST be in the same folder as the .pck file or the game won't work.
-- The save file is generated in the same folder as your executable and .pck file.
 
 ## Web
 
