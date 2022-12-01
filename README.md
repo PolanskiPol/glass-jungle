@@ -11,6 +11,11 @@ Glass Jungle has been developed by Morphine Games for the #GameOff2022 game jam,
     A phrase or an idea that has been used so often that it no longer has much meaning and is not interesting.
 Definition by Oxford
 
+
+[Link to the game on itch.io](https://polanski.itch.io/glass-jungle)
+
+[Link to the Jam](https://itch.io/jam/game-off-2022)
+
 # How to play
 
 - **W, A, S, D:** *Move around*
