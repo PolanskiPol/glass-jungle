@@ -123,7 +123,7 @@ func _on_Config_pressed():
 	$UI/UI/Settings.activate()
 	
 func _on_HowTo_pressed() -> void:
-	$UI/UI/Menu/Options/HowTo/PleaseClick.visible = false
+	$UI/UI/PleaseClick.visible = false
 	$UI/UI/HowTo/HBoxContainer/Next.grab_focus()
 	how_to = true
 	set_process(true)
@@ -1821,19 +1821,23 @@ visible = false
 [node name="Begin" type="Panel" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="Transition" type="Control" parent="UI/UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1080.0
-margin_bottom = -1080.0
+margin_right = 1920.0
 
 [node name="Panel" type="Panel" parent="UI/UI/Transition"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 230.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 
 [node name="Clap" type="TextureRect" parent="UI/UI/Transition"]
 margin_right = 1920.0
