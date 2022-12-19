@@ -1,7 +1,7 @@
 class_name FPSRaycast
 extends RayCast
 
-signal hit(item, collision_point)
+signal hit(item, collision_point, collision_normal)
 
 onready var time_alive : float = 0.0
 
@@ -20,6 +20,6 @@ func _process(delta: float) -> void:
 		queue_free()
 		
 	if(get_collider() != null):
-		emit_signal("hit", get_collider(), get_collision_point())
+		emit_signal("hit", get_collider(), get_collision_point(), get_collision_normal())
 		queue_free()
 
