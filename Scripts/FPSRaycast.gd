@@ -5,9 +5,9 @@ signal hit(item, collision_point, collision_normal)
 
 onready var time_alive : float = 0.0
 
-func setup(origin : Vector3, rotation_degrees : Vector3, distance : float) -> void:
+func setup(origin : Vector3, rotation_degrees : Vector3, distance : float, accuracy : Vector2) -> void:
 	collision_mask = 3
-	cast_to = Vector3(0, 0, -distance)
+	cast_to = Vector3(accuracy.x, accuracy.y, -distance)
 	enabled = true
 	self.rotation_degrees = rotation_degrees
 	global_transform.origin = origin

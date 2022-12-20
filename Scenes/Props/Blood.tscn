@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.554545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.792332, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.152941, 0.152941, 0.152941, 0 )
+
+[node name="Blood" type="CPUParticles"]
+emitting = false
+amount = 50
+lifetime = 0.15
+one_shot = true
+lifetime_randomness = 1.0
+mesh = SubResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 0.05
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+scale_amount = 0.01
+scale_amount_curve = SubResource( 3 )
+color = Color( 1, 0, 0, 1 )
+color_ramp = SubResource( 4 )
